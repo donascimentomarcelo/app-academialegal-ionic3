@@ -1,5 +1,14 @@
 // http://ionicframework.com/docs/theming/
 
-.toolbar-md-dark .bar-button-clear-md, .toolbar-md-dark .bar-button-default-md, .toolbar-md-dark .bar-button-outline-md, .toolbar-md-dark .toolbar-title-md{
+yellowFont{
     color: yellow !important;
+}
+
+.item-md.item-input .item-inner {
+    border-bottom-color: black !important;
+    box-shadow: inset 0 -1px 0 0 black !important
+}
+
+.item-input-has-focus .label-md[stacked], .input-has-focus .label-md[floating]{
+    color: black; 
 }
