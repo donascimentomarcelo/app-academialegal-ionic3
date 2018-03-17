@@ -1,3 +1,4 @@
+import { GrupoService } from './../services/domain/grupo.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GrupoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public grupoSercive: GrupoService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GrupoPage');
+    this.grupoSercive.findAll()
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.log(error);
+      })
   }
 
 }
