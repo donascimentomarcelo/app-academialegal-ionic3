@@ -1,14 +1,22 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
      </button>
-    <ion-title>grupo</ion-title>
+    <ion-title class=".toolbar-md-dark .bar-button-clear-md, .toolbar-md-dark .bar-button-default-md, .toolbar-md-dark .bar-button-outline-md, .toolbar-md-dark .toolbar-title-md">
+      grupo</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<p>Conteudo</p>
+  <ion-list>
+    <button ion-item *ngFor="let grupo of grupos">
+      <ion-thumbnail item-start>
+        <img src="{{bucketUrl}}/grupo{{grupo.id}}.png">
+      </ion-thumbnail>
+      <h2>{{grupo.nome}}</h2>
+    </button>
+  </ion-list>
 </ion-content>
