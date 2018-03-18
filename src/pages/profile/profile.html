@@ -1,14 +1,16 @@
 <ion-header>
-    <ion-navbar color="dark">
-        <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-       </button>
-      <ion-title class="yellowFont">Perfil</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title class="yellowFont">Perfil</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
-{{ email }}
+  <ion-avatar>
+    <img class="circle" [src]="usuario?.imageUrl || 'assets/imgs/avatar-blank.png'">
+  </ion-avatar>
+  <h2 text-center>{{usuario?.nome}}</h2>
+  <p text-center>{{usuario?.email}}</p>
 </ion-content>
