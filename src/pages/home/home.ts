@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
@@ -17,15 +18,20 @@ creds: CredenciaisDTO = {
 
   constructor(
     public navCtrl: NavController,
-    public sideMenu: MenuController) {
+    public sideMenu: MenuController,
+    public authService: AuthService) {
 
   }
 
   login()
   {
-    console.log(this.creds);
-    
-    this.navCtrl.setRoot('GrupoPage')
+    this.authService.authenticate(this.creds)
+        .subscribe(response => {
+          console.log(response.headers.get('Authorization'));
+          this.navCtrl.setRoot('GrupoPage')
+        }, error => {
+
+        });
   }
 
   ionViewWillEnter()
