@@ -25,7 +25,7 @@ bucketUrl: string = API_CONFIG.bucketBaseUrl;
       .subscribe(response => {
         this.grupos = response;
       }, error => {
-        console.log(error);
+        
       })
   }
 
