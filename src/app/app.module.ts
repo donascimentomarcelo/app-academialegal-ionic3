@@ -1,3 +1,4 @@
+import { StorageService } from './../pages/services/storage.service';
 import { AuthService } from './../pages/services/auth.service';
 
 import { GrupoService } from './../pages/services/domain/grupo.service';
@@ -32,6 +33,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
     GrupoService,
     ErrorInterceptorProvider,
     AuthService,
+    StorageService,
   ]
 })
 export class AppModule {}

@@ -27,7 +27,7 @@ creds: CredenciaisDTO = {
   {
     this.authService.authenticate(this.creds)
         .subscribe(response => {
-          console.log(response.headers.get('Authorization'));
+          this.authService.successfulLogin(response.headers.get('Authorization'));
           this.navCtrl.setRoot('GrupoPage')
         }, error => {
 
