@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { UsuarioService } from '../services/domain/usuario.service';
+import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UsuarioService } from '../services/domain/usuario.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GrupoService,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
