@@ -1,6 +1,6 @@
 import { API_CONFIG } from './../../config/api.config';
 import { GrupoDTO } from './../../models/grupo.dto';
-import { GrupoService } from './../services/domain/grupo.service';
+import { GrupoService } from './../../services/domain/grupo.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 

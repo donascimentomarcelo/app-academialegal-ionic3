@@ -1,9 +1,9 @@
-import { UsuarioDTO } from './../../../models/usuario.dto';
+import { UsuarioDTO } from './../../models/usuario.dto';
 import { StorageService } from './../storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
-import { API_CONFIG } from './../../../config/api.config';
+import { API_CONFIG } from './../../config/api.config';
 
 @Injectable()
 export class UsuarioService {

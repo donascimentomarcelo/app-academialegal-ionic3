@@ -1,5 +1,5 @@
-import { API_CONFIG } from './../../../config/api.config';
-import { GrupoDTO } from './../../../models/grupo.dto';
+import { API_CONFIG } from './../../config/api.config';
+import { GrupoDTO } from './../../models/grupo.dto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
