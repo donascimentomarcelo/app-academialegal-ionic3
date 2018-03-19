@@ -1,3 +1,4 @@
+import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -9,12 +10,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  email: string;
+  image: string;
+  nome: string;
   rootPage: string = 'HomePage';
 
   pages: Array<{title: string, component: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+      public platform: Platform, 
+      public statusBar: StatusBar, 
+      public splashScreen: SplashScreen,
+      public storage: StorageService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -24,6 +31,14 @@ export class MyApp {
       { title: 'Grupo', component: 'GrupoPage'}
     ];
 
+    let localUser = this.storage.getLocalUser();
+ 
+    if(localUser && localUser.email)
+    {
+      this.email = localUser.email;
+      this.image = localUser.imageUrl;
+      this.nome = localUser.nome;
+    }
   }
 
   initializeApp() {

@@ -43,6 +43,7 @@ export class AuthService{
                     nome: response.nome,
                     perfis: response.perfis,
                     id: response.id,
+                    imageUrl: `${API_CONFIG.bucketBaseUrl}/cp${response.id}.jpg`
                 };
                 this.storage.setLocalUser(user);
             }, error => {})

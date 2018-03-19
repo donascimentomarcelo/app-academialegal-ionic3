@@ -1,8 +1,16 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar color="tertiary">
+  <ion-header color="dark">
+    <ion-toolbar color="dark">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
+    <ion-card text-center class="hide-card" color="dark">
+      <img [src]="image || 'assets/imgs/avatar-blank.png'" class="custom-avatar"/>
+      <hr>
+      <h2>{{ nome }}</h2>
+      <hr>
+      <p>{{ email }}</p>
+      <hr>
+  </ion-card>
   </ion-header>
 
   <ion-content>

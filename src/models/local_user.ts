@@ -4,4 +4,5 @@ export interface LocalUser {
     nome: string;
     perfis: any;
     id: string;
+    imageUrl: any;
 }
