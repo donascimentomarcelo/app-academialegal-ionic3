@@ -31,6 +31,8 @@ export class MyApp {
       { title: 'Perfil', component: 'ProfilePage'},
       { title: 'Grupo', component: 'GrupoPage'}
     ];
+    
+    this.loadSideMenu();
   }
 
   loadSideMenu()
