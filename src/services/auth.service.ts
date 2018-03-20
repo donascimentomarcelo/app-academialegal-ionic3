@@ -35,18 +35,11 @@ export class AuthService{
 
         this.email = this.jwtHelper.decodeToken(tok).sub;
 
-        this.find(this.email)
-            .subscribe(response => {
-                let user: LocalUser = {
-                    token: tok,
-                    email: this.email,
-                    nome: response.nome,
-                    perfis: response.perfis,
-                    id: response.id,
-                    imageUrl: `${API_CONFIG.bucketBaseUrl}/cp${response.id}.jpg`
-                };
-                this.storage.setLocalUser(user);
-            }, error => {})
+        let user: LocalUser = {
+            token: tok,
+            email: this.email,
+        };
+        this.storage.setLocalUser(user);
     };
 
     logout()
@@ -54,8 +47,4 @@ export class AuthService{
         this.storage.setLocalUser(null);
     };
 
-    find(email: string): Observable<UsuarioDTO> {
-
-        return this.http.get<UsuarioDTO>(`${API_CONFIG.baseUrl}/usuarios/email?email=${email}`);
-    };
 }

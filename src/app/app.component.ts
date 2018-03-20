@@ -1,8 +1,11 @@
+import { UsuarioDTO } from './../models/usuario.dto';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { UsuarioService } from '../services/domain/usuario.service';
+import { API_CONFIG } from '../config/api.config';
 
 
 @Component({
@@ -10,9 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  email: string;
-  image: string;
-  nome: string;
+  menu: UsuarioDTO;
   perfis: any;
   rootPage: string = 'HomePage';
 
@@ -22,7 +23,8 @@ export class MyApp {
       public platform: Platform, 
       public statusBar: StatusBar, 
       public splashScreen: SplashScreen,
-      public storage: StorageService) {
+      public storage: StorageService,
+      public usuarioService: UsuarioService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -41,22 +43,23 @@ export class MyApp {
     
     if(localUser && localUser.email)
     {
-      this.email = localUser.email;
-      this.image = localUser.imageUrl;
-      this.nome = localUser.nome;
-      this.perfis = localUser.perfis;
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(response => {
+          this.menu = response;
+          
+          this.perfis = response.perfis;
+          if(this.perfis)
+          {
+            if(this.perfis.includes("ADMIN"))
+            {
+              this.pages.push(
+                { title: 'Grupo', component: 'GrupoPage'},
+              )
+            }
+          };
+        }, error => {});
+      
     }
-
-    if(this.perfis)
-    {
-      if(this.perfis.includes("ADMIN"))
-      {
-        this.pages.push(
-          { title: 'Grupo', component: 'GrupoPage'},
-        )
-      }
-    }
-
   }
 
   initializeApp() {
