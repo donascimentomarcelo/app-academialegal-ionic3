@@ -46,8 +46,11 @@ export class MyApp {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
           this.menu = response;
-          
+
+          this.getImageIfExist(this.menu.id);
+
           this.perfis = response.perfis;
+
           if(this.perfis)
           {
             if(this.perfis.includes("ADMIN"))
@@ -60,7 +63,15 @@ export class MyApp {
         }, error => {});
       
     }
-  }
+  };
+
+  getImageIfExist(id: string) {
+    this.usuarioService.getImageBucket(id)
+      .subscribe(response => {
+         this.menu.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`;
+      },
+    error => {});
+  };
 
   initializeApp() {
     this.platform.ready().then(() => {
