@@ -13,6 +13,7 @@ export class MyApp {
   email: string;
   image: string;
   nome: string;
+  perfis: any;
   rootPage: string = 'HomePage';
 
   pages: Array<{title: string, component: string}>;
@@ -30,15 +31,20 @@ export class MyApp {
       { title: 'Perfil', component: 'ProfilePage'},
       { title: 'Grupo', component: 'GrupoPage'}
     ];
+  }
 
+  loadSideMenu()
+  {
     let localUser = this.storage.getLocalUser();
- 
+    
     if(localUser && localUser.email)
     {
       this.email = localUser.email;
       this.image = localUser.imageUrl;
       this.nome = localUser.nome;
+      this.perfis = localUser.perfis;
     }
+
   }
 
   initializeApp() {
