@@ -29,7 +29,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
-      { title: 'Grupo', component: 'GrupoPage'}
+      
     ];
     
     this.loadSideMenu();
@@ -45,6 +45,16 @@ export class MyApp {
       this.image = localUser.imageUrl;
       this.nome = localUser.nome;
       this.perfis = localUser.perfis;
+    }
+
+    if(this.perfis)
+    {
+      if(this.perfis.includes("ADMIN"))
+      {
+        this.pages.push(
+          { title: 'Grupo', component: 'GrupoPage'},
+        )
+      }
     }
 
   }
