@@ -34,7 +34,7 @@ export class MyApp {
       { title: 'Perfil', component: 'ProfilePage'},
       
     ];
-    console.log(this.pages)
+    
     this.loadSideMenu();
   }
 
