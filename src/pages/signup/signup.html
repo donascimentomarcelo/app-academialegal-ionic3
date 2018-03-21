@@ -10,18 +10,22 @@
       <ion-label stacked>Nome*</ion-label>
       <ion-input formControlName="nome" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>O tamanho deve ser entre 5 e 80 caracteres</p>
     <ion-item>
       <ion-label stacked>Email*</ion-label>
       <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.email.dirty && formGroup.controls.email.errors" margin-left>E-mail inválido</p>
     <ion-item>
       <ion-label stacked>Senha*</ion-label>
       <ion-input formControlName="senha" type="password"></ion-input>
     </ion-item> 
+    <p class="danger" *ngIf="formGroup.controls.senha.dirty && formGroup.controls.senha.errors" margin-left>O tamanho deve ser entre 6 e 12 caracteres</p>
     <ion-item>
       <ion-label stacked>Repetir Senha*</ion-label>
       <ion-input formControlName="repeteSenha" type="password"></ion-input>
     </ion-item>
-    <button ion-button block type="submit"  color="dark">Criar conta</button>
+    <p class="danger" *ngIf="formGroup.controls.repeteSenha.dirty && formGroup.controls.repeteSenha.errors" margin-left>As senhas não conferem</p>
+    <button ion-button block type="submit"  color="dark" [disabled]="formGroup.invalid">Criar conta</button>
   </form>
 </ion-content>
