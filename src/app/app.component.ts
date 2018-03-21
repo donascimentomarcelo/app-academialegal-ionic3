@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { API_CONFIG } from '../config/api.config';
-
+import { AuthService } from '../services/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,16 +24,17 @@ export class MyApp {
       public statusBar: StatusBar, 
       public splashScreen: SplashScreen,
       public storage: StorageService,
-      public usuarioService: UsuarioService) {
+      public usuarioService: UsuarioService,
+      public authService: AuthService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
-      
+      { title: 'Logout', component: '' },
     ];
-    
+    console.log(this.pages)
     this.loadSideMenu();
   }
 
@@ -82,9 +83,30 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  openPage(page : {title:string, component:string}) {
+
+    switch (page.title)
+    {
+      case 'Logout':
+      this.authService.logout();
+      this.nav.setRoot('HomePage');
+      this.setPage();
+      break;
+
+      default:
+      this.nav.setRoot(page.component);
+    };
+  };
+
+  setPage()
+  {
+    delete this.pages;
+
+    this.pages = [
+      { title: 'Home', component: 'HomePage'},
+      { title: 'Perfil', component: 'ProfilePage'},
+      { title: 'Logout', component: '' },
+    ];
   }
+
 }
