@@ -32,7 +32,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
-      { title: 'Logout', component: '' },
+      
     ];
     console.log(this.pages)
     this.loadSideMenu();
@@ -58,6 +58,13 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Grupo', component: 'GrupoPage'},
+                { title: 'Logout', component: '' },
+              )
+            }
+            else if(this.perfis.includes("CLIENTE"))
+            {
+              this.pages.push(
+                { title: 'Logout', component: '' },
               )
             }
           };
@@ -105,7 +112,6 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
-      { title: 'Logout', component: '' },
     ];
   }
 
