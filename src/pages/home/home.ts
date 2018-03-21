@@ -56,5 +56,10 @@ creds: CredenciaisDTO = {
         this.myApp.setPage();
         this.navCtrl.setRoot('GrupoPage');
       }, error => {});
-  }
+  };
+
+  signup()
+  {
+    this.navCtrl.push('SignupPage');
+  };
 }

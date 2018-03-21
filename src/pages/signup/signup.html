@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar  color="dark">
+    <ion-title>Sign up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
+    <ion-item>
+      <ion-label stacked>Nome*</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Email*</ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Senha*</ion-label>
+      <ion-input formControlName="senha" type="password"></ion-input>
+    </ion-item> 
+    <ion-item>
+      <ion-label stacked>Repetir Senha*</ion-label>
+      <ion-input formControlName="repeteSenha" type="password"></ion-input>
+    </ion-item>
+    <button ion-button block type="submit"  color="dark">Criar conta</button>
+  </form>
+</ion-content>
