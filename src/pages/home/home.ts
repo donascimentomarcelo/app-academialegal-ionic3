@@ -47,4 +47,13 @@ creds: CredenciaisDTO = {
     this.sideMenu.swipeEnable(true);
     this.myApp.loadSideMenu();
   }
+
+  ionViewDidEnter()
+  {
+    this.authService.refreshToken()
+      .subscribe(response => {
+        this.authService.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('GrupoPage');
+      }, error => {});
+  }
 }

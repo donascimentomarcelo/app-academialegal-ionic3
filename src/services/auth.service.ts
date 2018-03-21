@@ -5,8 +5,6 @@ import { API_CONFIG } from './../config/api.config';
 import { StorageService } from './storage.service';
 import { LocalUser } from '../models/local_user';
 import { JwtHelper } from 'angular2-jwt';
-import { Observable } from 'rxjs/Observable';
-import { UsuarioDTO } from '../models/usuario.dto';
 
 @Injectable()
 export class AuthService{
@@ -45,6 +43,16 @@ export class AuthService{
     logout()
     {
         this.storage.setLocalUser(null);
+    };
+
+    refreshToken()
+    {
+        return this.http.post(`${API_CONFIG.baseUrl}/auth/refresh_token`,
+                                { },
+                                {
+                                    observe: 'response',
+                                    responseType: 'text'
+                                });
     };
 
 }
