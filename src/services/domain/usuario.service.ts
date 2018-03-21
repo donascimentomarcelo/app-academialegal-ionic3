@@ -22,4 +22,16 @@ export class UsuarioService {
         return this.http.get(url, {responseType: 'blob'});
     };
 
+    save(usuario: UsuarioDTO)
+    {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/usuarios`,
+            usuario,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    };
+
 };
