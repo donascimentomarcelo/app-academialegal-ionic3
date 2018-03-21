@@ -25,7 +25,7 @@
       <ion-label stacked>Repetir Senha*</ion-label>
       <ion-input formControlName="repeteSenha" type="password"></ion-input>
     </ion-item>
-    <p class="danger" *ngIf="formGroup.controls.repeteSenha.dirty && formGroup.controls.repeteSenha.errors" margin-left>As senhas não conferem</p>
+    <p class="danger" *ngIf="formGroup.controls.repeteSenha.dirty && formGroup.hasError('mismatchedPasswords')" margin-left>As senhas não conferem</p>
     <button ion-button block type="submit"  color="dark" [disabled]="formGroup.invalid">Criar conta</button>
   </form>
 </ion-content>
