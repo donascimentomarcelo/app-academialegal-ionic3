@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   menu: UsuarioDTO;
@@ -113,6 +114,6 @@ export class MyApp {
       { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
     ];
-  }
+  };
 
 }

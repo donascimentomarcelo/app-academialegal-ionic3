@@ -53,6 +53,7 @@ creds: CredenciaisDTO = {
     this.authService.refreshToken()
       .subscribe(response => {
         this.authService.successfulLogin(response.headers.get('Authorization'));
+        this.myApp.setPage();
         this.navCtrl.setRoot('GrupoPage');
       }, error => {});
   }
