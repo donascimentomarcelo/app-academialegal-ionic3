@@ -55,7 +55,7 @@ export class MyApp {
 
           if(this.perfis)
           {
-            if(this.perfis.includes("ADMIN") && this.perfis.includes("CLIENTE"))
+            if(this.perfis.includes("ADMIN") && this.perfis.includes("ALUNO"))
             {
               this.pages.push(
                 { title: 'Grupo', component: 'GrupoPage'},
@@ -63,7 +63,7 @@ export class MyApp {
                 { title: 'Logout', component: '' },
               )
             }
-            else if(this.perfis.includes("CLIENTE"))
+            else if(this.perfis.includes("ALUNO"))
             {
               this.pages.push(
                 { title: 'Logout', component: '' },

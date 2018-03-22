@@ -1,3 +1,4 @@
+import { PerfilService } from './../services/domain/perfil.service';
 import { StorageService } from './../services/storage.service';
 import { AuthService } from './../services/auth.service';
 
@@ -38,6 +39,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     AuthService,
     StorageService,
     UsuarioService,
+    PerfilService,
   ]
 })
 export class AppModule {}

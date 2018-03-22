@@ -25,12 +25,15 @@
     <ion-item>
       <ion-icon name='person' item-start style="color: #000000"></ion-icon>
       Quantidade de perfis
-      <ion-badge item-end>{{ usuario?.perfis.length }}</ion-badge>
+      <ion-badge item-end color="dark">{{ usuario?.perfis.length }}</ion-badge>
     </ion-item>
 
     <ion-item>
-      <ion-chip *ngFor="let subItem of usuario?.perfis" color="dark">
+      <ion-chip *ngFor="let subItem of usuario?.perfis; let aux = index" [attr.data-index]="aux" color="dark" #aux>
         <ion-label>{{ subItem }}</ion-label>
+        <button ion-button clear (click)="delete(aux, subItem, usuario?.id)" color="light">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
       </ion-chip>
     </ion-item>
 

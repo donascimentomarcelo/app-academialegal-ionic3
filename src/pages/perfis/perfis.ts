@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { UsuarioDTO } from './../../models/usuario.dto';
 import { API_CONFIG } from '../../config/api.config';
+import { PerfilService } from '../../services/domain/perfil.service';
 
 @IonicPage()
 @Component({
@@ -12,11 +13,12 @@ import { API_CONFIG } from '../../config/api.config';
 export class PerfisPage {
 
   usuario: UsuarioDTO;
-
+  perfilValue: number;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public usuarioService: UsuarioService) {
+    public usuarioService: UsuarioService,
+    public perfilService: PerfilService) {
   }
 
   ionViewDidLoad() {
@@ -29,7 +31,7 @@ export class PerfisPage {
       }, erros => {});
   };
 
-    getImageIfExist(id: string) {
+  getImageIfExist(id: string) {
     this.usuarioService.getImageBucket(id)
       .subscribe(response => {
          this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`;
@@ -37,8 +39,27 @@ export class PerfisPage {
     error => {});
   };
 
-  delete(chip: Element) {
-    chip.remove();
-  }
+  delete(chip: Element, perfil: string, id: string) {
+    this.perfilValue = this.convertPerfilToNumber(perfil);
+     this.perfilService.remove(this.perfilValue, id)
+      .subscribe(response => {
+        chip.remove();
+      }, error => {});
+  };
 
-}
+  convertPerfilToNumber(perfil: string)
+  {
+    switch(perfil)
+    {
+      case 'ADMIN':
+      return 1;
+
+      case 'ALUNO':
+      return 2;
+
+      case 'PROFESSOR':
+      return 3;
+    };
+  };
+
+};
