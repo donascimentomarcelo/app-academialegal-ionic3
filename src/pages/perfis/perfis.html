@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="dark">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+     </button>
+    <ion-title>{{ usuario?.nome }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-content>
+  <ion-card>
+    <img [src]="usuario?.imageUrl || 'assets/imgs/avatar-blank.png'"/>
+
+    <ion-card-content>
+      <ion-card-title>
+        {{ usuario?.nome }}
+      </ion-card-title>
+      <p>
+        {{ usuario?.email }}
+      </p>
+    </ion-card-content>
+
+    <ion-item>
+      <ion-icon name='person' item-start style="color: #000000"></ion-icon>
+      Quantidade de perfis
+      <ion-badge item-end>{{ usuario?.perfis.length }}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-chip *ngFor="let subItem of usuario?.perfis" color="dark">
+        <ion-label>{{ subItem }}</ion-label>
+      </ion-chip>
+    </ion-item>
+
+  </ion-card>
+</ion-content>

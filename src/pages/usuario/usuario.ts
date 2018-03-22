@@ -25,4 +25,9 @@ export class UsuarioPage {
         }, error => {});
   };
 
+  details(id: string)
+  {
+    this.navCtrl.push('PerfisPage', {id: id});
+  }
+
 };

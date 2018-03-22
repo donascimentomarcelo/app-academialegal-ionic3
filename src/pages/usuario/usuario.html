@@ -12,16 +12,12 @@
 <ion-content padding>
   <ion-list>
     <ion-item-sliding #item *ngFor="let usuario of usuarios">
-      <ion-item >
+      <ion-item>
        <h2>{{ usuario.nome }}</h2>
        <p>{{ usuario.email }}</p>
-        <div *ngFor="let subItem of usuario.perfis" fxLayout="row">
-            <div class="perfis">{{ subItem }} </div> 
-        </div>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="tertiary" (click)="addPerfil(usuario.id)">Adicionar Perfil</button>
-        <button ion-button color="dark" (click)="removePerfil(usuario.id)">Remover Perfil</button>
+        <button ion-button color="dark" (click)="details(usuario.id)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
