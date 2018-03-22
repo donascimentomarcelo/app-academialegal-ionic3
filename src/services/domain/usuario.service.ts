@@ -34,4 +34,9 @@ export class UsuarioService {
         );
     };
 
+    findAll(): Observable<UsuarioDTO> {
+        return this.http.get<UsuarioDTO>(`${API_CONFIG.baseUrl}/usuarios`);
+    }
+    
+
 };

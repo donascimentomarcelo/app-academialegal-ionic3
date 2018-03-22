@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="dark">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+     </button>
+    <ion-title>Lista de Usuários</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding #item *ngFor="let usuario of usuarios">
+      <ion-item >
+       <h2>{{ usuario.nome }}</h2>
+       <p>{{ usuario.email }}</p>
+        <div *ngFor="let subItem of usuario.perfis" fxLayout="row">
+            <div class="perfis">{{ subItem }} </div> 
+        </div>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="tertiary" (click)="addPerfil(usuario.id)">Adicionar Perfil</button>
+        <button ion-button color="dark" (click)="removePerfil(usuario.id)">Remover Perfil</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
