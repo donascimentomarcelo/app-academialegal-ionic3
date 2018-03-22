@@ -29,6 +29,12 @@
     </ion-item>
 
     <ion-item>
+        <ion-icon name='list-box' item-start style="color: #000000"></ion-icon>
+        Quantidade de solicitações
+        <ion-badge item-end color="dark">{{ usuario?.solicitacoes.length }}</ion-badge>
+      </ion-item>
+
+    <ion-item>
       <ion-chip *ngFor="let subItem of usuario?.perfis; let i = index" color="dark">
         <ion-label>{{ subItem }}</ion-label>
         <button ion-button clear (click)="delete(subItem, usuario?.id)" color="light">
