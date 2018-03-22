@@ -42,11 +42,11 @@ export class PerfisPage {
     error => {});
   };
 
-  delete(chip: Element, perfil: string, id: string) {
+  delete( perfil: string, id: string) {
     this.perfilValue = this.convertPerfilToNumber(perfil);
      this.perfilService.remove(this.perfilValue, id)
       .subscribe(response => {
-        chip.remove();
+        this.loadPerfil(id)
         this.usuario.perfis.length = this.usuario.perfis.length - 1;
       }, error => {});
   };

@@ -29,9 +29,9 @@
     </ion-item>
 
     <ion-item>
-      <ion-chip *ngFor="let subItem of usuario?.perfis; let aux = index" [attr.data-index]="aux" color="dark" #aux>
+      <ion-chip *ngFor="let subItem of usuario?.perfis; let i = index" color="dark">
         <ion-label>{{ subItem }}</ion-label>
-        <button ion-button clear (click)="delete(aux, subItem, usuario?.id)" color="light">
+        <button ion-button clear (click)="delete(subItem, usuario?.id)" color="light">
             <ion-icon name="close-circle"></ion-icon>
           </button>
       </ion-chip>
