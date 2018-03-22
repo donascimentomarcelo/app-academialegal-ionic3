@@ -14,6 +14,9 @@ export class PerfisPage {
 
   usuario: UsuarioDTO;
   perfilValue: number;
+  perfil: number;
+  codigo: string = this.navParams.get('id');
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -22,7 +25,7 @@ export class PerfisPage {
   }
 
   ionViewDidLoad() {
-    let id = this.navParams.get('id');
+    let id = this.codigo;
 
     this.usuarioService.findOne(id)
       .subscribe(response => {
@@ -44,6 +47,7 @@ export class PerfisPage {
      this.perfilService.remove(this.perfilValue, id)
       .subscribe(response => {
         chip.remove();
+        this.usuario.perfis.length = this.usuario.perfis.length - 1;
       }, error => {});
   };
 
@@ -60,6 +64,25 @@ export class PerfisPage {
       case 'PROFESSOR':
       return 3;
     };
+  };
+
+  add(id: string)
+  {
+    this.perfilService.add(this.perfil, id)
+      .subscribe(response => {
+        this.loadPerfil(id);
+      }, error => {});
+  };
+
+
+  loadPerfil(id) {
+
+    this.usuarioService.findOne(id)
+      .subscribe(response => {
+        this.usuario.perfis = response.perfis;
+        this.usuario.perfis.length + 1;
+        delete this.perfil;
+      }, erros => {});
   };
 
 };

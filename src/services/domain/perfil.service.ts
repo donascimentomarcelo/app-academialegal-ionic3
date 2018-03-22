@@ -15,6 +15,18 @@ export class PerfilService {
                 observe: 'response',
                 responseType: 'text'
             }
-        )
-    }
-}
+        );
+    };
+
+    add(perfil: number, id: string)
+    {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/usuarios/${id}/addPerfil`,
+            {perfil: perfil},
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    };
+};

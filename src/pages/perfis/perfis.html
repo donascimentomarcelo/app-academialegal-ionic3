@@ -37,5 +37,16 @@
       </ion-chip>
     </ion-item>
 
+    <ion-item>
+        <ion-label>Perfis</ion-label>
+        <ion-select [(ngModel)]="perfil">
+          <ion-option [value]="1">ADMIN</ion-option>
+          <ion-option [value]="2">ALUNO</ion-option>
+          <ion-option [value]="3">PROFESSOR</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <button ion-button block color="dark" (click)="add(usuario?.id)" [disabled]='!perfil'>Adicionar Perfil</button>
+    </ion-item>
   </ion-card>
 </ion-content>
