@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let grupo of grupos">
+    <button ion-item *ngFor="let grupo of grupos" (click)="showExercicios(grupo.id)">
       <ion-thumbnail item-start>
         <img src="{{bucketUrl}}/grupo{{grupo.id}}.png">
       </ion-thumbnail>

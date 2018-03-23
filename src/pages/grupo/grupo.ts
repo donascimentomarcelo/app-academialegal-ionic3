@@ -27,6 +27,11 @@ bucketUrl: string = API_CONFIG.bucketBaseUrl;
       }, error => {
         
       })
-  }
+  };
+
+  showExercicios(id: string)
+  {
+    this.navCtrl.push('ExercicioPage', {id: id});
+  };
 
 }

@@ -1,4 +1,4 @@
-export interface GrupoDTO {
+export interface ExercicioDTO {
     id: string;
     nome: string;
 }

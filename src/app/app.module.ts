@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { ExercicioService } from '../services/domain/exercicio.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     StorageService,
     UsuarioService,
     PerfilService,
+    ExercicioService,
   ]
 })
 export class AppModule {}
