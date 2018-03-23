@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+       </button>
+      <ion-title>Lista de exercícios</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-list>
+      <button ion-item *ngFor="let exercicio of exercicios">
+        <h2>{{exercicio?.nome}}</h2>
+        <p>Identificador: {{ exercicio?.id }}</p>
+      </button>
+    </ion-list>
+  </ion-content>

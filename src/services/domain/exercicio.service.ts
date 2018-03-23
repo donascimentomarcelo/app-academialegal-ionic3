@@ -9,8 +9,13 @@ export class ExercicioService {
 
     constructor(public http: HttpClient){};
 
-    findAll(id: string): Observable<ExercicioDTO[]>
+    findByCategory(id: string): Observable<ExercicioDTO[]>
     {
         return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/grupos/${id}/exercicios`);
+    };
+
+    findAll(): Observable<ExercicioDTO[]>
+    {
+        return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/exercicios`);
     };
 };

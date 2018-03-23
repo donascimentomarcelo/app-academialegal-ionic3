@@ -16,6 +16,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ExercicioService } from '../services/domain/exercicio.service';
+import { AdminExercicioPage } from '../pages/admin-exercicio/admin-exercicio';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ExercicioService } from '../services/domain/exercicio.service';
     UsuarioService,
     PerfilService,
     ExercicioService,
+    AdminExercicioPage,
   ]
 })
 export class AppModule {}

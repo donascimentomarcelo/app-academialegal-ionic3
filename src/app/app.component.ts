@@ -58,7 +58,8 @@ export class MyApp {
             if(this.perfis.includes("ADMIN"))
             {
               this.pages.push(
-                { title: 'Grupo', component: 'GrupoPage'},
+                { title: 'Grupos', component: 'GrupoPage'},
+                { title: 'Exercícios', component: 'AdminExercicioPage'},
                 { title: 'Usuários', component: 'UsuarioPage'},
                 { title: 'Logout', component: '' },
               )

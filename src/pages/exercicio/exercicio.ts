@@ -21,7 +21,7 @@ export class ExercicioPage {
   
   ionViewDidLoad() 
   {
-    this.exercicioService.findAll(this.codigo)
+    this.exercicioService.findByCategory(this.codigo)
       .subscribe(response => {
         this.exercicios = response;
       }, error => {
