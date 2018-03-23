@@ -24,7 +24,9 @@ export class ExercicioPage {
     this.exercicioService.findAll(this.codigo)
       .subscribe(response => {
         this.exercicios = response;
-      }, error => {});
+      }, error => {
+        this.navCtrl.pop();
+      });
   };
 
 }

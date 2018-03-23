@@ -43,6 +43,10 @@ export class ErrorInterceptor implements HttpInterceptor{
                     this.handler403();
                     break;
 
+                    case 404:
+                    this.handler404(errorObj);
+                    break
+
                     case 422:
                     this.handler422(errorObj);
                     break;
@@ -55,16 +59,31 @@ export class ErrorInterceptor implements HttpInterceptor{
             }) as any;
     };
 
-    handler403()
-    {
-        this.storage.setLocalUser(null);
-    };
-
     handler401()
     {
         let alert = this.alertCtrl.create({
             title: 'Falha de autenticação',
             message: 'E-mail ou senha incorreto.',
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        alert.present();
+    };
+
+    handler403()
+    {
+        this.storage.setLocalUser(null);
+    };
+
+    handler404(errorObj)
+    {
+        let alert = this.alertCtrl.create({
+            title: errorObj.message,
+            message: errorObj.error,
             enableBackdropDismiss: false,
             buttons: [
                 {
