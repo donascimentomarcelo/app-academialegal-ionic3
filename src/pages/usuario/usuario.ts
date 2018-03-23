@@ -1,3 +1,4 @@
+import { API_CONFIG } from './../../config/api.config';
 import { UsuarioDTO } from './../../models/usuario.dto';
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { Component } from '@angular/core';
@@ -11,6 +12,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class UsuarioPage {
 
   usuarios: UsuarioDTO[];
+  bucketUrl = API_CONFIG.bucketBaseUrl;
 
   constructor(
     public navCtrl: NavController, 

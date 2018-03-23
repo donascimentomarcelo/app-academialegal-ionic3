@@ -4,4 +4,22 @@ page-usuario {
         padding-left: 7px;
         padding-right: 7px;
     }
+    .circle{
+        height: 5vw; 
+        width: 5vw; 
+       border: 2px solid #fff;
+       border-radius: 50%;
+       box-shadow: 0 0 5px gray;
+       display: inline-block;
+       margin-left: auto;
+       margin-right: auto;
+    }
+    .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start] {
+        margin: 7px 0px 0px 0 !important;
+    }
 }

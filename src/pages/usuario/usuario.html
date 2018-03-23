@@ -13,6 +13,9 @@
   <ion-list>
     <ion-item-sliding #item *ngFor="let usuario of usuarios">
       <ion-item>
+       <ion-thumbnail item-start>
+          <img class="circle" src="{{bucketUrl}}/cp{{usuario?.id}}.jpg" onError="this.src='assets/imgs/avatar-blank.png'">
+       </ion-thumbnail>
        <h2>{{ usuario.nome }}</h2>
        <p>{{ usuario.email }}</p>
       </ion-item>
