@@ -1,3 +1,4 @@
+import { GrupoDTO } from './../../models/grupo.dto';
 import { API_CONFIG } from './../../config/api.config';
 import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
@@ -18,4 +19,14 @@ export class ExercicioService {
     {
         return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/exercicios`);
     };
+
+    findOne(id: string): Observable<ExercicioDTO>
+    {
+        return this.http.get<ExercicioDTO>(`${API_CONFIG.baseUrl}/exercicios/${id}`);
+    };
+
+    findOneGrupoByExercicio(id: string): Observable<GrupoDTO>
+    {
+        return this.http.get<GrupoDTO>(`${API_CONFIG.baseUrl}/grupos/${id}/grupoByExercicio`);
+    }
 };

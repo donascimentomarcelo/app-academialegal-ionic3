@@ -24,6 +24,24 @@ export class AdminExercicioPage {
       .subscribe(response => {
         this.exercicios = response['content'];
       }, error => { });
-  }
+  };
+
+  edit(id: string)
+  {
+    this.exercicioService.findOne(id)
+      .subscribe(response => {
+        console.log(response);
+      }, error => {});
+  };
+
+  showExercicioForm(id: string)
+  {
+    this.navCtrl.push('AdminExercicioSavePage', {id: id})
+  };
+
+  showExercicioFormNew()
+  {
+    this.navCtrl.push('AdminExercicioSavePage');
+  };
 
 }

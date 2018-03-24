@@ -1,0 +1,26 @@
+
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Exercício</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form [formGroup]="formGroup" (ngSubmit)="save(); $event.preventDefault()">
+    <ion-item>
+      <ion-label stacked>Nome*</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>O tamanho deve ser entre 5 e 80 caracteres</p>
+    <ion-item>
+        <ion-label>Perfis</ion-label>
+        <ion-select formControlName="grupo_id">
+          <ion-option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.nome }}</ion-option>
+        </ion-select>
+    </ion-item>
+    <button ion-button block type="submit"  color="dark" [disabled]="formGroup.invalid">Salvar</button>
+</form>    
+</ion-content>
