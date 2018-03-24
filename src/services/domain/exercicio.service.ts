@@ -29,4 +29,19 @@ export class ExercicioService {
     {
         return this.http.get<GrupoDTO>(`${API_CONFIG.baseUrl}/grupos/${id}/grupoByExercicio`);
     }
+
+    update(id: string, exercicio: any)
+    {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/exercicios/${id}`,
+            { 
+                nome: exercicio.nome,
+                grupoId: exercicio.grupo_id,
+            },
+            {
+                observe: 'response',
+                responseType: 'text',
+            }
+        );
+    };
 };

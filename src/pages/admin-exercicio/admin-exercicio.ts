@@ -26,6 +26,11 @@ export class AdminExercicioPage {
       }, error => { });
   };
 
+  ionViewDidEnter()
+  {
+   this.ionViewDidLoad()
+  }
+
   edit(id: string)
   {
     this.exercicioService.findOne(id)

@@ -16,6 +16,7 @@ export class AdminExercicioSavePage {
   formGroup: FormGroup;
   grupos: GrupoDTO[];
   grupo_id: any;
+  codigo = this.navParams.get('id');
 
   constructor(
     public navCtrl: NavController, 
@@ -34,14 +35,11 @@ export class AdminExercicioSavePage {
       
   ionViewDidLoad() 
   {
-
-    let codigo = this.navParams.get('id');
-
     this.listGrupo();
 
-    if(codigo)
+    if(this.codigo)
     {
-      this.edit(codigo);
+      this.edit(this.codigo);
     }
 
   };
@@ -89,7 +87,39 @@ export class AdminExercicioSavePage {
 
   save()
   {
-   console.log(this.formGroup.value);
-  }
+    if(this.codigo != null)
+    {
+      this.update(this.codigo, this.formGroup.value);
+      
+      return;
+    };
 
-}
+    this.create(this.formGroup.value);
+  };
+
+  update(id: string, exercicio: any)
+  {
+    this.exercicioService.update(id, exercicio)
+      .subscribe(response => {
+        this.success();
+      }, error => {});
+  };
+
+  success()
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Operação realizada com sucesso!',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  };
+};
