@@ -1,10 +1,10 @@
-import { ExercicioDTO } from './../../models/exercicio.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExercicioService } from '../../services/domain/exercicio.service';
 import { GrupoService } from '../../services/domain/grupo.service';
 import { GrupoDTO } from '../../models/grupo.dto';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @IonicPage()
 @Component({
@@ -48,17 +48,17 @@ export class AdminExercicioSavePage {
 
   edit(id: string)
   {
-    this.exercicioService.findOne(id)
-      .subscribe(exercicio => {
-        this.exercicioService.findOneGrupoByExercicio(id)
-        .subscribe(grupo => {
-          
-          let nome = exercicio.nome;
-          let grupo_id = grupo.id;
+    let getExercicio = this.exercicioService.findOne(id);
+    let getGrupo = this.exercicioService.findOneGrupoByExercicio(id);
+
+    forkJoin([getExercicio, getGrupo])
+        .subscribe(results => {
+
+          let nome = results[0].nome;
+          let grupo_id = results[1].id;
           this.fillForm(nome, grupo_id);
 
         }, error => {});
-      }, error => {});
   };
 
   fillForm(nome: string, grupo_id: any)
