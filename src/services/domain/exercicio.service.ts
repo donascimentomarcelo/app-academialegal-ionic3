@@ -44,4 +44,19 @@ export class ExercicioService {
             }
         );
     };
+
+    create(exercicio: any)
+    {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/exercicios`,
+            { 
+                nome: exercicio.nome,
+                grupoId: exercicio.grupo_id,
+            },
+            {
+                observe: 'response',
+                responseType: 'text',
+            }
+        );
+    }
 };

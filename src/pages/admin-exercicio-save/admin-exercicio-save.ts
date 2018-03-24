@@ -101,15 +101,25 @@ export class AdminExercicioSavePage {
   {
     this.exercicioService.update(id, exercicio)
       .subscribe(response => {
-        this.success();
+        let operacao = 'atualizado';
+        this.success(exercicio.nome, operacao);
       }, error => {});
   };
 
-  success()
+  create(exercicio: any)
+  {
+    this.exercicioService.create(exercicio)
+      .subscribe(response => {
+        let operacao = 'criado';
+        this.success(exercicio.nome, operacao);
+      }, error => {});
+  }
+
+  success(nome: string, operacao:string)
   {
     let alert = this.alertCtrl.create({
       title: 'Sucesso!',
-      message: 'Operação realizada com sucesso!',
+      message: 'O exercício ' + nome +' foi ' + operacao + ' com sucesso!',
       enableBackdropDismiss: false,
       buttons: [
         {
