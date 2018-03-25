@@ -5,9 +5,7 @@
      </button>
     <ion-title>Lista de Usuários</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <ion-list>
@@ -23,5 +21,22 @@
         <button ion-button color="dark" (click)="details(usuario.id)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
+    <ion-item *ngIf="total === 0" >
+        <h2>Nenhum usuário foi encontrado!</h2>
+  </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar color="dark">
+      <ion-title>
+        <ion-searchbar
+          [(ngModel)]="search"
+          [showCancelButton]="false"
+          (ionInput)="onInput($event.target.value)"
+          (ionCancel)="onCancel($event)"
+          (ionClear)="onClear($event)">
+        </ion-searchbar>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

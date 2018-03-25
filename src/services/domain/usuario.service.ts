@@ -34,12 +34,19 @@ export class UsuarioService {
         );
     };
 
-    findAll(): Observable<UsuarioDTO> {
+    findAll(): Observable<UsuarioDTO> 
+    {
         return this.http.get<UsuarioDTO>(`${API_CONFIG.baseUrl}/usuarios`);
     };
     
-    findOne(id: string): Observable<UsuarioDTO> {
+    findOne(id: string): Observable<UsuarioDTO> 
+    {
         return this.http.get<UsuarioDTO>(`${API_CONFIG.baseUrl}/usuarios/${id}`);
+    };
+
+    findByName(nome: string): Observable<UsuarioDTO[]>
+    {
+        return this.http.get<UsuarioDTO[]>(`${API_CONFIG.baseUrl}/usuarios/name?name=${nome}`);
     };
 
 };
