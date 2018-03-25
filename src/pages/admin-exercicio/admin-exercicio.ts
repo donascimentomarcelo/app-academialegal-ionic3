@@ -1,7 +1,7 @@
 import { ExercicioDTO } from './../../models/exercicio.dto';
 import { ExercicioService } from './../../services/domain/exercicio.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content  } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -70,6 +70,18 @@ export class AdminExercicioPage {
   {   
     this.search = "";
     this.loadExercicios();
+  }
+
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  }
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
   }
 
 }
