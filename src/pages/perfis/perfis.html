@@ -9,9 +9,8 @@
 
 
 <ion-content padding>
-<ion-content>
   <ion-card>
-    <img [src]="usuario?.imageUrl || 'assets/imgs/avatar-blank.png'"/>
+    <img src="{{bucketUrl}}/cp{{usuario?.id}}.jpg" onError="this.src='assets/imgs/avatar-blank.png'"/>
 
     <ion-card-content>
       <ion-card-title>

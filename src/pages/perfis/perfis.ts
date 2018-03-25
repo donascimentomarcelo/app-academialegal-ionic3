@@ -16,6 +16,7 @@ export class PerfisPage {
   perfilValue: number;
   perfil: number;
   codigo: string = this.navParams.get('id');
+  bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
   constructor(
     public navCtrl: NavController, 
