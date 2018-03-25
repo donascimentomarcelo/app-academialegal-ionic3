@@ -20,12 +20,7 @@ export class AdminExercicioPage {
   total: number;
   search: string;
 
-  ionViewDidLoad() 
-  {
-    this.loadExercicios();
-  };
-
-  ionViewDidLeave()
+  ionViewDidEnter()
   {
     this.loadExercicios();
   }
