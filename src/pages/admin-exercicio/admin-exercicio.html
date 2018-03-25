@@ -42,5 +42,22 @@
             <button ion-button color="dark" (click)="showExercicioForm(exercicio?.id)">Editar</button>
           </ion-item-options>
       </ion-item-sliding>
+      <ion-item *ngIf="total === 0" >
+          <h2>Nenhum registro foi encontrado!</h2>
+    </ion-item>
     </ion-list>
   </ion-content>
+
+  <ion-footer no-border>
+    <ion-toolbar color="dark">
+      <ion-title>
+        <ion-searchbar
+          [(ngModel)]="search"
+          [showCancelButton]="false"
+          (ionInput)="onInput($event.target.value)"
+          (ionCancel)="onCancel($event)"
+          (ionClear)="onClear($event)">
+        </ion-searchbar>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

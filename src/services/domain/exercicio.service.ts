@@ -28,7 +28,12 @@ export class ExercicioService {
     findOneGrupoByExercicio(id: string): Observable<GrupoDTO>
     {
         return this.http.get<GrupoDTO>(`${API_CONFIG.baseUrl}/grupos/${id}/grupoByExercicio`);
-    }
+    };
+
+    findByName(nome: string): Observable<ExercicioDTO[]>
+    {
+        return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/exercicios/name?name=${nome}`);
+    };
 
     update(id: string, exercicio: any)
     {
@@ -58,5 +63,5 @@ export class ExercicioService {
                 responseType: 'text',
             }
         );
-    }
+    };
 };

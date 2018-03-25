@@ -17,19 +17,27 @@ export class AdminExercicioPage {
   };
 
   exercicios: ExercicioDTO[];
+  total: number;
+  search: string;
 
   ionViewDidLoad() 
   {
-    this.exercicioService.findAll()
-      .subscribe(response => {
-        this.exercicios = response['content'];
-      }, error => { });
+    this.loadExercicios();
   };
 
-  ionViewDidEnter()
+  ionViewDidLeave()
   {
-   this.ionViewDidLoad()
+    this.loadExercicios();
   }
+
+  loadExercicios()
+  {
+    this.exercicioService.findAll()
+    .subscribe(response => {
+      this.exercicios = response['content'];
+      this.total = response['content'].length;      
+    }, error => { });
+  };
 
   edit(id: string)
   {
@@ -48,5 +56,20 @@ export class AdminExercicioPage {
   {
     this.navCtrl.push('AdminExercicioSavePage');
   };
+
+  onInput(name){
+    this.exercicioService.findByName(name)
+      .subscribe(response => {
+        this.exercicios = response;
+        this.total = this.exercicios.length;
+      }, error => {});
+  };
+
+
+  onClear()
+  {   
+    this.search = "";
+    this.loadExercicios();
+  }
 
 }
