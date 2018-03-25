@@ -15,6 +15,7 @@ export class ProfilePage {
 
   email: string;
   usuario: UsuarioDTO;
+  bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
   constructor(
       public navCtrl: NavController, 
