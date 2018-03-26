@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar color="dark">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+     </button>
+    <ion-title>Solicitações</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding #item *ngFor="let solicitacao of solicitacoes">
+      <ion-item>
+       <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h2>Aluno: {{ solicitacao.solicitante }}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Data: {{ solicitacao.dataSolicitacao }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Tipo: {{ solicitacao.tipoSerie | titlecase }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="dark" (click)="details()">Detalhes</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item *ngIf="total === 0" >
+        <h2>Nenhum usuário foi encontrado!</h2>
+  </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar color="dark">
+      <ion-title>
+        <ion-searchbar placeholder="Pesquisar..."
+          [(ngModel)]="search"
+          [showCancelButton]="false"
+          (ionInput)="onInput($event.target.value)"
+          (ionCancel)="onCancel($event)"
+          (ionClear)="onClear($event)">
+        </ion-searchbar>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

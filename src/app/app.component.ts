@@ -60,6 +60,7 @@ export class MyApp {
               this.pages.push(
                 { title: 'Grupos', component: 'GrupoPage'},
                 { title: 'Exercícios', component: 'AdminExercicioPage'},
+                { title: 'Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Usuários', component: 'UsuarioPage'},
                 { title: 'Logout', component: '' },
               )
