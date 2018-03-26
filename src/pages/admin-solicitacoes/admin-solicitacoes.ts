@@ -1,6 +1,6 @@
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 
 @IonicPage()
@@ -11,6 +11,8 @@ import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 export class AdminSolicitacoesPage {
 
   solicitacoes: SolicitacaoDTO[];
+  search: string;
+  total: number;
 
   constructor(
     public navCtrl: NavController, 
@@ -22,7 +24,35 @@ export class AdminSolicitacoesPage {
     this.solicitacaoService.findAll()
       .subscribe(response => {
         this.solicitacoes = response['content'];
+        this.total = response['content'].length;
       }, error => {});
+  };
+
+  onInput(solicitante)
+  {
+    this.solicitacaoService.findBySolicitante(solicitante)
+      .subscribe(response => {
+        this.solicitacoes = response;
+        this.total = response.length
+      }, error => {});
+  };
+
+  onClear()
+  {   
+    this.search = "";
+    this.ionViewDidLoad();
+  };
+
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  };
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
   }
 
 }

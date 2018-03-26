@@ -14,4 +14,9 @@ export class SolicitacaoService {
     {
         return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes`);
     };
+
+    findBySolicitante(solicitante: string): Observable<SolicitacaoDTO[]>
+    {
+        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/name?name=${solicitante}`);
+    };
 }
