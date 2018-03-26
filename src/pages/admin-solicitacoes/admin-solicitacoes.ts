@@ -2,6 +2,7 @@ import { SolicitacaoService } from './../../services/domain/solicitacao.service'
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
+import { StorageService } from '../../services/storage.service';
 
 @IonicPage()
 @Component({
@@ -17,7 +18,8 @@ export class AdminSolicitacoesPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public solicitacaoService: SolicitacaoService) {
+    public solicitacaoService: SolicitacaoService,
+    public storage: StorageService) {
   }
 
   ionViewDidLoad() {
@@ -53,6 +55,14 @@ export class AdminSolicitacoesPage {
   scrollToBottom() 
   {
     this.content.scrollToBottom();
+  };
+
+  details(id: string)
+  {
+    // this.navCtrl.push('')
+    let localProfile = this.storage.getLocalPerfis();
+    console.log(localProfile);
+    
   }
 
 }

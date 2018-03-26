@@ -30,21 +30,21 @@
        <ion-grid>
         <ion-row>
           <ion-col>
-            <h2>Aluno: {{ solicitacao.solicitante }}</h2>
+            <h2><b>Aluno:</b> {{ solicitacao.solicitante }}</h2>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <p>Data: {{ solicitacao.dataSolicitacao }}</p>
+            <p><b>Data:</b> {{ solicitacao.dataSolicitacao }}</p>
           </ion-col>
           <ion-col>
-            <p>Tipo: {{ solicitacao.tipoSerie | titlecase }}</p>
+            <p><b>Tipo:</b> {{ solicitacao.tipoSerie | titlecase }}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="dark" (click)="details()">Detalhes</button>
+        <button ion-button color="dark" (click)="details(solicitacao.id)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
     <ion-item *ngIf="total === 0" >

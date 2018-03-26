@@ -1,3 +1,4 @@
+import { LocalPerfis } from './../models/local_perfis';
 import { UsuarioDTO } from './../models/usuario.dto';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
@@ -47,6 +48,15 @@ export class MyApp {
     {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
+
+          // SET LOCALSTORAGE WITH PROFILE
+          let perfis: LocalPerfis = {
+            perfis: response.perfis
+          };
+
+          this.storage.setLocalPerfis(perfis);
+          // SET LOCALSTORAGE WITH PROFILE
+
           this.menu = response;
 
           this.getImageIfExist(this.menu.id);
