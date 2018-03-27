@@ -13,13 +13,13 @@
 
         <ion-item>
           <ion-icon name='md-person' item-start style="color: #000000"></ion-icon>
-          Aluno
+          Aluno(a)
           <ion-badge item-end color="dark">{{ solicitacao?.solicitante}}</ion-badge>
         </ion-item>
 
         <ion-item>
           <ion-icon name='md-calendar' item-start style="color: #000000"></ion-icon>
-          Solicitado em
+          Data
           <ion-badge item-end color="dark">{{ solicitacao?.dataSolicitacao}}</ion-badge>
         </ion-item>
     
@@ -42,10 +42,8 @@
               <ion-icon color="success" [name]="isGroupShown(accordionDescricao) ? 'md-remove' : 'md-add'"></ion-icon>
           </ion-icon>
         </ion-item>
-        <div class="accordionItem">
-          <ion-icon *ngIf="isGroupShown(accordionDescricao)">
-              <ion-badge item-end color="dark">{{ solicitacao?.descricao | slice:0:20 }}</ion-badge>
-          </ion-icon>
+        <div class="accordionItem" *ngIf="isGroupShown(accordionDescricao)" [@slideInOut]>
+            <ion-item><p class="breakLine">{{ solicitacao?.descricao }}</p></ion-item>
         </div>
 
         <ion-item *ngIf="solicitacao?.justificativa">
@@ -55,10 +53,13 @@
               <ion-icon color="success" [name]="isGroupShown(accordionJustificativa) ? 'md-remove' : 'md-add'"></ion-icon>
           </ion-icon>
         </ion-item>
-        <div class="accordionItem">
-          <ion-icon *ngIf="isGroupShown(accordionJustificativa)">
-              <ion-badge item-end color="dark">{{ solicitacao?.justificativa | slice:0:20 }}</ion-badge>
-          </ion-icon>
+        <div class="accordionItem" *ngIf="isGroupShown(accordionJustificativa)" [@slideInOut]>
+              <ion-item><p class="breakLine">{{ solicitacao?.justificativa }}</p></ion-item>
         </div>
+
+        <ion-item>
+            <button ion-button block color="dark" (click)="add()">Criar Série</button>
+            <button ion-button block outline color="dark" (click)="add()">Reprovar Solicitação</button>
+        </ion-item>
       </ion-card>
 </ion-content>

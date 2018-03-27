@@ -17,6 +17,7 @@ import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ExercicioService } from '../services/domain/exercicio.service';
 import { SolicitacaoService } from '../services/domain/solicitacao.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SolicitacaoService } from '../services/domain/solicitacao.service';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    BrowserAnimationsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
