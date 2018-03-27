@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+       </button>
+      <ion-title>Detalhes da solicitação</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-card>    
+
+        <ion-item>
+          <ion-icon name='md-person' item-start style="color: #000000"></ion-icon>
+          Aluno
+          <ion-badge item-end color="dark">{{ solicitacao?.solicitante}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name='md-calendar' item-start style="color: #000000"></ion-icon>
+          Solicitado em
+          <ion-badge item-end color="dark">{{ solicitacao?.dataSolicitacao}}</ion-badge>
+        </ion-item>
+    
+        <ion-item>
+          <ion-icon name='list-box' item-start style="color: #000000"></ion-icon>
+          Objetivo
+          <ion-badge item-end color="dark">{{ solicitacao?.tipoSerie | titlecase}}</ion-badge>
+        </ion-item>
+    
+        <ion-item>
+          <ion-icon name='md-stats' item-start style="color: #000000"></ion-icon>
+          Status
+          <ion-badge item-end color="dark">{{ solicitacao?.statusSerie | titlecase}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name='md-paper' item-start style="color: #000000"></ion-icon>
+          Descrição
+          <ion-icon item-end style="color: #000000" (click)="toggleGroup(accordionDescricao)"  [ngClass]="{active: isGroupShown(accordionDescricao)}">
+              <ion-icon color="success" [name]="isGroupShown(accordionDescricao) ? 'md-remove' : 'md-add'"></ion-icon>
+          </ion-icon>
+        </ion-item>
+        <div class="accordionItem">
+          <ion-icon *ngIf="isGroupShown(accordionDescricao)">
+              <ion-badge item-end color="dark">{{ solicitacao?.descricao | slice:0:20 }}</ion-badge>
+          </ion-icon>
+        </div>
+
+        <ion-item *ngIf="solicitacao?.justificativa">
+          <ion-icon name='md-document' item-start style="color: #000000"></ion-icon>
+          Justificativa
+          <ion-icon item-end style="color: #000000" (click)="toggleGroup(accordionJustificativa)"  [ngClass]="{active: isGroupShown(accordionJustificativa)}">
+              <ion-icon color="success" [name]="isGroupShown(accordionJustificativa) ? 'md-remove' : 'md-add'"></ion-icon>
+          </ion-icon>
+        </ion-item>
+        <div class="accordionItem">
+          <ion-icon *ngIf="isGroupShown(accordionJustificativa)">
+              <ion-badge item-end color="dark">{{ solicitacao?.justificativa | slice:0:20 }}</ion-badge>
+          </ion-icon>
+        </div>
+      </ion-card>
+</ion-content>

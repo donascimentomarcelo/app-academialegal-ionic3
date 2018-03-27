@@ -59,9 +59,7 @@ export class AdminSolicitacoesPage {
 
   details(id: string)
   {
-    // this.navCtrl.push('')
-    let localProfile = this.storage.getLocalPerfis();
-    console.log(localProfile);
+    this.navCtrl.push('SolicitacaoDetailsPage', {id: id});
     
   }
 

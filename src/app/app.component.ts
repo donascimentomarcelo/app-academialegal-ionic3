@@ -1,4 +1,4 @@
-import { LocalPerfis } from './../models/local_perfis';
+import { LocalProfile } from './../models/local_profile';
 import { UsuarioDTO } from './../models/usuario.dto';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
@@ -50,7 +50,7 @@ export class MyApp {
         .subscribe(response => {
 
           // SET LOCALSTORAGE WITH PROFILE
-          let perfis: LocalPerfis = {
+          let perfis: LocalProfile = {
             perfis: response.perfis
           };
 

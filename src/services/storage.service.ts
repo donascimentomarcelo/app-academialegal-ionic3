@@ -1,4 +1,4 @@
-import { LocalPerfis } from './../models/local_perfis';
+import { LocalProfile } from './../models/local_profile';
 import { STORAGE_KEY } from './../config/storage_keys.config';
 import { LocalUser } from './../models/local_user';
 import { Injectable } from '@angular/core';
@@ -32,7 +32,7 @@ export class StorageService {
         };
     };
 
-    getLocalPerfis(): LocalPerfis 
+    getLocalPerfis(): LocalProfile 
     {
         let profile = localStorage.getItem(STORAGE_KEY.localProfile);
 
@@ -46,7 +46,7 @@ export class StorageService {
         };
     };
 
-    setLocalPerfis(obj: LocalPerfis)
+    setLocalPerfis(obj: LocalProfile)
     {
         if(obj == null)
         {
