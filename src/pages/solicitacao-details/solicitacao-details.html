@@ -39,7 +39,7 @@
           <ion-icon name='md-paper' item-start style="color: #000000"></ion-icon>
           Descrição
           <ion-icon item-end style="color: #000000" (click)="toggleGroup(accordionDescricao)"  [ngClass]="{active: isGroupShown(accordionDescricao)}">
-              <ion-icon color="success" [name]="isGroupShown(accordionDescricao) ? 'md-remove' : 'md-add'"></ion-icon>
+              <ion-icon color="success" [name]="isGroupShown(accordionDescricao) ? 'md-remove' : 'md-add'" ></ion-icon>
           </ion-icon>
         </ion-item>
         <div class="accordionItem" *ngIf="isGroupShown(accordionDescricao)" [@slideInOut]>
@@ -57,7 +57,7 @@
               <ion-item><p class="breakLine">{{ solicitacao?.justificativa }}</p></ion-item>
         </div>
 
-        <ion-item>
+        <ion-item *ngIf="professor === true">
             <button ion-button block color="dark" (click)="add()">Criar Série</button>
             <button ion-button block outline color="dark" (click)="add()">Reprovar Solicitação</button>
         </ion-item>

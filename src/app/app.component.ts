@@ -50,11 +50,11 @@ export class MyApp {
         .subscribe(response => {
 
           // SET LOCALSTORAGE WITH PROFILE
-          let perfis: LocalProfile = {
+          let profile: LocalProfile = {
             perfis: response.perfis
           };
 
-          this.storage.setLocalPerfis(perfis);
+          this.storage.setLocalPerfis(profile);
           // SET LOCALSTORAGE WITH PROFILE
 
           this.menu = response;

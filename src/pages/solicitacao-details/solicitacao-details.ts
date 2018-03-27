@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
@@ -31,21 +32,33 @@ import { trigger, transition, animate, style, state, keyframes } from '@angular/
 })
 export class SolicitacaoDetailsPage {
 
-  constructor(
-      public navCtrl: NavController, 
-      public navParams: NavParams,
-      public solicitacaoService: SolicitacaoService) {
-  }
-
   codigo = this.navParams.get('id');
   solicitacao: SolicitacaoDTO;
   accordionDescricao = 'accordion';
   accordionJustificativa = 'justificativa';
+  professor: boolean = false;
+  perfis: any;
+
+  constructor(
+      public navCtrl: NavController, 
+      public navParams: NavParams,
+      public solicitacaoService: SolicitacaoService,  
+      public storage: StorageService) 
+      {
+        this.perfis = this.storage.getLocalPerfis().perfis;
+
+        if(this.perfis)
+        {
+          if(this.perfis.includes("PROFESSOR"))
+          {
+            this.professor = true;
+          };
+        };
+      }
 
   ionViewDidLoad() {
     this.solicitacaoService.findOne(this.codigo)
       .subscribe(response => {
-        console.log(response);
         this.solicitacao = response;
       }, error => {});
   };
@@ -53,13 +66,13 @@ export class SolicitacaoDetailsPage {
   shownGroup = null;
   toggleGroup(group) {
     if (this.isGroupShown(group)) {
-        this.shownGroup = null;
+        this.shownGroup = !this.shownGroup;
     } else {
         this.shownGroup = group;
     }
-};
-isGroupShown(group) {
-    return this.shownGroup === group;
-};
+  };
+  isGroupShown(group) {
+      return this.shownGroup === group;
+  };
 
 }
