@@ -35,6 +35,10 @@ export class ErrorInterceptor implements HttpInterceptor{
 
                 switch(errorObj.status)
                 {
+                    case 400:
+                    this.handler400(errorObj)
+                    break; 
+
                     case 401:
                     this.handler401();
                     break;
@@ -58,6 +62,21 @@ export class ErrorInterceptor implements HttpInterceptor{
                 return Observable.throw(errorObj);
             }) as any;
     };
+
+    handler400(errorObj)
+    {
+        let alert = this.alertCtrl.create({
+            title: errorObj.message,
+            message: errorObj.error,
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        alert.present();
+    }
 
     handler401()
     {
