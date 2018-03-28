@@ -16,7 +16,7 @@
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>O tamanho deve ser entre 5 e 80 caracteres</p>
     <ion-item>
-        <ion-label>Perfis</ion-label>
+        <ion-label>Grupo muscular</ion-label>
         <ion-select formControlName="grupo_id">
           <ion-option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.nome }}</ion-option>
         </ion-select>

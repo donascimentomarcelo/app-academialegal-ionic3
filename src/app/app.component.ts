@@ -34,7 +34,6 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
-      
     ];
     
     this.loadSideMenu();
@@ -72,12 +71,14 @@ export class MyApp {
                 { title: 'Exercícios', component: 'AdminExercicioPage'},
                 { title: 'Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Usuários', component: 'UsuarioPage'},
+                { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
                 { title: 'Logout', component: '' },
               )
             }
             else if(this.perfis.includes("ALUNO"))
             {
               this.pages.push(
+                { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
                 { title: 'Logout', component: '' },
               )
             }

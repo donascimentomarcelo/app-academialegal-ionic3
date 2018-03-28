@@ -3,7 +3,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
      </button>
-    <ion-title>Solicitações</ion-title>
+    <ion-title>Minhas solicitações</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -30,7 +30,7 @@
        <ion-grid>
         <ion-row>
           <ion-col>
-            <h2><b>Aluno:</b> {{ solicitacao.solicitante }}</h2>
+            <h2><b>Objetivo:</b> {{ solicitacao.tipoSerie | titlecase }}</h2>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -49,17 +49,3 @@
     </ion-item>
   </ion-list>
 </ion-content>
-
-<ion-footer no-border>
-    <ion-toolbar color="dark">
-      <ion-title>
-        <ion-searchbar placeholder="Pesquisar..."
-          [(ngModel)]="search"
-          [showCancelButton]="false"
-          (ionInput)="onInput($event.target.value)"
-          (ionCancel)="onCancel($event)"
-          (ionClear)="onClear($event)">
-        </ion-searchbar>
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>
