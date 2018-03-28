@@ -1,6 +1,6 @@
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { trigger, transition, animate, style, state, keyframes } from '@angular/animations'
@@ -43,7 +43,8 @@ export class SolicitacaoDetailsPage {
       public navCtrl: NavController, 
       public navParams: NavParams,
       public solicitacaoService: SolicitacaoService,  
-      public storage: StorageService) 
+      public storage: StorageService,
+      public alertCtrl: AlertController) 
       {
         this.perfis = this.storage.getLocalPerfis().perfis;
 
@@ -52,7 +53,9 @@ export class SolicitacaoDetailsPage {
           if(this.perfis.includes("PROFESSOR"))
           {
             this.professor = true;
+            
           };
+
         };
       }
 
@@ -73,6 +76,43 @@ export class SolicitacaoDetailsPage {
   };
   isGroupShown(group) {
       return this.shownGroup === group;
+  };
+
+  rejectPrompt(id: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Insira uma justificativa!',
+      subTitle: 'Insira uma justificativa para que a solicitação seja rejeitada.',
+     
+      inputs: [
+        {
+          name: 'justificativa',
+          placeholder: 'Justificativa',
+          label: 'dark'
+        }
+      ],
+      buttons: [
+        
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Rejeitar',
+          handler: data => {
+            this.rejectOk(id,data);
+          }
+        }
+      ]
+    });
+    alert.present();
+  };
+
+  rejectOk(id: string, data: string)
+  {
+    this.solicitacaoService.reject(id, data)
+      .subscribe(response => {
+        this.navCtrl.pop();
+      }, error => {});
   };
 
 }

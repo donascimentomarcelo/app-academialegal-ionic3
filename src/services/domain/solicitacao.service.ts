@@ -24,4 +24,16 @@ export class SolicitacaoService {
     {
         return this.http.get<SolicitacaoDTO>(`${API_CONFIG.baseUrl}/solicitacoes/${id}`);
     };
+
+    reject(id: string, data: string)
+    {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/solicitacoes/${id}/rejeitar`,
+             data,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    };
 }
