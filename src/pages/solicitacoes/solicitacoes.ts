@@ -1,7 +1,7 @@
 import { SolicitacaoDTO } from './../../models/solicitacao.dto';
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -20,6 +20,11 @@ export class SolicitacoesPage {
   ionViewDidEnter()
   {
     this.loadData();
+  };
+
+  closeFab(event, fab: FabContainer)
+  {
+    fab.close();
   };
 
   loadData()

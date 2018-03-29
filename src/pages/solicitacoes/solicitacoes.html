@@ -9,7 +9,7 @@
 
 <ion-content padding>
 
-  <ion-fab top right edge>
+  <ion-fab top right edge #fab>
     <button ion-fab color="light">
         <ion-icon name="md-options"></ion-icon>
     </button>
@@ -24,7 +24,7 @@
     </ion-fab-list>
 
     <ion-fab-list side="left">
-      <button ion-fab (click)="showSerieFormNew()" color="light">
+      <button ion-fab (click)="showSerieFormNew(); closeFab($event, fab)" color="light">
         <ion-icon name="md-add-circle"></ion-icon>
     </button>
   </ion-fab-list>
@@ -48,7 +48,7 @@
       </ion-grid>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="dark" (click)="details(solicitacao.id)">Detalhes</button>
+        <button ion-button color="dark" (click)="details(solicitacao.id); closeFab($event, fab)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
     <ion-item *ngIf="total === 0" >
