@@ -26,6 +26,7 @@
       <ion-input formControlName="descricao" type="text"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.descricao.dirty && formGroup.controls.descricao.errors" margin-left>O tamanho deve ser entre 5 e 80 caracteres</p>
+    <p class="danger" *ngIf="formGroup.controls.descricao.dirty && formGroup.hasError('mismatchedDescricao')" margin-left>Ao selecionar 'Outros', esse campo deve ser preenchido</p>
 
     <button ion-button block type="submit"  color="dark" [disabled]="formGroup.invalid">Salvar</button>
 </form>    

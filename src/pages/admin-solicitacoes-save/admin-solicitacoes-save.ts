@@ -19,8 +19,23 @@ export class AdminSolicitacoesSavePage {
     this.formGroup = this.formBuilder.group({
       tipoSerie:['',[Validators.required]],
       descricao:['',[Validators.minLength(5), Validators.maxLength(80)]],
-    });
+    },{validator: this.matchingDescricao('tipoSerie', 'descricao')});
   };
+
+  matchingDescricao(tipoSerieKey: string, descricaoKey: string)
+  {
+    return (group: FormGroup): {[key: string]: any} => {
+      let tipoSerie = group.controls['tipoSerie'].value;
+      let descricao = group.controls['descricao'].value;
+      // console.log(Number(tipoSerie));
+      
+      if (tipoSerie == 4 && descricao == '') {
+        return {
+          mismatchedDescricao: true
+        };
+      }
+    }
+  }
 
   save()
   {
