@@ -1,7 +1,7 @@
 import { SolicitacaoDTO } from './../../models/solicitacao.dto';
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -28,5 +28,22 @@ export class SolicitacoesPage {
   {
     this.navCtrl.push('SolicitacaoDetailsPage', {id: id});
   };
+
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  };
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
+  };
+
+  showSerieFormNew()
+  {
+    this.navCtrl.push('AdminSolicitacoesSavePage');
+  }
 
 }

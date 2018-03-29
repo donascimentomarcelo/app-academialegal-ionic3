@@ -13,6 +13,7 @@
     <button ion-fab color="light">
         <ion-icon name="md-options"></ion-icon>
     </button>
+
     <ion-fab-list side="buttom">
         <button ion-fab (click)="scrollToTop()" color="dark">
             <ion-icon name="arrow-round-up"></ion-icon>
@@ -21,6 +22,12 @@
             <ion-icon name="arrow-round-down"></ion-icon>
         </button>
     </ion-fab-list>
+
+    <ion-fab-list side="left">
+      <button ion-fab (click)="showSerieFormNew()" color="light">
+        <ion-icon name="md-add-circle"></ion-icon>
+    </button>
+  </ion-fab-list>
 
   </ion-fab>
 
