@@ -17,11 +17,17 @@ export class SolicitacoesPage {
       public solicitacaoService: SolicitacaoService) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter()
+  {
+    this.loadData();
+  };
+
+  loadData()
+  {
     this.solicitacaoService.findByUserLogged()
-      .subscribe(response => {
-       this.solicitacoes = response;
-      }, error => {});
+    .subscribe(response => {
+     this.solicitacoes = response;
+    }, error => {});
   };
 
   details(id: string)

@@ -40,5 +40,17 @@ export class SolicitacaoService {
     findByUserLogged(): Observable<SolicitacaoDTO[]>
     {
         return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/doUsuarioLogado`);
-    }
+    };
+
+    create(data: any)
+    {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/solicitacoes`,
+            data,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    };
 }
