@@ -11,8 +11,12 @@
   
   <ion-content padding>
     <ion-list>
-      <button ion-item *ngFor="let exercicio of exercicios">
-        <h2>{{exercicio.nome}}</h2>
-      </button>
+      <ion-item ion-item *ngFor="let exercicio of exercicios">
+        <h2>{{exercicio.nome}}</h2> 
+        <button ion-button icon-end color="dark" item-end (click)="addToCart(exercicio)">
+          Adicionar
+          <ion-icon name="md-add"></ion-icon>
+        </button>
+      </ion-item>
     </ion-list>
   </ion-content>

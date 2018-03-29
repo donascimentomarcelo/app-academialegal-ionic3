@@ -1,3 +1,4 @@
+import { CartService } from './../../services/domain/cart.service';
 import { ExercicioDTO } from './../../models/exercicio.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -16,7 +17,8 @@ export class ExercicioPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public exercicioService: ExercicioService) {
+    public exercicioService: ExercicioService,
+    public cartService: CartService) {
   }
   
   ionViewDidLoad() 
@@ -27,6 +29,12 @@ export class ExercicioPage {
       }, error => {
         this.navCtrl.pop();
       });
+  };
+
+  addToCart(exercicio: ExercicioDTO)
+  {
+    this.cartService.addExercicio(exercicio);
+    this.navCtrl.setRoot('CartPage');
   };
 
 }

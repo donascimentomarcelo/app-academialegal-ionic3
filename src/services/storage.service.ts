@@ -1,3 +1,4 @@
+import { Cart } from './../models/cart';
 import { LocalProfile } from './../models/local_profile';
 import { STORAGE_KEY } from './../config/storage_keys.config';
 import { LocalUser } from './../models/local_user';
@@ -55,6 +56,32 @@ export class StorageService {
         else
         {
             localStorage.setItem(STORAGE_KEY.localProfile, JSON.stringify(obj));
+        };
+    };
+
+    getCart(): Cart 
+    {
+        let cart = localStorage.getItem(STORAGE_KEY.cart);
+
+        if(cart == null)
+        {
+            return null;
+        }
+        else
+        {
+            return JSON.parse(cart);
+        };
+    };
+
+    setCart(obj: Cart)
+    {
+        if(obj == null)
+        {
+            localStorage.removeItem(STORAGE_KEY.cart);
+        }
+        else
+        {
+            localStorage.setItem(STORAGE_KEY.cart, JSON.stringify(obj));
         };
     };
 

@@ -1,6 +1,6 @@
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { StorageService } from '../../services/storage.service';
 
@@ -28,6 +28,11 @@ export class AdminSolicitacoesPage {
         this.solicitacoes = response['content'];
         this.total = response['content'].length;
       }, error => {});
+  };
+
+  closeFab(event, fab: FabContainer)
+  {
+    fab.close();
   };
 
   onInput(solicitante)

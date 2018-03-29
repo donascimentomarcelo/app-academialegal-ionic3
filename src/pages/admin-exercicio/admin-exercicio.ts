@@ -1,7 +1,7 @@
 import { ExercicioDTO } from './../../models/exercicio.dto';
 import { ExercicioService } from './../../services/domain/exercicio.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer  } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -23,7 +23,12 @@ export class AdminExercicioPage {
   ionViewDidEnter()
   {
     this.loadExercicios();
-  }
+  };
+
+  closeFab(event, fab: FabContainer)
+  {
+    fab.close();
+  };
 
   loadExercicios()
   {
@@ -41,6 +46,7 @@ export class AdminExercicioPage {
         console.log(response);
       }, error => {});
   };
+  
 
   showExercicioForm(id: string)
   {

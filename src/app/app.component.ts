@@ -70,7 +70,6 @@ export class MyApp {
                 { title: 'Grupos', component: 'GrupoPage'},
                 { title: 'Exercícios', component: 'AdminExercicioPage'},
                 { title: 'Solicitações', component: 'AdminSolicitacoesPage'},
-                { title: 'Séries', component: 'AdminSeriesPage'},
                 { title: 'Usuários', component: 'UsuarioPage'},
                 { title: 'Logout', component: '' },
               )

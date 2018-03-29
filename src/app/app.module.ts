@@ -18,6 +18,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ExercicioService } from '../services/domain/exercicio.service';
 import { SolicitacaoService } from '../services/domain/solicitacao.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { CartService } from '../services/domain/cart.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     PerfilService,
     ExercicioService,
     SolicitacaoService,
+    CartService,
   ]
 })
 export class AppModule {}
