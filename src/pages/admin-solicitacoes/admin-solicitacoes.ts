@@ -14,12 +14,21 @@ export class AdminSolicitacoesPage {
   solicitacoes: SolicitacaoDTO[];
   search: string;
   total: number;
+  showMenuRedirectToGroupPage: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public solicitacaoService: SolicitacaoService,
     public storage: StorageService) {
+    
+    let solId = this.storage.getSolicitacao();
+
+    if(solId)
+    {
+      this.showMenuRedirectToGroupPage = true;
+    }
+
   }
 
   ionViewDidLoad() {
@@ -65,7 +74,11 @@ export class AdminSolicitacoesPage {
   details(id: string)
   {
     this.navCtrl.push('SolicitacaoDetailsPage', {id: id});
-    
+  };
+
+  redirectToGroupPage()
+  {
+    this.navCtrl.setRoot('GrupoPage');
   }
 
 }
