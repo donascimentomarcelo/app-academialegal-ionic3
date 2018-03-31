@@ -81,6 +81,13 @@ export class MyApp {
                 { title: 'Logout', component: '' },
               )
             }
+            else if(this.perfis.includes("PROFESSOR"))
+            {
+              this.pages.push(
+                { title: 'Solicitações', component: 'AdminSolicitacoesPage'},
+                { title: 'Logout', component: '' },
+              )
+            }
           };
         }, error => {});
       

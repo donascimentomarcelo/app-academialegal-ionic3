@@ -116,13 +116,24 @@ export class SolicitacaoDetailsPage {
       }, error => {});
   };
 
-  createNewSerie(id: string)
+  createNewSerie(id: string, solicitante: string)
   {
     let sol: Solicitacao_identificator = {
       id: id
     };
     this.storage.setSolicitacao(null);
     this.storage.setSolicitacao(sol);
-  }
+    this.aletCreatingSerie(solicitante);
+    this.navCtrl.setRoot('GrupoPage');
+  };
 
+  aletCreatingSerie(solicitante: string)
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Atenção!',
+      subTitle: 'Agora, você estará montando a série do aluno(a) ' + solicitante,
+      buttons: ['Entendi']
+    });
+    alert.present();
+  };
 }

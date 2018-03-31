@@ -58,7 +58,7 @@
         </div>
 
         <ion-item *ngIf="professor === true && solicitacao?.statusSerie == 'PENDENTE'">
-            <button ion-button block color="dark" (click)="createNewSerie(solicitacao?.id)">Criar Série</button>
+            <button ion-button block color="dark" (click)="createNewSerie(solicitacao?.id, solicitacao?.solicitante)">Criar Série</button>
             <button *ngIf="!solicitacao?.justificativa" ion-button block outline color="dark" (click)="rejectPrompt(solicitacao?.id)">Rejeitar Solicitação</button>
         </ion-item>
       </ion-card>
