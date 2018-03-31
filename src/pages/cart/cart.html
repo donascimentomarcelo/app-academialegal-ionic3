@@ -10,12 +10,39 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let item of items">      
-      <h2>{{ item.letra }}</h2>
-      <p>{{ item.exercicio.nome }}</p>
-      <p>{{ item.repeticoes }}</p>
-      <p>{{ item.observacao }}</p>
+  <ion-card *ngFor="let item of items; let i = index; trackBy: customTrackBy">
+    <ion-item>      
+      <h2><b>Exercício:</b> {{ item.exercicio.nome }}</h2>
     </ion-item>
-  </ion-list>
+    <ion-item>
+        <ion-label>Grupo de série</ion-label>
+        <ion-select [(ngModel)]="letra[i]" (ionChange)="addLetra(item.exercicio, i)">
+          <ion-option [value]="A">A</ion-option>
+          <ion-option [value]="B">B</ion-option>
+          <ion-option [value]="C">C</ion-option>
+          <ion-option [value]="D">D</ion-option>
+          <ion-option [value]="E">E</ion-option>
+          <ion-option [value]="F">F</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Repetições</ion-label>
+      <ion-select [(ngModel)]="repeticao[i]" (ionChange)="addRepeticoes(item.exercicio, i)">
+        <ion-option [value]="'8-8-8'">8-8-8</ion-option>
+        <ion-option [value]="'10-10-10'">10-10-10</ion-option>
+        <ion-option [value]="'12-12-12'">12-12-12</ion-option>
+        <ion-option [value]="'15-15-15'">15-15-15</ion-option>
+        <ion-option [value]="'21-21-21'">21-21-21</ion-option>
+        <ion-option [value]="'12-10-8-6'">12-10-8-6</ion-option>
+        <ion-option [value]="'12-12-10-10'">12-12-10-10</ion-option>
+        <ion-option [value]="'12-12-12-12'">12-12-12-12</ion-option>
+        <ion-option [value]="'15-15-15-15'">15-15-15-15</ion-option>
+      </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Observação</ion-label>
+    <ion-input type="text" [(ngModel)]="observacao[i]" (change)="addObservacoes(item.exercicio, i)" maxLength="30"></ion-input>
+  </ion-item>
+    <hr>
+  </ion-card>
 </ion-content>
