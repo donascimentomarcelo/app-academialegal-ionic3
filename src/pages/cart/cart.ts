@@ -3,6 +3,7 @@ import { CartItem } from './../../models/cart-item';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ExercicioDTO } from '../../models/exercicio.dto';
+import { StorageService } from '../../services/storage.service';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,8 @@ export class CartPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public cartService: CartService) {
+    public cartService: CartService,
+    public storage: StorageService) {
   }
 
   ionViewDidLoad() {
@@ -58,6 +60,22 @@ export class CartPage {
     let obs:any = this.observacao[index];
     
     this.items = this.cartService.addObservacoes(exercicio, obs).items;
-  }
+  };
+
+  deleteStorageCart()
+  {
+    this.storage.setCart(null);
+    this.ionViewDidLoad();
+  };
+
+  redirectToGroupPage()
+  {
+    this.navCtrl.setRoot('GrupoPage');
+  };
+
+  viewer()
+  {
+    this.navCtrl.push('ConcluirSeriePage');
+  };
 
 }
