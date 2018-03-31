@@ -123,10 +123,11 @@ export class SolicitacaoDetailsPage {
     if(solicitacaoId)
     {
       this.ifSolicitacaoExist(id, solicitante);
-      
     }
-    else{console.log('n tem id');}
-
+    else
+    {
+      this.createSerie(id, solicitante);
+    };
   };
 
   aletCreatingSerie(solicitante: string)
@@ -151,14 +152,7 @@ export class SolicitacaoDetailsPage {
         {
           text: 'Criar nova',
           handler: () => {
-            let sol: Solicitacao_identificator = {
-              id: id
-            };
-            this.storage.setSolicitacao(null);
-            this.storage.setCart(null);
-            this.storage.setSolicitacao(sol);
-            this.aletCreatingSerie(solicitante);
-            this.navCtrl.setRoot('GrupoPage');
+            this.createSerie(id, solicitante);
           }
         },
         {
@@ -170,5 +164,17 @@ export class SolicitacaoDetailsPage {
       ]
     });
     alert.present();
+  };
+
+  createSerie(id: string, solicitante: string)
+  {
+    let sol: Solicitacao_identificator = {
+      id: id
+    };
+    this.storage.setSolicitacao(null);
+    this.storage.setCart(null);
+    this.storage.setSolicitacao(sol);
+    this.aletCreatingSerie(solicitante);
+    this.navCtrl.setRoot('GrupoPage');
   }
 }
