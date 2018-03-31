@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { trigger, transition, animate, style, state, keyframes } from '@angular/animations'
+import { Solicitacao_identificator } from '../../models/solicitacao_identificator';
 
 
 @IonicPage()
@@ -114,5 +115,14 @@ export class SolicitacaoDetailsPage {
         this.navCtrl.pop();
       }, error => {});
   };
+
+  createNewSerie(id: string)
+  {
+    let sol: Solicitacao_identificator = {
+      id: id
+    };
+    this.storage.setSolicitacao(null);
+    this.storage.setSolicitacao(sol);
+  }
 
 }
