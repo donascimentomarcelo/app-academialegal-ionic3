@@ -118,22 +118,57 @@ export class SolicitacaoDetailsPage {
 
   createNewSerie(id: string, solicitante: string)
   {
-    let sol: Solicitacao_identificator = {
-      id: id
-    };
-    this.storage.setSolicitacao(null);
-    this.storage.setSolicitacao(sol);
-    this.aletCreatingSerie(solicitante);
-    this.navCtrl.setRoot('GrupoPage');
+    let solicitacaoId = this.storage.getSolicitacao()
+    
+    if(solicitacaoId)
+    {
+      this.ifSolicitacaoExist(id, solicitante);
+      
+    }
+    else{console.log('n tem id');}
+
   };
 
   aletCreatingSerie(solicitante: string)
   {
     let alert = this.alertCtrl.create({
       title: 'Atenção!',
-      subTitle: 'Agora, você estará montando a série do aluno(a) ' + solicitante,
+      subTitle: 'Agora você estará montando a série do aluno(a) ' + solicitante,
       buttons: ['Entendi']
     });
     alert.present();
   };
+
+  ifSolicitacaoExist(id: string, solicitante: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Atenção!',
+      message: 'Você começou a criar uma série e não finalizou. Se confirmar a serie anterior irá ser apagada',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Criar nova',
+          handler: () => {
+            let sol: Solicitacao_identificator = {
+              id: id
+            };
+            this.storage.setSolicitacao(null);
+            this.storage.setCart(null);
+            this.storage.setSolicitacao(sol);
+            this.aletCreatingSerie(solicitante);
+            this.navCtrl.setRoot('GrupoPage');
+          }
+        },
+        {
+          text: 'Voltar para antiga',
+          handler: () => {
+            this.navCtrl.setRoot('GrupoPage');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }
