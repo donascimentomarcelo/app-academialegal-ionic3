@@ -9,7 +9,7 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
   <ion-item-group *ngFor="let item of items; let i = index">
     <ion-item-divider color="light"><h1>{{ item.Key }}</h1></ion-item-divider>
     <ion-item *ngFor="let it of item.Elements">
@@ -20,4 +20,13 @@
         </ion-item>
     </ion-item>
   </ion-item-group>
+  <ion-content padding>
+      <ion-item>
+          <ion-label color="dark" floating>Visão geral da série</ion-label>
+          <ion-input type="text" [(ngModel)]="observacao" name="observacao"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button ion-button block color="dark" (click)="save()">Concluir série</button>
+        </ion-item>
+  </ion-content>
 </ion-content>

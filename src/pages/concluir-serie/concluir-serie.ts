@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
+import { SerieDTO } from '../../models/serie.dto';
 
 @IonicPage()
 @Component({
@@ -12,12 +13,15 @@ import { CartItem } from '../../models/cart-item';
 export class ConcluirSeriePage {
 
   items: CartItem[];
+  serie: SerieDTO;
+  observacao: string;
   
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
     public cartService: CartService) {
+
   }
 
   ionViewDidLoad() 
@@ -37,6 +41,29 @@ export class ConcluirSeriePage {
      });
   
     this.items = agrupado;
+  };
+
+  save()
+  {
+    let solicitacaoId: any = this.storage.getSolicitacao();
+    
+    let cart = this.cartService.getCart();
+
+    this.serie = {
+      solicitacao: {id: solicitacaoId.id},
+      observacao: this.observacao,
+      itens: cart.items.map(key => {return {
+        letra: key.letra, 
+        repeticoes: key.repeticoes, 
+        observacao: key.observacao, 
+          exercicio: {
+            id: key.exercicio.id
+          }
+        }
+      })
+    };
+    console.log(this.serie);
+    
   };
 
   }
