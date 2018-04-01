@@ -1,6 +1,6 @@
 import { CartService } from './../../services/domain/cart.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
 import { SerieDTO } from '../../models/serie.dto';
@@ -16,19 +16,22 @@ export class ConcluirSeriePage {
   items: CartItem[];
   serie: SerieDTO;
   observacao: string;
+  count: number;
   
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
     public cartService: CartService,
-    public serieService: SerieService) {
+    public serieService: SerieService,
+    public alertCtrl: AlertController) {
 
   }
 
   ionViewDidLoad() 
   {
     let cart =  this.cartService.getCart();
+    this.count = cart.items.length;
     
     var agrupado = [];
     cart.items.forEach(function (i) {
@@ -64,14 +67,31 @@ export class ConcluirSeriePage {
         }
       })
     };
-    console.log(this.serie);
     this.serieService.insert(this.serie)
       .subscribe(response => {
-        this.navCtrl.setRoot('AdminSolicitacoesPage');
         this.storage.setSolicitacao(null);
         this.cartService.createOrClearCart();
+        this.showInsertOk();
         //que futuramente sera redirecionado para pagina de series
       }, error => {});
+  };
+
+  showInsertOk()
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'A série foi criada com sucesso!',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.setRoot('AdminSolicitacoesPage');
+          }
+        }
+      ]
+    });
+    alert.present();
   };
 
   }

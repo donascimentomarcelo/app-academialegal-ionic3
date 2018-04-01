@@ -20,7 +20,7 @@
         </ion-item>
     </ion-item>
   </ion-item-group>
-  <ion-content padding>
+  <ion-content padding *ngIf="count != 0">
       <ion-item>
           <ion-label color="dark" floating>Visão geral da série</ion-label>
           <ion-input type="text" [(ngModel)]="observacao" name="observacao"></ion-input>
