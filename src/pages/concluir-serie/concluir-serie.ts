@@ -72,7 +72,6 @@ export class ConcluirSeriePage {
         this.storage.setSolicitacao(null);
         this.cartService.createOrClearCart();
         this.showInsertOk();
-        //que futuramente sera redirecionado para pagina de series
       }, error => {});
   };
 
@@ -86,7 +85,7 @@ export class ConcluirSeriePage {
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.setRoot('AdminSolicitacoesPage');
+            this.navCtrl.setRoot('AdminSeriesPage');
           }
         }
       ]

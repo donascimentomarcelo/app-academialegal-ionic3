@@ -67,9 +67,10 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Grupos', component: 'GrupoPage'},
-                { title: 'Exercícios', component: 'AdminExercicioPage'},
-                { title: 'Solicitações', component: 'AdminSolicitacoesPage'},
-                { title: 'Usuários', component: 'UsuarioPage'},
+                { title: 'Todos os Exercícios', component: 'AdminExercicioPage'},
+                { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
+                { title: 'Todas as Séries', component: 'AdminSeriesPage'},
+                { title: 'Todos os Usuários', component: 'UsuarioPage'},
                 { title: 'Logout', component: '' },
               )
             }
@@ -83,7 +84,7 @@ export class MyApp {
             else if(this.perfis.includes("PROFESSOR"))
             {
               this.pages.push(
-                { title: 'Solicitações', component: 'AdminSolicitacoesPage'},
+                { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Logout', component: '' },
               )
             }
