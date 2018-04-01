@@ -16,6 +16,7 @@ export class CartPage {
   letra: Array<{ letra:string }> = [];
   repeticao:Array<{ repeticao:string }> = [];
   observacao:Array<{ observacao:string }> = [];
+  count: number;
 
   constructor(
     public navCtrl: NavController, 
@@ -27,7 +28,8 @@ export class CartPage {
   ionViewDidLoad() {
     let cart =  this.cartService.getCart();
     this.items = cart.items
-
+    this.count = this.items.length;
+    
     for(var i=0; i<cart.items.length; i++)
     {
       this.observacao[i] = cart.items[i].observacao as any; 
