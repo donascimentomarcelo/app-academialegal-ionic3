@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
 import { SerieDTO } from '../../models/serie.dto';
+import { SerieService } from '../../services/domain/serie.service';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,8 @@ export class ConcluirSeriePage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
-    public cartService: CartService) {
+    public cartService: CartService,
+    public serieService: SerieService) {
 
   }
 
@@ -63,7 +65,13 @@ export class ConcluirSeriePage {
       })
     };
     console.log(this.serie);
-    
+    this.serieService.insert(this.serie)
+      .subscribe(response => {
+        this.navCtrl.setRoot('AdminSolicitacoesPage');
+        this.storage.setSolicitacao(null);
+        this.cartService.createOrClearCart();
+        //que futuramente sera redirecionado para pagina de series
+      }, error => {});
   };
 
   }

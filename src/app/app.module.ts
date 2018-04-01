@@ -19,6 +19,7 @@ import { ExercicioService } from '../services/domain/exercicio.service';
 import { SolicitacaoService } from '../services/domain/solicitacao.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CartService } from '../services/domain/cart.service';
+import { SerieService } from '../services/domain/serie.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CartService } from '../services/domain/cart.service';
     ExercicioService,
     SolicitacaoService,
     CartService,
+    SerieService,
   ]
 })
 export class AppModule {}
