@@ -79,6 +79,6 @@ export class AdminSolicitacoesPage {
   redirectToGroupPage()
   {
     this.navCtrl.setRoot('GrupoPage');
-  }
+  };
 
 }

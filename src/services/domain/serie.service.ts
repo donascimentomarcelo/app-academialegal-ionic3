@@ -26,4 +26,14 @@ export class SerieService {
         return this.http.get<SerieDTO[]>(`${API_CONFIG.baseUrl}/series`);
     };
 
+    findByAluno(aluno): Observable <SerieDTO[]>
+    {
+        return this.http.get<SerieDTO[]>(`${API_CONFIG.baseUrl}/series/name?name=${aluno}`);
+    };
+
+    findOne(id): Observable <SerieDTO>
+    {
+        return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/${id}`);
+    };
+
 }
