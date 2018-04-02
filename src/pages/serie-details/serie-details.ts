@@ -1,17 +1,42 @@
+import { SolicitacaoDTO } from './../../models/solicitacao.dto';
 import { SerieDTO } from './../../models/serie.dto';
 import { SerieService } from './../../services/domain/serie.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { trigger, transition, animate, style, state, keyframes } from '@angular/animations'
 
 @IonicPage()
 @Component({
   selector: 'page-serie-details',
   templateUrl: 'serie-details.html',
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      transition('void => *', [
+        animate(300, keyframes([
+          style({opacity: 0, transform: 'translateX(-100%)', offset: 0}),
+          style({opacity: 1, transform: 'translateX(15px)',  offset: 0.3}),
+          style({opacity: 1, transform: 'translateX(0)',     offset: 1.0})
+        ]))
+      ]),
+      transition('* => void', [
+        animate(300, keyframes([
+          style({opacity: 1, transform: 'translateX(0)',     offset: 0}),
+          style({opacity: 1, transform: 'translateX(-15px)', offset: 0.7}),
+          style({opacity: 0, transform: 'translateX(100%)',  offset: 1.0})
+        ]))
+      ])
+    ])
+  ],
 })
 export class SerieDetailsPage {
 
   codigo: number = this.navParams.get('id');
-  serie: SerieDTO[];
+  items: SerieDTO[];
+  serie: SerieDTO;
+  solicitacao: SolicitacaoDTO;
+  accordionDescricao = 'accordion';
+  accordionObs = 'accordionObs';
 
   constructor(
       public navCtrl: NavController, 
@@ -34,12 +59,26 @@ export class SerieDetailsPage {
           });
           if (!foiAgrupado) agrupado.push({ Key: i['letra'], Elements: [ i ] });
          });
-      
-        this.serie = agrupado;
-        console.log(this.serie);
+         
+        this.serie = response;
+        this.solicitacao = response.solicitacao;
+        this.items = agrupado;
+        console.log(this.solicitacao);
         
         
       }, error => {});
-  }
+  };
+
+  shownGroup = null;
+  toggleGroup(group) {
+    if (this.isGroupShown(group)) {
+        this.shownGroup = !this.shownGroup;
+    } else {
+        this.shownGroup = group;
+    }
+  };
+  isGroupShown(group) {
+      return this.shownGroup === group;
+  };
 
 }

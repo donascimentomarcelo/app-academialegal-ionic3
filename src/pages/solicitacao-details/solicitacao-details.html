@@ -35,7 +35,7 @@
           <ion-badge item-end color="dark">{{ solicitacao?.statusSerie | titlecase}}</ion-badge>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="solicitacao?.descricao">
           <ion-icon name='md-paper' item-start style="color: #000000"></ion-icon>
           Descrição
           <ion-icon item-end style="color: #000000" (click)="toggleGroup(accordionDescricao)"  [ngClass]="{active: isGroupShown(accordionDescricao)}">
