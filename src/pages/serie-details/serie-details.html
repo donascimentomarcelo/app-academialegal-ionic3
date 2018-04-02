@@ -10,7 +10,7 @@
 
 
   <ion-content>
-      <ion-item-group *ngFor="let item of serie; let i = index">
+      <ion-item-group *ngFor="let item of serie | orderBy: 'Key': 'asc'">
         <ion-item-divider color="light"><h1>{{ item.Key }}</h1></ion-item-divider>
         <ion-item *ngFor="let it of item.Elements">
             <ion-item>
