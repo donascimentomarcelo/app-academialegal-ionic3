@@ -78,6 +78,7 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
+                { title: 'Minhas séries', component: 'SeriePage'},
                 { title: 'Logout', component: '' },
               )
             }

@@ -47,7 +47,6 @@ export class SerieDetailsPage {
   ionViewDidLoad() {
     this.serieService.findOne(this.codigo)
       .subscribe(response => {
-        console.log(response);
         var agrupado = [];
         response.itens.forEach(function (i) {
           var foiAgrupado = false;
@@ -63,9 +62,6 @@ export class SerieDetailsPage {
         this.serie = response;
         this.solicitacao = response.solicitacao;
         this.items = agrupado;
-        console.log(this.solicitacao);
-        
-        
       }, error => {});
   };
 

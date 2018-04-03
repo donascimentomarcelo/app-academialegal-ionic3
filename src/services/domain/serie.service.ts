@@ -1,3 +1,4 @@
+import { SerieDTO } from './../../models/serie.dto';
 import { Observable } from 'rxjs/Rx';
 import { API_CONFIG } from './../../config/api.config';
 import { Injectable } from '@angular/core';
@@ -35,5 +36,10 @@ export class SerieService {
     {
         return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/${id}`);
     };
+
+    findMySerie(): Observable <SerieDTO>
+    {
+        return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/listByUser`);
+    }
 
 }

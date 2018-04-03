@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+       </button>
+      <ion-title>Minhas Série</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+<ion-content padding>
+
+  <ion-fab top right edge #fab>
+    <button ion-fab color="light">
+        <ion-icon name="md-options"></ion-icon>
+    </button>
+    <ion-fab-list side="buttom">
+        <button ion-fab (click)="scrollToTop()" color="dark">
+            <ion-icon name="arrow-round-up"></ion-icon>
+        </button>
+        <button ion-fab (click)="scrollToBottom()" color="dark">
+            <ion-icon name="arrow-round-down"></ion-icon>
+        </button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-list inset>
+    <ion-item-sliding #item *ngFor="let serie of series">
+      <ion-item>
+          <h2><b>Aluno:</b> {{ serie.solicitacao.solicitante }}</h2> 
+          <h2><b>Prof:</b> {{ serie.professor }}</h2><br>
+         <div>
+          <p><b>Início:</b> {{ serie.dataCriacao }} <b>Fim:</b> {{ serie.dataVencimento }}</p>
+         </div>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="dark" (click)="details(serie.id); closeFab($event, fab)">Detalhes</button>
+      </ion-item-options>
+    </ion-item-sliding> 
+    <ion-item *ngIf="count === 0" >
+        <h2>Nenhuma solicitação foi encontrada!</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar color="dark">
+      <ion-title>
+        <ion-searchbar placeholder="Pesquisar..."
+          [(ngModel)]="search"
+          [showCancelButton]="false"
+          (ionInput)="onInput($event.target.value)"
+          (ionCancel)="onCancel($event)"
+          (ionClear)="onClear($event)">
+        </ion-searchbar>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
