@@ -57,5 +57,15 @@ export class SolicitacaoService {
     pendente(): Observable <SolicitacaoDTO[]>
     {
         return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/pendentes`);
-    }
+    };
+
+    concluido(): Observable <SolicitacaoDTO[]>
+    {
+        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/concluido`);
+    };
+
+    rejeitado(): Observable <SolicitacaoDTO[]>
+    {   
+        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/rejeitado`);
+    };  
 }

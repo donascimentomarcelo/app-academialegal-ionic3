@@ -90,6 +90,14 @@ export class AdminSolicitacoesPage {
       this.pendentes();
       break;
 
+      case 2:
+      this.concluido();
+      break;
+
+      case 3:
+      this.rejeitado();
+      break;
+
       case 4:
       this.ionViewDidLoad();
       break;
@@ -103,6 +111,24 @@ export class AdminSolicitacoesPage {
         this.solicitacoes = response['content'];
         this.total = response['content'].length;
       }, error => {});
-  }
+  };
+
+  concluido()
+  {
+    this.solicitacaoService.concluido()
+      .subscribe(response => {
+        this.solicitacoes = response['content'];
+        this.total = response['content'].length;
+      }, error => {});
+  };
+
+  rejeitado()
+  {
+    this.solicitacaoService.rejeitado()
+      .subscribe(response => {
+        this.solicitacoes = response['content'];
+        this.total = response['content'].length;
+      }, error => {});
+  };
 
 }
