@@ -15,6 +15,7 @@ export class AdminSolicitacoesPage {
   search: string;
   total: number;
   showMenuRedirectToGroupPage: boolean = false;
+  filter: number;
 
   constructor(
     public navCtrl: NavController, 
@@ -80,5 +81,28 @@ export class AdminSolicitacoesPage {
   {
     this.navCtrl.setRoot('GrupoPage');
   };
+
+  filterBy()
+  {
+    switch(this.filter)
+    {
+      case 1:
+      this.pendentes();
+      break;
+
+      case 4:
+      this.ionViewDidLoad();
+      break;
+    };
+  };
+
+  pendentes()
+  {
+    this.solicitacaoService.pendente()
+      .subscribe(response => {
+        this.solicitacoes = response['content'];
+        this.total = response['content'].length;
+      }, error => {});
+  }
 
 }

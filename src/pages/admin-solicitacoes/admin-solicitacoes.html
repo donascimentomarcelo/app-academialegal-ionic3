@@ -9,6 +9,16 @@
 
 <ion-content padding>
 
+  <ion-item>
+      <ion-label>Filtro</ion-label>
+      <ion-select [(ngModel)]="filter" (ionChange)="filterBy()">
+        <ion-option [value]="1">Pendente</ion-option>
+        <ion-option [value]="2">Concluído</ion-option>
+        <ion-option [value]="3">Rejeitado</ion-option>
+        <ion-option [value]="4" selected>Sem filtro</ion-option>
+      </ion-select>
+  </ion-item>
+
   <ion-fab top right edge #fab>
     <button ion-fab color="light">
         <ion-icon name="md-options"></ion-icon>
