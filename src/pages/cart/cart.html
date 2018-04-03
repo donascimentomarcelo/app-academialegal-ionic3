@@ -13,6 +13,9 @@
   <ion-card *ngFor="let item of items; let i = index; trackBy: customTrackBy">
     <ion-item>      
       <h2><b>Exercício:</b> {{ item.exercicio.nome }}</h2>
+      <button ion-button item-end color="dark" (click)="removeItem(item.exercicio)">
+          <ion-icon name="md-trash"></ion-icon>
+      </button>
     </ion-item>
     <ion-item>
         <ion-label>Grupo de série</ion-label>

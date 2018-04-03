@@ -39,8 +39,9 @@ export class CartPage {
   };
 
   removeItem(exercicio: ExercicioDTO)
-  {
+  { 
     this.items = this.cartService.removeExercicio(exercicio).items;
+    this.ionViewDidLoad();
   };
 
   addLetra(exercicio: ExercicioDTO, index: number)

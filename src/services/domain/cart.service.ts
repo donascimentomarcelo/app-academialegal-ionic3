@@ -31,7 +31,7 @@ export class CartService {
             cart.items.push(
                 {
                     letra: 'A',
-                    repeticoes: '10 - 10 - 10',
+                    repeticoes: '10-10-10',
                     observacao: null,
                     exercicio: exercicio
                 }
@@ -44,9 +44,12 @@ export class CartService {
     removeExercicio(exercicio: ExercicioDTO): Cart{
         let cart = this.getCart();
         let position = cart.items.findIndex(index => index.exercicio.id == exercicio.id);
+        console.log(cart);
+        console.log(position);
+        
         if(position != -1)
         {
-            cart.items.slice(position, 1);
+            cart.items.splice(position, 1);
         }
         this.storage.setCart(cart);
         return cart;
