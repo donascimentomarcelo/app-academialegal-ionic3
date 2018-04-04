@@ -37,7 +37,8 @@ export class SerieDetailsPage {
   solicitacao: SolicitacaoDTO;
   accordionDescricao = 'accordion';
   accordionObs = 'accordionObs';
-
+  data: Array<{title: string, details: string, icon: string, showDetails: boolean}> = [];
+  showDetails: boolean = false;
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
@@ -48,7 +49,6 @@ export class SerieDetailsPage {
     this.serieService.findOne(this.codigo)
       .subscribe(response => {
         var agrupado = [];
-        console.log(response);
         
         response.itens.forEach(function (i) {
           var foiAgrupado = false;
@@ -58,12 +58,12 @@ export class SerieDetailsPage {
                   foiAgrupado = true;
               }
           });
-          if (!foiAgrupado) agrupado.push({ Key: i['letra'], Elements: [ i ] });
+          if (!foiAgrupado) agrupado.push({ Key: i['letra'], Elements: [ i ], icon: 'md-add-circle' });
          });
          
         this.serie = response;
         this.solicitacao = response.solicitacao;
-        this.items = agrupado;
+        this.items = agrupado;        
       }, error => {});
   };
 
@@ -77,6 +77,16 @@ export class SerieDetailsPage {
   };
   isGroupShown(group) {
       return this.shownGroup === group;
+  };
+
+  toggleDetails(data) {
+    if (data.showDetails) {
+        data.showDetails = false;
+        data.icon = 'md-add-circle';
+    } else {
+        data.showDetails = true;
+        data.icon = 'md-remove';
+    }
   };
 
 }
