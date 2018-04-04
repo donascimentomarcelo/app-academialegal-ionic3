@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-card *ngFor="let item of items; let i = index; trackBy: customTrackBy">
-    <ion-item>      
+    <ion-item>    
       <h2><b>Exercício:</b> {{ item.exercicio.nome }}</h2>
       <button ion-button item-end color="dark" (click)="removeItem(item.exercicio)">
           <ion-icon name="md-trash"></ion-icon>
@@ -49,6 +49,6 @@
     <hr>
   </ion-card>
   <button ion-button block color="dark" (click)="redirectToGroupPage()">Continuar Montando</button>
-  <button ion-button block outline color="dark" (click)="viewer()" *ngIf="count != 0">Visualizar Série</button>
+  <button ion-button block outline color="dark" (click)="reorder()" *ngIf="count != 0">Ordenar</button>
   <button ion-button block color="tertiary" (click)="deleteStorageCart()" *ngIf="count != 0">Refazer</button>
 </ion-content>

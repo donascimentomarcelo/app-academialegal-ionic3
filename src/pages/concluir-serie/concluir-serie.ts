@@ -5,6 +5,7 @@ import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
 import { SerieDTO } from '../../models/serie.dto';
 import { SerieService } from '../../services/domain/serie.service';
+import { Cart } from '../../models/cart';
 
 @IonicPage()
 @Component({
@@ -46,6 +47,8 @@ export class ConcluirSeriePage {
      });
   
     this.items = agrupado;
+    console.log(this.items);
+    
   };
 
   save()
@@ -92,7 +95,6 @@ export class ConcluirSeriePage {
     });
     alert.present();
   };
-
   }
 
 

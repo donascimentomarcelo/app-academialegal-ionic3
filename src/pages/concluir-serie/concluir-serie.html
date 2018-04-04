@@ -13,11 +13,9 @@
   <ion-item-group *ngFor="let item of items; let i = index">
     <ion-item-divider color="light"><h1>{{ item.Key }}</h1></ion-item-divider>
     <ion-item *ngFor="let it of item.Elements">
-        <ion-item>
           <h2>{{ it.exercicio.nome }}</h2>
           <p item-end>{{ it.repeticoes }}</p>
           <p>{{ it.observacao }}</p>
-        </ion-item>
     </ion-item>
   </ion-item-group>
   <ion-content padding *ngIf="count != 0">

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ExercicioDTO } from '../../models/exercicio.dto';
 import { StorageService } from '../../services/storage.service';
+import { Cart } from '../../models/cart';
 
 @IonicPage()
 @Component({
@@ -14,9 +15,10 @@ export class CartPage {
 
   items: CartItem[];
   letra: Array<{ letra:string }> = [];
-  repeticao:Array<{ repeticao:string }> = [];
-  observacao:Array<{ observacao:string }> = [];
+  repeticao: Array<{ repeticao:string }> = [];
+  observacao: Array<{ observacao:string }> = [];
   count: number;
+  order: Array<{ observacao:string }> = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -35,6 +37,7 @@ export class CartPage {
       this.observacao[i] = cart.items[i].observacao as any; 
       this.repeticao[i] = cart.items[i].repeticoes as any; 
       this.letra[i] = cart.items[i].letra as any; 
+      this.order[i] = i as any;
     };
   };
 
@@ -76,9 +79,9 @@ export class CartPage {
     this.navCtrl.setRoot('GrupoPage');
   };
 
-  viewer()
+  reorder()
   {
-    this.navCtrl.push('ConcluirSeriePage');
-  };
+    this.navCtrl.push('ReorderPage');
+  }
 
 }

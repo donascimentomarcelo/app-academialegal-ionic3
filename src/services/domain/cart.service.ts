@@ -33,6 +33,7 @@ export class CartService {
                     letra: 'A',
                     repeticoes: '10-10-10',
                     observacao: null,
+                    order: null,
                     exercicio: exercicio
                 }
             );
@@ -44,8 +45,6 @@ export class CartService {
     removeExercicio(exercicio: ExercicioDTO): Cart{
         let cart = this.getCart();
         let position = cart.items.findIndex(index => index.exercicio.id == exercicio.id);
-        console.log(cart);
-        console.log(position);
         
         if(position != -1)
         {
