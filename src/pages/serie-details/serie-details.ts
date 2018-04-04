@@ -48,6 +48,8 @@ export class SerieDetailsPage {
     this.serieService.findOne(this.codigo)
       .subscribe(response => {
         var agrupado = [];
+        console.log(response);
+        
         response.itens.forEach(function (i) {
           var foiAgrupado = false;
           agrupado.forEach(function (j) {

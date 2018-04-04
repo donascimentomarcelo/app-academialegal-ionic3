@@ -47,8 +47,6 @@ export class ConcluirSeriePage {
      });
   
     this.items = agrupado;
-    console.log(this.items);
-    
   };
 
   save()
@@ -63,6 +61,7 @@ export class ConcluirSeriePage {
       itens: cart.items.map(key => {return {
         letra: key.letra, 
         repeticoes: key.repeticoes, 
+        ordenation: key.order,
         observacao: key.observacao, 
           exercicio: {
             id: key.exercicio.id

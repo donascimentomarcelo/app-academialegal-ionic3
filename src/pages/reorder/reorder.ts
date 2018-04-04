@@ -25,9 +25,7 @@ export class ReorderPage {
   ionViewDidLoad() {
     let cart =  this.cartService.getCart();
     this.items = cart.items
-    this.count = this.items.length;
-    console.log(this.items);
-    
+    this.count = this.items.length;    
   };
 
   reorderItems(indexes) 
