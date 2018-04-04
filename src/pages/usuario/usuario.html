@@ -8,6 +8,21 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-fab top right edge #fab>
+    <button ion-fab color="light">
+        <ion-icon name="md-options"></ion-icon>
+    </button>
+    <ion-fab-list side="buttom">
+        <button ion-fab (click)="scrollToTop()" color="dark">
+            <ion-icon name="arrow-round-up"></ion-icon>
+        </button>
+        <button ion-fab (click)="scrollToBottom()" color="dark">
+            <ion-icon name="arrow-round-down"></ion-icon>
+        </button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-list>
     <ion-item-sliding #item *ngFor="let usuario of usuarios">
       <ion-item>

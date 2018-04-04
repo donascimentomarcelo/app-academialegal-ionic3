@@ -10,12 +10,30 @@
 
 
 <ion-content padding>
+
+  <ion-fab top right edge #fab>
+    <button ion-fab color="light">
+        <ion-icon name="md-options"></ion-icon>
+    </button>
+    <ion-fab-list side="buttom">
+        <button ion-fab (click)="scrollToTop()" color="dark">
+            <ion-icon name="arrow-round-up"></ion-icon>
+        </button>
+        <button ion-fab (click)="scrollToBottom()" color="dark">
+            <ion-icon name="arrow-round-down"></ion-icon>
+        </button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+        <button ion-fab (click)="redirectToGroupPage(); closeFab($event, fab)" color="light">
+          <ion-icon name="md-add-circle"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-card *ngFor="let item of items; let i = index; trackBy: customTrackBy">
     <ion-item>    
       <h2><b>Exercício:</b> {{ item.exercicio.nome }}</h2>
-      <button ion-button item-end color="dark" (click)="removeItem(item.exercicio)">
-          <ion-icon name="md-trash"></ion-icon>
-      </button>
+
     </ion-item>
     <ion-item>
         <ion-label>Grupo de série</ion-label>
@@ -43,12 +61,14 @@
       </ion-select>
   </ion-item>
   <ion-item>
+      <button ion-button item-end color="dark" (click)="removeItem(item.exercicio)">
+          <ion-icon name="md-trash"></ion-icon>
+      </button>
     <ion-label floating>Observação</ion-label>
     <ion-input type="text" [(ngModel)]="observacao[i]" (change)="addObservacoes(item.exercicio, i)" maxLength="30"></ion-input>
   </ion-item>
     <hr>
   </ion-card>
-  <button ion-button block color="dark" (click)="redirectToGroupPage()">Continuar Montando</button>
-  <button ion-button block outline color="dark" (click)="reorder()" *ngIf="count != 0">Ordenar</button>
-  <button ion-button block color="tertiary" (click)="deleteStorageCart()" *ngIf="count != 0">Refazer</button>
+  <button ion-button block color="dark" (click)="reorder(); closeFab($event, fab)" *ngIf="count != 0">Ordenar</button>
+  <button ion-button block color="tertiary" (click)="deleteStorageCart(); closeFab($event, fab)" *ngIf="count != 0">Refazer</button>
 </ion-content>

@@ -1,8 +1,9 @@
+import { StorageService } from './../../services/storage.service';
 import { API_CONFIG } from './../../config/api.config';
 import { GrupoDTO } from './../../models/grupo.dto';
 import { GrupoService } from './../../services/domain/grupo.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -13,11 +14,20 @@ export class GrupoPage {
 
 grupos: GrupoDTO[];
 bucketUrl: string = API_CONFIG.bucketBaseUrl;
+showMenuRedirectToGroupPage: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public grupoSercive: GrupoService) {
+    public grupoSercive: GrupoService,
+    public storage: StorageService) {
+
+    let solId = this.storage.getSolicitacao();
+
+    if(solId)
+    {
+      this.showMenuRedirectToGroupPage = true;
+    }
   }
 
   ionViewDidLoad() {
@@ -33,5 +43,22 @@ bucketUrl: string = API_CONFIG.bucketBaseUrl;
   {
     this.navCtrl.push('ExercicioPage', {id: id});
   };
+
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  };
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
+  };
+
+  redirectToCartPage()
+  {
+    this.navCtrl.setRoot('CartPage');
+  }
 
 }

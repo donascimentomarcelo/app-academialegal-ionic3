@@ -1,7 +1,7 @@
 import { CartService } from './../../services/domain/cart.service';
 import { CartItem } from './../../models/cart-item';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
 import { ExercicioDTO } from '../../models/exercicio.dto';
 import { StorageService } from '../../services/storage.service';
 import { Cart } from '../../models/cart';
@@ -83,5 +83,22 @@ export class CartPage {
   {
     this.navCtrl.push('ReorderPage');
   }
+
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  };
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
+  };
+  
+  closeFab(event, fab: FabContainer)
+  {
+    fab.close();
+  };
 
 }

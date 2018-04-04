@@ -85,7 +85,7 @@ export class SerieDetailsPage {
         data.icon = 'md-add-circle';
     } else {
         data.showDetails = true;
-        data.icon = 'md-remove';
+        data.icon = 'md-remove-circle';
     }
   };
 

@@ -10,12 +10,28 @@
   
   
   <ion-content padding>
+      
+    <ion-fab top right edge #fab>
+      <button ion-fab color="light">
+          <ion-icon name="md-options"></ion-icon>
+      </button>
+      <ion-fab-list side="buttom">
+          <button ion-fab (click)="scrollToTop()" color="dark">
+              <ion-icon name="arrow-round-up"></ion-icon>
+          </button>
+          <button ion-fab (click)="scrollToBottom()" color="dark">
+              <ion-icon name="arrow-round-down"></ion-icon>
+          </button>
+      </ion-fab-list>
+    </ion-fab>
+
     <ion-list>
-      <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
-        <ion-item *ngFor="let item of items; let i = index;">
-            {{ item.letra }} - {{ item.exercicio.nome }}
-        </ion-item>
-      </ion-item-group>
+      <ion-list-header text-center>Arraste e solte para ordenar</ion-list-header>
+        <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
+          <ion-item *ngFor="let item of items; let i = index;">
+              {{ item.letra }} - {{ item.exercicio.nome }}
+          </ion-item>
+        </ion-item-group>
     </ion-list>
     <button ion-button block color="dark" (click)="viewer()" *ngIf="count != 0">Visualizar Série</button>
   </ion-content>

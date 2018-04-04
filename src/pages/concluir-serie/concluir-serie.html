@@ -10,6 +10,21 @@
 
 
 <ion-content>
+  
+  <ion-fab top right edge #fab>
+    <button ion-fab color="light">
+        <ion-icon name="md-options"></ion-icon>
+    </button>
+    <ion-fab-list side="buttom">
+        <button ion-fab (click)="scrollToTop()" color="dark">
+            <ion-icon name="arrow-round-up"></ion-icon>
+        </button>
+        <button ion-fab (click)="scrollToBottom()" color="dark">
+            <ion-icon name="arrow-round-down"></ion-icon>
+        </button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-item-group *ngFor="let item of items | orderBy: 'Key': 'asc'">
     <ion-item-divider color="light"><h1>{{ item.Key }}</h1></ion-item-divider>
     <ion-item *ngFor="let it of item.Elements | orderBy: 'order': 'asc'">

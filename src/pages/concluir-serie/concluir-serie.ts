@@ -1,11 +1,10 @@
 import { CartService } from './../../services/domain/cart.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, Content } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
 import { SerieDTO } from '../../models/serie.dto';
 import { SerieService } from '../../services/domain/serie.service';
-import { Cart } from '../../models/cart';
 
 @IonicPage()
 @Component({
@@ -94,6 +93,18 @@ export class ConcluirSeriePage {
     });
     alert.present();
   };
-  }
+
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  };
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
+  };
+}
 
 

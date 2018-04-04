@@ -33,7 +33,6 @@
       <ion-item-sliding #item *ngFor="let exercicio of exercicios">
         <ion-item>
           <h2>{{exercicio?.nome}}</h2>
-          <p>Identificador: {{ exercicio?.id }}</p>
         </ion-item>
         <ion-item-options side="right">
             <button ion-button color="dark" (click)="showExercicioForm(exercicio?.id); closeFab($event, fab)">Editar</button>

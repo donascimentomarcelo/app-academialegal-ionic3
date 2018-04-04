@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { CartService } from '../../services/domain/cart.service';
 import { CartItem } from '../../models/cart-item';
@@ -51,4 +51,15 @@ export class ReorderPage {
     this.navCtrl.push('ConcluirSeriePage');
   };
 
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() 
+  {
+    this.content.scrollToTop();
+  };
+
+  scrollToBottom() 
+  {
+    this.content.scrollToBottom();
+  };
 }
