@@ -74,4 +74,11 @@ showMenuRedirectToGroupPage: boolean = false;
     return loader;
   };
 
+  doRefresh(refresher) {
+    setTimeout(() => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    }, 2000);
+  };
+
 }

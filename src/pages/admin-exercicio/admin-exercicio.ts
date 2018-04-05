@@ -21,7 +21,7 @@ export class AdminExercicioPage {
   total: number;
   search: string;
 
-  ionViewDidEnter()
+  ionViewDidLoad()
   {
     this.loadExercicios();
   };
@@ -90,6 +90,13 @@ export class AdminExercicioPage {
 
     loader.present();
     return loader;
+  };
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      refresher.complete();
+      this.loadExercicios();
+    }, 2000);
   };
 
 }

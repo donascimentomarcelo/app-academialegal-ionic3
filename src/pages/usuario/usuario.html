@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-fab top right edge #fab>
     <button ion-fab color="light">
         <ion-icon name="md-options"></ion-icon>

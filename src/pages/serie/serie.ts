@@ -79,4 +79,11 @@ export class SeriePage {
     return loader;
   };
 
+  doRefresh(refresher) {
+    setTimeout(() => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    }, 2000);
+  };
+
 }

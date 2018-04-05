@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-item>
       <ion-label>Filtro</ion-label>
       <ion-select [(ngModel)]="filter" (ionChange)="filterBy()">
@@ -34,7 +36,7 @@
   </ion-fab>
 
   <ion-fab bottom right edge *ngIf="showMenuRedirectToGroupPage == true">
-    <button ion-fab color="dark" (click)="redirectToGroupPage()">
+    <button ion-fab color="dark" (click)="redirectToCartPage()">
         Série
     </button>
   </ion-fab>

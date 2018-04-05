@@ -18,17 +18,7 @@ export class SolicitacoesPage {
       public loadingCtrl: LoadingController) {
   }
 
-  ionViewDidEnter()
-  {
-    this.loadData();
-  };
-
-  closeFab(event, fab: FabContainer)
-  {
-    fab.close();
-  };
-
-  loadData()
+  ionViewDidLoad()
   {
     let loader = this.presentLoading();
     this.solicitacaoService.findByUserLogged()
@@ -39,6 +29,12 @@ export class SolicitacoesPage {
       loader.dismiss();
     });
   };
+
+  closeFab(event, fab: FabContainer)
+  {
+    fab.close();
+  };
+
 
   details(id: string)
   {
@@ -70,6 +66,13 @@ export class SolicitacoesPage {
 
     loader.present();
     return loader;
+  };
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    }, 2000);
   };
 
 }

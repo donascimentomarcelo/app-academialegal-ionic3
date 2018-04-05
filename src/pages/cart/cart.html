@@ -29,7 +29,11 @@
       </button>
     </ion-fab-list>
   </ion-fab>
-
+  <ion-item *ngIf="count == 0">
+    <h2>Não há exercicios na série!</h2>
+    <br>
+    <button ion-button block color="dark" (click)="redirectToGroupPage(); closeFab($event, fab)" >Inserir novo exercício</button>  
+  </ion-item>
   <ion-card *ngFor="let item of items; let i = index; trackBy: customTrackBy">
     <ion-item>    
       <h2><b>Exercício:</b> {{ item.exercicio.nome }}</h2>
@@ -69,6 +73,7 @@
   </ion-item>
     <hr>
   </ion-card>
+  <button ion-button block outline color="dark" (click)="redirectToGroupPage(); closeFab($event, fab)" *ngIf="count < 5">Continuar montando</button>
   <button ion-button block color="dark" (click)="reorder(); closeFab($event, fab)" *ngIf="count != 0">Ordenar</button>
   <button ion-button block color="tertiary" (click)="deleteStorageCart(); closeFab($event, fab)" *ngIf="count != 0">Refazer</button>
 </ion-content>

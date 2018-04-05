@@ -9,7 +9,9 @@
   </ion-header>
 
 <ion-content padding>
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-fab top right edge #fab>
     <button ion-fab color="light">
         <ion-icon name="md-options"></ion-icon>
@@ -42,17 +44,3 @@
     </ion-item>
   </ion-list>
 </ion-content>
-
-<ion-footer no-border>
-    <ion-toolbar color="dark">
-      <ion-title>
-        <ion-searchbar placeholder="Pesquisar..."
-          [(ngModel)]="search"
-          [showCancelButton]="false"
-          (ionInput)="onInput($event.target.value)"
-          (ionCancel)="onCancel($event)"
-          (ionClear)="onClear($event)">
-        </ion-searchbar>
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>

@@ -82,9 +82,9 @@ export class AdminSolicitacoesPage {
     this.navCtrl.push('SolicitacaoDetailsPage', {id: id});
   };
 
-  redirectToGroupPage()
+  redirectToCartPage()
   {
-    this.navCtrl.setRoot('GrupoPage');
+    this.navCtrl.setRoot('CartPage');
   };
 
   filterBy()
@@ -156,6 +156,13 @@ export class AdminSolicitacoesPage {
 
     loader.present();
     return loader;
+  };
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    }, 2000);
   };
 
 }
