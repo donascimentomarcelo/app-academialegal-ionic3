@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
 
@@ -16,7 +16,9 @@ export class AdminSolicitacoesSavePage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    public solicitacaoService: SolicitacaoService) {
+    public solicitacaoService: SolicitacaoService,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController) {
 
     this.formGroup = this.formBuilder.group({
       tipoSerie:['',[Validators.required]],
@@ -40,11 +42,40 @@ export class AdminSolicitacoesSavePage {
 
   save()
   {
+    let loader = this.presentLoading();
     this.solicitacaoService.create(this.formGroup.value)
       .subscribe(response => {
+        loader.dismiss();
         this.navCtrl.pop();
-      }, error => {});
-    
-  }
+        this.success();
+      }, error => {
+        loader.dismiss();
+      });
+  };
+
+  success()
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'A solicitação foi criada com sucesso!',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok'
+        }
+      ]
+    });
+    alert.present();
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  };
 
 }

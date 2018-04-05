@@ -2,7 +2,7 @@ import { API_CONFIG } from './../../config/api.config';
 import { UsuarioDTO } from './../../models/usuario.dto';
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -19,15 +19,20 @@ export class UsuarioPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public usuarioService: UsuarioService) { }
+    public usuarioService: UsuarioService,
+    public loadingCtrl: LoadingController) { }
 
   ionViewDidLoad() 
   {
+    let loader = this.presentLoading();
       this.usuarioService.findAll()
         .subscribe(response => {
+          loader.dismiss();
           this.usuarios = response['content'];
           this.total = response['content'].length
-        }, error => {});
+        }, error => {
+          loader.dismiss();
+        });
   };
 
   details(id: string)
@@ -60,6 +65,16 @@ export class UsuarioPage {
   scrollToBottom() 
   {
     this.content.scrollToBottom();
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
   };
 
 };

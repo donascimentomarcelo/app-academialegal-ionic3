@@ -1,7 +1,7 @@
 import { CartService } from './../../services/domain/cart.service';
 import { ExercicioDTO } from './../../models/exercicio.dto';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ExercicioService } from '../../services/domain/exercicio.service';
 
 @IonicPage()
@@ -18,16 +18,24 @@ export class ExercicioPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public exercicioService: ExercicioService,
-    public cartService: CartService) {
+    public cartService: CartService,
+    public loadingCtrl: LoadingController) {
   }
   
   ionViewDidLoad() 
   {
+    let loader = this.presentLoading();
     this.exercicioService.findByCategory(this.codigo)
       .subscribe(response => {
+        loader.dismiss();
         this.exercicios = response;
       }, error => {
-        this.navCtrl.pop();
+        if(error.status == 400)
+        {
+          loader.dismiss();
+          this.navCtrl.setRoot('GrupoPage');
+        }
+
       });
   };
 
@@ -35,6 +43,16 @@ export class ExercicioPage {
   {
     this.cartService.addExercicio(exercicio);
     this.navCtrl.setRoot('CartPage');
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
   };
 
 }

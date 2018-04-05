@@ -1,7 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
-import { NavController, IonicPage, MenuController } from 'ionic-angular';
+import { NavController, IonicPage, MenuController, LoadingController } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
 
 @IonicPage()
@@ -21,19 +21,23 @@ creds: CredenciaisDTO = {
     public navCtrl: NavController,
     public sideMenu: MenuController,
     public authService: AuthService,
-    public myApp: MyApp) {
+    public myApp: MyApp,
+    public loadingCtrl: LoadingController) {
 
   }
 
   login()
   {
+    let loader = this.presentLoading();
+
     this.authService.authenticate(this.creds)
         .subscribe(response => {
+          loader.dismiss();
           this.authService.successfulLogin(response.headers.get('Authorization'));
 
           this.navCtrl.setRoot('GrupoPage')
         }, error => {
-
+          loader.dismiss();
         });
   }
 
@@ -62,4 +66,14 @@ creds: CredenciaisDTO = {
   {
     this.navCtrl.push('SignupPage');
   };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  }
 }

@@ -18,7 +18,7 @@ export class CartPage {
   repeticao: Array<{ repeticao:string }> = [];
   observacao: Array<{ observacao:string }> = [];
   count: number;
-  order: Array<{ observacao:string }> = [];
+  // order: Array<{ observacao:string }> = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -37,7 +37,7 @@ export class CartPage {
       this.observacao[i] = cart.items[i].observacao as any; 
       this.repeticao[i] = cart.items[i].repeticoes as any; 
       this.letra[i] = cart.items[i].letra as any; 
-      this.order[i] = i as any;
+      // this.order[i] = i as any;
     };
   };
 

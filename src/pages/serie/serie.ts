@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController, FabContainer } from 'ionic-angular';
 import { SerieService } from '../../services/domain/serie.service';
 import { SerieDTO } from '../../models/serie.dto';
 
@@ -17,14 +17,19 @@ export class SeriePage {
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
-      public serieService: SerieService) {
+      public serieService: SerieService,
+      public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.serieService.findMySerie()
       .subscribe(response => {
+        loader.dismiss();
         this.series = response['content'];
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   onInput(aluno)
@@ -34,7 +39,7 @@ export class SeriePage {
         this.series = response;
         this.count = response.length;
       }, error => {});
-  }
+  }//corrigir
 
   onClear()
   {   
@@ -62,6 +67,16 @@ export class SeriePage {
   closeFab(event, fab: FabContainer)
   {
     fab.close();
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
   };
 
 }

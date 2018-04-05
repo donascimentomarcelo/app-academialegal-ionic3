@@ -10,10 +10,10 @@
 
 <ion-content padding>
   <ion-card>
-    <img src="{{bucketUrl}}/cp{{usuario?.id}}.jpg" onError="this.src='assets/imgs/avatar-blank.png'"/>
+      <img class="circle" src="{{bucketUrl}}/cp{{usuario?.id}}.jpg" onError="this.src='assets/imgs/avatar-blank.png'"/>
 
-    <ion-card-content>
-      <ion-card-title>
+    <ion-card-content text-center>
+      <ion-card-title >
         {{ usuario?.nome }}
       </ion-card-title>
       <p>

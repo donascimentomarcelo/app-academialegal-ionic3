@@ -3,7 +3,7 @@ import { API_CONFIG } from './../../config/api.config';
 import { GrupoDTO } from './../../models/grupo.dto';
 import { GrupoService } from './../../services/domain/grupo.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -20,7 +20,8 @@ showMenuRedirectToGroupPage: boolean = false;
     public navCtrl: NavController, 
     public navParams: NavParams,
     public grupoSercive: GrupoService,
-    public storage: StorageService) {
+    public storage: StorageService,
+    public loadingCtrl: LoadingController) {
 
     let solId = this.storage.getSolicitacao();
 
@@ -31,11 +32,13 @@ showMenuRedirectToGroupPage: boolean = false;
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.grupoSercive.findAll()
       .subscribe(response => {
+        loader.dismiss();
         this.grupos = response;
       }, error => {
-        
+        loader.dismiss();
       })
   };
 
@@ -60,5 +63,15 @@ showMenuRedirectToGroupPage: boolean = false;
   {
     this.navCtrl.setRoot('CartPage');
   }
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  };
 
 }

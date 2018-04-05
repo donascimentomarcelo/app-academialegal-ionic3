@@ -1,6 +1,6 @@
 import { CartService } from './../../services/domain/cart.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Content, LoadingController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
 import { SerieDTO } from '../../models/serie.dto';
@@ -24,7 +24,8 @@ export class ConcluirSeriePage {
     public storage: StorageService,
     public cartService: CartService,
     public serieService: SerieService,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
 
   }
 
@@ -50,6 +51,8 @@ export class ConcluirSeriePage {
 
   save()
   {
+    let loader = this.presentLoading();
+
     let solicitacaoId: any = this.storage.getSolicitacao();
     
     let cart = this.cartService.getCart();
@@ -70,10 +73,13 @@ export class ConcluirSeriePage {
     };
     this.serieService.insert(this.serie)
       .subscribe(response => {
+        loader.dismiss();
         this.storage.setSolicitacao(null);
         this.cartService.createOrClearCart();
         this.showInsertOk();
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   showInsertOk()
@@ -104,6 +110,16 @@ export class ConcluirSeriePage {
   scrollToBottom() 
   {
     this.content.scrollToBottom();
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
   };
 }
 

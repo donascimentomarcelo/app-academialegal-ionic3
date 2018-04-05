@@ -66,7 +66,6 @@ export class MyApp {
             if(this.perfis.includes("ADMIN"))
             {
               this.pages.push(
-                { title: 'Grupos', component: 'GrupoPage'},
                 { title: 'Todos os Exercícios', component: 'AdminExercicioPage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Todas as Séries', component: 'AdminSeriesPage'},
@@ -86,6 +85,7 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
+                { title: 'Todas as Séries', component: 'AdminSeriesPage'},
                 { title: 'Logout', component: '' },
               )
             }

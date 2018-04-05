@@ -1,7 +1,7 @@
 import { ExercicioDTO } from './../../models/exercicio.dto';
 import { ExercicioService } from './../../services/domain/exercicio.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingController  } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -13,7 +13,8 @@ export class AdminExercicioPage {
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
-      public exercicioService: ExercicioService) {
+      public exercicioService: ExercicioService,
+      public loadingCtrl: LoadingController) {
   };
 
   exercicios: ExercicioDTO[];
@@ -32,21 +33,17 @@ export class AdminExercicioPage {
 
   loadExercicios()
   {
+    let loader = this.presentLoading();
+
     this.exercicioService.findAll()
     .subscribe(response => {
+      loader.dismiss();
       this.exercicios = response['content'];
       this.total = response['content'].length;      
-    }, error => { });
-  };
-
-  edit(id: string)
-  {
-    this.exercicioService.findOne(id)
-      .subscribe(response => {
-        console.log(response);
-      }, error => {});
-  };
-  
+    }, error => {
+      loader.dismiss();
+     });
+  };  
 
   showExercicioForm(id: string)
   {
@@ -84,5 +81,15 @@ export class AdminExercicioPage {
   {
     this.content.scrollToBottom();
   }
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  };
 
 }

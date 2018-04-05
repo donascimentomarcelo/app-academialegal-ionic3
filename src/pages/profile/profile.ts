@@ -3,7 +3,7 @@ import { API_CONFIG } from './../../config/api.config';
 import { UsuarioDTO } from './../../models/usuario.dto';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -21,7 +21,8 @@ export class ProfilePage {
       public navCtrl: NavController, 
       public navParams: NavParams,
       public storage: StorageService,
-      public usuarioService: UsuarioService) {
+      public usuarioService: UsuarioService,
+      public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -48,11 +49,26 @@ export class ProfilePage {
   };
 
   getImageIfExist() {
+    let loader = this.presentLoading();
     this.usuarioService.getImageBucket(this.usuario.id)
       .subscribe(response => {
-         this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+        loader.dismiss();
+        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
       },
-    error => {});
+    error => {
+      loader.dismiss();
+    });
   };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  };
+  
   
 }

@@ -1,6 +1,6 @@
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingController } from 'ionic-angular';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { StorageService } from '../../services/storage.service';
 
@@ -21,7 +21,8 @@ export class AdminSolicitacoesPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public solicitacaoService: SolicitacaoService,
-    public storage: StorageService) {
+    public storage: StorageService,
+    public loadingCtrl: LoadingController) {
     
     let solId = this.storage.getSolicitacao();
 
@@ -33,11 +34,15 @@ export class AdminSolicitacoesPage {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.solicitacaoService.findAll()
       .subscribe(response => {
+        loader.dismiss();
         this.solicitacoes = response['content'];
         this.total = response['content'].length;
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   closeFab(event, fab: FabContainer)
@@ -106,29 +111,51 @@ export class AdminSolicitacoesPage {
 
   pendentes()
   {
+    let loader = this.presentLoading();
     this.solicitacaoService.pendente()
       .subscribe(response => {
+        loader.dismiss();
         this.solicitacoes = response['content'];
         this.total = response['content'].length;
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   concluido()
   {
+    let loader = this.presentLoading();
     this.solicitacaoService.concluido()
       .subscribe(response => {
+        loader.dismiss();
         this.solicitacoes = response['content'];
         this.total = response['content'].length;
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   rejeitado()
   {
+    let loader = this.presentLoading();
     this.solicitacaoService.rejeitado()
       .subscribe(response => {
+        loader.dismiss();
         this.solicitacoes = response['content'];
         this.total = response['content'].length;
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
   };
 
 }

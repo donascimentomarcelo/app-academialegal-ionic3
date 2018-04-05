@@ -1,6 +1,6 @@
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { trigger, transition, animate, style, state, keyframes } from '@angular/animations'
@@ -45,7 +45,8 @@ export class SolicitacaoDetailsPage {
       public navParams: NavParams,
       public solicitacaoService: SolicitacaoService,  
       public storage: StorageService,
-      public alertCtrl: AlertController) 
+      public alertCtrl: AlertController,
+      public loadingCtrl: LoadingController) 
       {
         this.perfis = this.storage.getLocalPerfis().perfis;
 
@@ -110,10 +111,14 @@ export class SolicitacaoDetailsPage {
 
   rejectOk(id: string, data: string)
   {
+    let loader = this.presentLoading();
     this.solicitacaoService.reject(id, data)
       .subscribe(response => {
+        loader.dismiss();
         this.navCtrl.pop();
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   createNewSerie(id: string, solicitante: string)
@@ -176,5 +181,15 @@ export class SolicitacaoDetailsPage {
     this.storage.setSolicitacao(sol);
     this.aletCreatingSerie(solicitante);
     this.navCtrl.setRoot('GrupoPage');
-  }
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  };
 }

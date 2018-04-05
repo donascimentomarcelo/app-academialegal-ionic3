@@ -1,7 +1,7 @@
 import { SolicitacaoDTO } from './../../models/solicitacao.dto';
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,7 +14,8 @@ export class SolicitacoesPage {
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
-      public solicitacaoService: SolicitacaoService) {
+      public solicitacaoService: SolicitacaoService,
+      public loadingCtrl: LoadingController) {
   }
 
   ionViewDidEnter()
@@ -29,10 +30,14 @@ export class SolicitacoesPage {
 
   loadData()
   {
+    let loader = this.presentLoading();
     this.solicitacaoService.findByUserLogged()
     .subscribe(response => {
+      loader.dismiss();
      this.solicitacoes = response;
-    }, error => {});
+    }, error => {
+      loader.dismiss();
+    });
   };
 
   details(id: string)
@@ -55,6 +60,16 @@ export class SolicitacoesPage {
   showSerieFormNew()
   {
     this.navCtrl.push('AdminSolicitacoesSavePage');
-  }
+  };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  };
 
 }

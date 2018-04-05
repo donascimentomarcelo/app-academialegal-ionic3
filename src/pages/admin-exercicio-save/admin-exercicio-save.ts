@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExercicioService } from '../../services/domain/exercicio.service';
 import { GrupoService } from '../../services/domain/grupo.service';
@@ -24,7 +24,8 @@ export class AdminExercicioSavePage {
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public exercicioService: ExercicioService,
-    public grupoService: GrupoService) {
+    public grupoService: GrupoService,
+    public loadingCtrl: LoadingController) {
       
       this.formGroup = this.formBuilder.group({
         nome:['', [Validators.required, Validators.minLength(5), Validators.maxLength(80)]],
@@ -46,17 +47,20 @@ export class AdminExercicioSavePage {
 
   edit(id: string)
   {
+    let loader = this.presentLoading();
     let getExercicio = this.exercicioService.findOne(id);
     let getGrupo = this.exercicioService.findOneGrupoByExercicio(id);
-
+    
     forkJoin([getExercicio, getGrupo])
         .subscribe(results => {
-
+          loader.dismiss();
           let nome = results[0].nome;
           let grupo_id = results[1].id;
           this.fillForm(nome, grupo_id);
 
-        }, error => {});
+        }, error => {
+          loader.dismiss();
+        });
   };
 
   fillForm(nome: string, grupo_id: any)
@@ -99,20 +103,28 @@ export class AdminExercicioSavePage {
 
   update(id: string, exercicio: any)
   {
+    let loader = this.presentLoading();
     this.exercicioService.update(id, exercicio)
       .subscribe(response => {
+        loader.dismiss();
         let operacao = 'atualizado';
         this.success(exercicio.nome, operacao);
-      }, error => {});
+      }, error => {
+        loader.dismiss();
+      });
   };
 
   create(exercicio: any)
   {
+    let loader = this.presentLoading();
     this.exercicioService.create(exercicio)
       .subscribe(response => {
         let operacao = 'criado';
         this.success(exercicio.nome, operacao);
-      }, error => {});
+        loader.dismiss();
+      }, error => {
+        loader.dismiss();
+      });
   }
 
   success(nome: string, operacao:string)
@@ -132,4 +144,14 @@ export class AdminExercicioSavePage {
     });
     alert.present();
   };
+
+  presentLoading()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando..."
+    });
+
+    loader.present();
+    return loader;
+  }
 };
