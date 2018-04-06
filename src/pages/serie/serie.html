@@ -39,8 +39,12 @@
         <button ion-button color="dark" (click)="details(serie.id); closeFab($event, fab)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding> 
-    <ion-item *ngIf="count === 0" >
-        <h2>Nenhuma solicitação foi encontrada!</h2>
+    <ion-item *ngIf="series.length === 0" text-center>
+        <h2 class="breakLine">Você não possui nenhuma série!</h2>
+        <p class="breakLine">Clique <u><b (click)="redirectToSolicitacao()">aqui</b></u> para realizar uma solicitação e caso já tenha feito aguarde o professor montar sua série.</p>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

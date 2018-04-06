@@ -10,9 +10,10 @@ import { IonicPage, NavController, NavParams, FabContainer, Content, LoadingCont
 })
 export class AdminSeriesPage {
 
-  series: SerieDTO[];
+  series: SerieDTO[] = [];
   search: string;
   count: number;
+  page : number = 0;
   
   constructor(
       public navCtrl: NavController, 
@@ -23,10 +24,10 @@ export class AdminSeriesPage {
 
   ionViewDidLoad() {
     let loader = this.presentLoading();
-    this.serieService.find()
+    this.serieService.find(this.page, 20)
       .subscribe(response => {
         loader.dismiss();
-        this.series = response['content'];
+        this.series = this.series.concat(response['content']);
       }, error => {
         loader.dismiss();
       });
@@ -79,11 +80,22 @@ export class AdminSeriesPage {
     return loader;
   };
 
-  doRefresh(refresher) {
+  doRefresh(refresher) 
+  {
+    this.page = 0;
+    this.series = [];
+    this.ionViewDidLoad();
     setTimeout(() => {
       refresher.complete();
-      this.ionViewDidLoad();
     }, 2000);
   };
 
+  doInfinite(infiniteScroll) 
+  {
+    this.page++;
+    this.ionViewDidLoad();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  };
 }

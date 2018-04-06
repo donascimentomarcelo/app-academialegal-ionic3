@@ -10,9 +10,9 @@ import { SerieDTO } from '../../models/serie.dto';
 })
 export class SeriePage {
 
-  series: SerieDTO[];
+  series: SerieDTO[] = [];
   search: string;
-  count: number;
+  page : number = 0;
   
   constructor(
       public navCtrl: NavController, 
@@ -23,10 +23,10 @@ export class SeriePage {
 
   ionViewDidLoad() {
     let loader = this.presentLoading();
-    this.serieService.findMySerie()
+    this.serieService.findMySerie(this.page, 1)
       .subscribe(response => {
         loader.dismiss();
-        this.series = response['content'];
+        this.series = this.series.concat(response['content']);
       }, error => {
         loader.dismiss();
       });
@@ -37,9 +37,8 @@ export class SeriePage {
     this.serieService.findByAluno(aluno)
       .subscribe(response => {
         this.series = response;
-        this.count = response.length;
       }, error => {});
-  }//corrigir
+  }
 
   onClear()
   {   
@@ -79,11 +78,28 @@ export class SeriePage {
     return loader;
   };
 
-  doRefresh(refresher) {
+  doInfinite(infiniteScroll) 
+  {
+    this.page++;
+    this.ionViewDidLoad();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  };
+
+ doRefresh(refresher)
+  {
+    this.page = 0;
+    this.series = [];
+    this.ionViewDidLoad();
     setTimeout(() => {
       refresher.complete();
-      this.ionViewDidLoad();
     }, 2000);
   };
+
+  redirectToSolicitacao()
+  {
+    this.navCtrl.setRoot('SolicitacoesPage');
+  }
 
 }

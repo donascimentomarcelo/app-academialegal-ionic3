@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingCont
 })
 export class SolicitacoesPage {
 
-  solicitacoes: SolicitacaoDTO[];
+  solicitacoes: SolicitacaoDTO[] = [];
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,

@@ -10,9 +10,9 @@ export class SolicitacaoService {
 
     constructor(public http: HttpClient){};
 
-    findAll(): Observable <SolicitacaoDTO[]>
+    findAll(page : number = 0, linesPerPage : number = 24): Observable <SolicitacaoDTO[]>
     {
-        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes`);
+        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes?page=${page}&linesPerPage=${linesPerPage}`);
     };
 
     findBySolicitante(solicitante: string): Observable<SolicitacaoDTO[]>

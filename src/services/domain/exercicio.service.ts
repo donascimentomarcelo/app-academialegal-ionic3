@@ -15,9 +15,9 @@ export class ExercicioService {
         return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/grupos/${id}/exercicios`);
     };
 
-    findAll(): Observable<ExercicioDTO[]>
+    findAll(page : number = 0, linesPerPage : number = 24): Observable<ExercicioDTO[]>
     {
-        return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/exercicios`);
+        return this.http.get<ExercicioDTO[]>(`${API_CONFIG.baseUrl}/exercicios?page=${page}&linesPerPage=${linesPerPage}`);
     };
 
     findOne(id: string): Observable<ExercicioDTO>

@@ -1,4 +1,3 @@
-import { SerieDTO } from './../../models/serie.dto';
 import { Observable } from 'rxjs/Rx';
 import { API_CONFIG } from './../../config/api.config';
 import { Injectable } from '@angular/core';
@@ -22,9 +21,9 @@ export class SerieService {
         );
     };
 
-    find(): Observable <SerieDTO[]>
+    find(page : number = 0, linesPerPage : number = 24): Observable <SerieDTO[]>
     {
-        return this.http.get<SerieDTO[]>(`${API_CONFIG.baseUrl}/series`);
+        return this.http.get<SerieDTO[]>(`${API_CONFIG.baseUrl}/series?page=${page}&linesPerPage=${linesPerPage}`);
     };
 
     findByAluno(aluno): Observable <SerieDTO[]>
@@ -37,9 +36,9 @@ export class SerieService {
         return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/${id}`);
     };
 
-    findMySerie(): Observable <SerieDTO>
+    findMySerie(page : number = 0, linesPerPage : number = 24): Observable <SerieDTO>
     {
-        return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/listByUser`);
+        return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/listByUser?page=${page}&linesPerPage=${linesPerPage}`);
     }
 
 }

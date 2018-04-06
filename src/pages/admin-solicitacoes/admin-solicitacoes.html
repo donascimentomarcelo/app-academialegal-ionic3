@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="filter == 4">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-item>
@@ -37,7 +37,7 @@
 
   <ion-fab bottom right edge *ngIf="showMenuRedirectToGroupPage == true">
     <button ion-fab color="dark" (click)="redirectToCartPage()">
-        Série
+        <ion-icon name='list-box' item-start></ion-icon>
     </button>
   </ion-fab>
 
@@ -61,10 +61,13 @@
         <button ion-button color="dark" (click)="details(solicitacao.id); closeFab($event, fab)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item *ngIf="total === 0" >
+    <ion-item *ngIf="solicitacoes.length === 0" >
         <h2>Nenhuma solicitação foi encontrada!</h2>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="filter == 4">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer no-border>

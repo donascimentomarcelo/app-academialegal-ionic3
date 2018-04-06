@@ -38,10 +38,13 @@
         <button ion-button color="dark" (click)="details(usuario.id)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item *ngIf="total === 0" >
-        <h2>Nenhum usuário foi encontrado!</h2>
-  </ion-item>
+    <ion-item *ngIf="usuarios.length == 0" >
+          <h2>Nenhum usuário foi encontrado!</h2>
+    </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer no-border>

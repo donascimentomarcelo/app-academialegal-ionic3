@@ -16,7 +16,7 @@
         <ion-icon name="md-options"></ion-icon>
     </button>
 
-    <ion-fab-list side="buttom">
+    <ion-fab-list side="buttom" *ngIf="solicitacoes.length > 0">
         <button ion-fab (click)="scrollToTop()" color="dark">
             <ion-icon name="arrow-round-up"></ion-icon>
         </button>
@@ -53,8 +53,11 @@
         <button ion-button color="dark" (click)="details(solicitacao.id); closeFab($event, fab)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item *ngIf="total === 0" >
-        <h2>Nenhuma solicitação foi encontrada!</h2>
+    <ion-item *ngIf="solicitacoes.length === 0" text-center>
+        <h2  class="breakLine">Você não possui nenhuma solicitação!</h2>
+        <p class="breakLine">
+          Clique no botão do lado direito e no ícone <ion-icon name="md-add-circle" color="dark"></ion-icon>
+          para realizar a sua solicitação. Informe o seu objetivo (no campo tipo de série) e caso necessário, descreva como quer que sua série seja montada.</p>
     </ion-item>
   </ion-list>
 </ion-content>

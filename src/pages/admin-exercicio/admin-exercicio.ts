@@ -17,9 +17,9 @@ export class AdminExercicioPage {
       public loadingCtrl: LoadingController) {
   };
 
-  exercicios: ExercicioDTO[];
-  total: number;
+  exercicios: ExercicioDTO[] = [];
   search: string;
+  page : number = 0;
 
   ionViewDidLoad()
   {
@@ -35,11 +35,10 @@ export class AdminExercicioPage {
   {
     let loader = this.presentLoading();
 
-    this.exercicioService.findAll()
+    this.exercicioService.findAll(this.page, 20)
     .subscribe(response => {
       loader.dismiss();
-      this.exercicios = response['content'];
-      this.total = response['content'].length;      
+      this.exercicios = this.exercicios.concat(response['content']);         
     }, error => {
       loader.dismiss();
      });
@@ -59,7 +58,6 @@ export class AdminExercicioPage {
     this.exercicioService.findByName(name)
       .subscribe(response => {
         this.exercicios = response;
-        this.total = this.exercicios.length;
       }, error => {});
   };
 
@@ -93,10 +91,21 @@ export class AdminExercicioPage {
   };
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.exercicios = [];
+    this.ionViewDidLoad();
     setTimeout(() => {
       refresher.complete();
-      this.loadExercicios();
     }, 2000);
+  };
+
+  doInfinite(infiniteScroll) 
+  {
+    this.page++;
+    this.ionViewDidLoad();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
   };
 
 }

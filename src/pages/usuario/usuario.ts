@@ -11,10 +11,10 @@ import { IonicPage, NavController, NavParams, Content, LoadingController } from 
 })
 export class UsuarioPage {
 
-  usuarios: UsuarioDTO[];
+  usuarios: UsuarioDTO[] = [];
   bucketUrl = API_CONFIG.bucketBaseUrl;
   search: string;
-  total: number;
+  page : number = 0;
 
   constructor(
     public navCtrl: NavController, 
@@ -25,11 +25,10 @@ export class UsuarioPage {
   ionViewDidLoad() 
   {
     let loader = this.presentLoading();
-      this.usuarioService.findAll()
+      this.usuarioService.findAll(this.page, 1)
         .subscribe(response => {
           loader.dismiss();
-          this.usuarios = response['content'];
-          this.total = response['content'].length
+          this.usuarios = this.usuarios.concat(response['content']);
         }, error => {
           loader.dismiss();
         });
@@ -45,7 +44,6 @@ export class UsuarioPage {
     this.usuarioService.findByName(nome)
       .subscribe( response => {
         this.usuarios = response;
-        this.total = this.usuarios.length
       }, error => {});
   };
 
@@ -78,10 +76,21 @@ export class UsuarioPage {
   };
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.usuarios = [];
+    this.ionViewDidLoad();
     setTimeout(() => {
       refresher.complete();
-      this.ionViewDidLoad();
     }, 2000);
+  };
+
+  doInfinite(infiniteScroll) 
+  {
+    this.page++;
+    this.ionViewDidLoad();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
   };
 
 };

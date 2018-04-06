@@ -34,9 +34,9 @@ export class UsuarioService {
         );
     };
 
-    findAll(): Observable<UsuarioDTO> 
+    findAll(page : number = 0, linesPerPage : number = 24): Observable<UsuarioDTO> 
     {
-        return this.http.get<UsuarioDTO>(`${API_CONFIG.baseUrl}/usuarios`);
+        return this.http.get<UsuarioDTO>(`${API_CONFIG.baseUrl}/usuarios?page=${page}&linesPerPage=${linesPerPage}`);
     };
     
     findOne(id: string): Observable<UsuarioDTO> 

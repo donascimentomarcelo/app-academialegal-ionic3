@@ -11,11 +11,12 @@ import { StorageService } from '../../services/storage.service';
 })
 export class AdminSolicitacoesPage {
 
-  solicitacoes: SolicitacaoDTO[];
+  solicitacoes: SolicitacaoDTO[] = [];
   search: string;
   total: number;
   showMenuRedirectToGroupPage: boolean = false;
-  filter: number;
+  filter: number = 4;
+  page : number = 0;
 
   constructor(
     public navCtrl: NavController, 
@@ -35,11 +36,10 @@ export class AdminSolicitacoesPage {
 
   ionViewDidLoad() {
     let loader = this.presentLoading();
-    this.solicitacaoService.findAll()
+    this.solicitacaoService.findAll(this.page, 10)
       .subscribe(response => {
         loader.dismiss();
-        this.solicitacoes = response['content'];
-        this.total = response['content'].length;
+        this.solicitacoes = this.solicitacoes.concat(response['content']);
       }, error => {
         loader.dismiss();
       });
@@ -115,8 +115,7 @@ export class AdminSolicitacoesPage {
     this.solicitacaoService.pendente()
       .subscribe(response => {
         loader.dismiss();
-        this.solicitacoes = response['content'];
-        this.total = response['content'].length;
+        this.solicitacoes = response;
       }, error => {
         loader.dismiss();
       });
@@ -128,8 +127,7 @@ export class AdminSolicitacoesPage {
     this.solicitacaoService.concluido()
       .subscribe(response => {
         loader.dismiss();
-        this.solicitacoes = response['content'];
-        this.total = response['content'].length;
+        this.solicitacoes = response;
       }, error => {
         loader.dismiss();
       });
@@ -141,8 +139,7 @@ export class AdminSolicitacoesPage {
     this.solicitacaoService.rejeitado()
       .subscribe(response => {
         loader.dismiss();
-        this.solicitacoes = response['content'];
-        this.total = response['content'].length;
+        this.solicitacoes = response;
       }, error => {
         loader.dismiss();
       });
@@ -158,10 +155,22 @@ export class AdminSolicitacoesPage {
     return loader;
   };
 
-  doRefresh(refresher) {
+  doInfinite(infiniteScroll) 
+  {
+    this.page++;
+    this.ionViewDidLoad();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  };
+
+ doRefresh(refresher)
+  {
+    this.page = 0;
+    this.solicitacoes = [];
+    this.ionViewDidLoad();
     setTimeout(() => {
       refresher.complete();
-      this.ionViewDidLoad();
     }, 2000);
   };
 

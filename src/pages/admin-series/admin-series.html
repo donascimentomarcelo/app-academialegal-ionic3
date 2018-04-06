@@ -39,10 +39,13 @@
         <button ion-button color="dark" (click)="details(serie.id); closeFab($event, fab)">Detalhes</button>
       </ion-item-options>
     </ion-item-sliding> 
-    <ion-item *ngIf="count === 0" >
+    <ion-item *ngIf="series.length == 0" >
         <h2>Nenhuma solicitação foi encontrada!</h2>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer no-border>
