@@ -54,10 +54,14 @@ export class AdminExercicioPage {
     this.navCtrl.push('AdminExercicioSavePage');
   };
 
-  onInput(name){
-    this.exercicioService.findByName(name)
+  onInput(nome){
+    this.exercicioService.findByName(nome)
       .subscribe(response => {
         this.exercicios = response;
+        if(nome.length == 0)
+        {
+          this.onClear();
+        }
       }, error => {});
   };
 
@@ -65,6 +69,7 @@ export class AdminExercicioPage {
   onClear()
   {   
     this.search = "";
+    this.exercicios = [];
     this.loadExercicios();
   }
 
@@ -91,6 +96,7 @@ export class AdminExercicioPage {
   };
 
   doRefresh(refresher) {
+    this.search = "";
     this.page = 0;
     this.exercicios = [];
     this.ionViewDidLoad();

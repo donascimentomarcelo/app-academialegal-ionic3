@@ -33,12 +33,11 @@
             <ion-icon name="arrow-round-down"></ion-icon>
         </button>
     </ion-fab-list>
-  </ion-fab>
-
-  <ion-fab bottom right edge *ngIf="showMenuRedirectToGroupPage == true">
-    <button ion-fab color="dark" (click)="redirectToCartPage()">
-        <ion-icon name='list-box' item-start></ion-icon>
-    </button>
+    <ion-fab-list side="left" *ngIf="showMenuRedirectToGroupPage == true">
+        <button ion-fab color="light" (click)="redirectToCartPage()">
+            <ion-icon name='list-box' item-start></ion-icon>
+        </button>
+    </ion-fab-list>
   </ion-fab>
 
   <ion-list>
@@ -65,7 +64,7 @@
         <h2>Nenhuma solicitação foi encontrada!</h2>
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="filter == 4">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="filter == 4 || !search">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

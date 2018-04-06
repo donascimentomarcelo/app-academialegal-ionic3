@@ -55,13 +55,17 @@ export class AdminSolicitacoesPage {
     this.solicitacaoService.findBySolicitante(solicitante)
       .subscribe(response => {
         this.solicitacoes = response;
-        this.total = response.length
+        if(solicitante.length == 0)
+        {
+          this.onClear();
+        }
       }, error => {});
   };
 
   onClear()
   {   
     this.search = "";
+    this.solicitacoes = [];
     this.ionViewDidLoad();
   };
 
@@ -166,6 +170,7 @@ export class AdminSolicitacoesPage {
 
  doRefresh(refresher)
   {
+    this.search = "";
     this.page = 0;
     this.solicitacoes = [];
     this.ionViewDidLoad();

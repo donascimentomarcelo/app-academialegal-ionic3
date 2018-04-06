@@ -25,7 +25,7 @@ export class UsuarioPage {
   ionViewDidLoad() 
   {
     let loader = this.presentLoading();
-      this.usuarioService.findAll(this.page, 1)
+      this.usuarioService.findAll(this.page, 20)
         .subscribe(response => {
           loader.dismiss();
           this.usuarios = this.usuarios.concat(response['content']);
@@ -44,12 +44,17 @@ export class UsuarioPage {
     this.usuarioService.findByName(nome)
       .subscribe( response => {
         this.usuarios = response;
+        if(nome.length == 0)
+        {
+          this.onClear();
+        }
       }, error => {});
   };
 
   onClear()
   {   
     this.search = "";
+    this.usuarios = [];
     this.ionViewDidLoad();
   };
 
@@ -76,6 +81,7 @@ export class UsuarioPage {
   };
 
   doRefresh(refresher) {
+    this.search = "";
     this.page = 0;
     this.usuarios = [];
     this.ionViewDidLoad();

@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage.service';
 import { SerieDTO } from './../../models/serie.dto';
 import { SerieService } from './../../services/domain/serie.service';
 import { Component, ViewChild } from '@angular/core';
@@ -14,12 +15,21 @@ export class AdminSeriesPage {
   search: string;
   count: number;
   page : number = 0;
+  showMenuRedirectToCartPage: boolean = false;
   
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
       public serieService: SerieService,
-      public loadingCtrl: LoadingController) {
+      public loadingCtrl: LoadingController,
+      public storage: StorageService) {
+
+        let solId = this.storage.getSolicitacao();
+
+        if(solId)
+        {
+          this.showMenuRedirectToCartPage = true;
+        }
   }
 
   ionViewDidLoad() {
@@ -38,13 +48,17 @@ export class AdminSeriesPage {
     this.serieService.findByAluno(aluno)
       .subscribe(response => {
         this.series = response;
-        this.count = response.length;
+        if(aluno.length == 0)
+        {
+          this.onClear();
+        }
       }, error => {});
   }
 
   onClear()
   {   
     this.search = "";
+    this.series = [];
     this.ionViewDidLoad();
   };
 
@@ -82,6 +96,7 @@ export class AdminSeriesPage {
 
   doRefresh(refresher) 
   {
+    this.search = "";
     this.page = 0;
     this.series = [];
     this.ionViewDidLoad();
@@ -97,5 +112,10 @@ export class AdminSeriesPage {
     setTimeout(() => {
       infiniteScroll.complete();
     }, 1000);
+  };
+
+  redirectToCartPage()
+  {
+    this.navCtrl.setRoot('CartPage');
   };
 }
