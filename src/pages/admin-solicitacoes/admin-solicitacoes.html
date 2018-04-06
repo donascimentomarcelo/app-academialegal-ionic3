@@ -13,7 +13,7 @@
   </ion-refresher>
   <ion-item>
       <ion-label>Filtro</ion-label>
-      <ion-select [(ngModel)]="filter" (ionChange)="filterBy()">
+      <ion-select [(ngModel)]="filter" (ionChange)="checkFilterBy()">
         <ion-option [value]="1">Pendente</ion-option>
         <ion-option [value]="2">Concluído</ion-option>
         <ion-option [value]="3">Rejeitado</ion-option>
@@ -64,7 +64,16 @@
         <h2>Nenhuma solicitação foi encontrada!</h2>
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="filter == 4 || !search">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="filter == 4 && !search">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-infinite-scroll (ionInfinite)="doInfiniteFilterBy($event)" *ngIf="filter == 1 && !search">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-infinite-scroll (ionInfinite)="doInfiniteFilterBy($event)" *ngIf="filter == 2 && !search">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-infinite-scroll (ionInfinite)="doInfiniteFilterBy($event)" *ngIf="filter == 3 && !search">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

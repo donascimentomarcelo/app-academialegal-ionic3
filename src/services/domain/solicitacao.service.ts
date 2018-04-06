@@ -54,18 +54,9 @@ export class SolicitacaoService {
         );
     };
 
-    pendente(): Observable <SolicitacaoDTO[]>
-    {
-        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/pendentes`);
-    };
-
-    concluido(): Observable <SolicitacaoDTO[]>
-    {
-        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/concluido`);
-    };
-
-    rejeitado(): Observable <SolicitacaoDTO[]>
+    filterByStatus(status: number, page : number = 0, linesPerPage : number = 24): Observable <SolicitacaoDTO[]>
     {   
-        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/rejeitado`);
-    };  
+        return this.http.get<SolicitacaoDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/findByStatus/${status}?page=${page}&linesPerPage=${linesPerPage}`);
+    };
+ 
 }

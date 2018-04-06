@@ -91,59 +91,39 @@ export class AdminSolicitacoesPage {
     this.navCtrl.setRoot('CartPage');
   };
 
-  filterBy()
+  checkFilterBy()
   {
     switch(this.filter)
     {
       case 1:
-      this.pendentes();
-      break;
-
       case 2:
-      this.concluido();
-      break;
-
       case 3:
-      this.rejeitado();
+      this.setFilterSolicitacoes()
+      this.filterBy();
       break;
 
       case 4:
+      this.setFilterSolicitacoes()
       this.ionViewDidLoad();
       break;
+
     };
   };
 
-  pendentes()
+  setFilterSolicitacoes()
   {
-    let loader = this.presentLoading();
-    this.solicitacaoService.pendente()
-      .subscribe(response => {
-        loader.dismiss();
-        this.solicitacoes = response;
-      }, error => {
-        loader.dismiss();
-      });
+    this.solicitacoes = [];
+    this.search = "";
+    this.page = 0;
   };
 
-  concluido()
+  filterBy()
   {
     let loader = this.presentLoading();
-    this.solicitacaoService.concluido()
+    this.solicitacaoService.filterByStatus(this.filter, this.page, 10)
       .subscribe(response => {
         loader.dismiss();
-        this.solicitacoes = response;
-      }, error => {
-        loader.dismiss();
-      });
-  };
-
-  rejeitado()
-  {
-    let loader = this.presentLoading();
-    this.solicitacaoService.rejeitado()
-      .subscribe(response => {
-        loader.dismiss();
-        this.solicitacoes = response;
+        this.solicitacoes = this.solicitacoes.concat(response['content']);
       }, error => {
         loader.dismiss();
       });
@@ -163,6 +143,15 @@ export class AdminSolicitacoesPage {
   {
     this.page++;
     this.ionViewDidLoad();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  };
+
+  doInfiniteFilterBy(infiniteScroll) 
+  {
+    this.page++;
+    this.filterBy();
     setTimeout(() => {
       infiniteScroll.complete();
     }, 1000);
