@@ -4,6 +4,7 @@ import { UsuarioDTO } from './../../models/usuario.dto';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { CameraOptions, Camera } from '@ionic-native/camera';
 
 
 @IonicPage()
@@ -16,13 +17,16 @@ export class ProfilePage {
   email: string;
   usuario: UsuarioDTO;
   bucketUrl = API_CONFIG.bucketBaseUrl;
+  picture: string;
+  cameraOn: boolean = false;
 
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
       public storage: StorageService,
       public usuarioService: UsuarioService,
-      public loadingCtrl: LoadingController) {
+      public loadingCtrl: LoadingController,
+      public camera: Camera) {
   }
 
   ionViewDidLoad() {
@@ -69,6 +73,24 @@ export class ProfilePage {
     loader.present();
     return loader;
   };
+
+  getCameraPicture()
+  {
+    this.cameraOn = true;
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     this.picture = 'data:image/png;base64,' + imageData;
+     this.cameraOn = false;
+    }, (err) => {
+     // Handle error
+    });
+  }
   
   
 }

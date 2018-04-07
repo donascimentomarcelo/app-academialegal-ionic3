@@ -53,12 +53,13 @@ export class ConcluirSeriePage {
   {
     let loader = this.presentLoading();
 
-    let solicitacaoId: any = this.storage.getSolicitacao();
+    let solicitacao_storage: any = this.storage.getSolicitacao();
+    let solicitacaoId: string = solicitacao_storage.id;
     
     let cart = this.cartService.getCart();
 
     this.serie = {
-      solicitacao: {id: solicitacaoId.id},
+      solicitacao: {id: solicitacaoId},
       observacao: this.observacao,
       itens: cart.items.map(key => {return {
         letra: key.letra, 
