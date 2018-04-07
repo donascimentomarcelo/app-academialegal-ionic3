@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
 
@@ -18,7 +18,8 @@ export class AdminSolicitacoesSavePage {
     public formBuilder: FormBuilder,
     public solicitacaoService: SolicitacaoService,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public events: Events) {
 
     this.formGroup = this.formBuilder.group({
       tipoSerie:['',[Validators.required]],
@@ -46,8 +47,8 @@ export class AdminSolicitacoesSavePage {
     this.solicitacaoService.create(this.formGroup.value)
       .subscribe(response => {
         loader.dismiss();
-        this.navCtrl.pop();
         this.success();
+        this.events.publish('created');
       }, error => {
         loader.dismiss();
       });
@@ -61,7 +62,10 @@ export class AdminSolicitacoesSavePage {
       enableBackdropDismiss: false,
       buttons: [
         {
-          text: 'Ok'
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
         }
       ]
     });

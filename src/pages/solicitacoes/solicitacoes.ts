@@ -1,7 +1,7 @@
 import { SolicitacaoDTO } from './../../models/solicitacao.dto';
 import { SolicitacaoService } from './../../services/domain/solicitacao.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingController, Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,8 +15,13 @@ export class SolicitacoesPage {
       public navCtrl: NavController, 
       public navParams: NavParams,
       public solicitacaoService: SolicitacaoService,
-      public loadingCtrl: LoadingController) {
-  }
+      public loadingCtrl: LoadingController,
+      public events: Events) 
+      {
+        events.subscribe('created',() =>{
+          this.ionViewDidLoad();
+        }); 
+      }
 
   ionViewDidLoad()
   {

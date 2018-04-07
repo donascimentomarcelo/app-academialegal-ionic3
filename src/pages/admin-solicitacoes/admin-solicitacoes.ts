@@ -98,7 +98,7 @@ export class AdminSolicitacoesPage {
       case 1:
       case 2:
       case 3:
-      this.setFilterSolicitacoes()
+      this.setFilterSolicitacoes();
       this.filterBy();
       break;
 
