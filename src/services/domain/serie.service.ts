@@ -3,6 +3,7 @@ import { API_CONFIG } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SerieDTO } from '../../models/serie.dto';
+import { SerieListDTO } from '../../models/serieList.dto';
 
 @Injectable()
 export class SerieService {
@@ -31,9 +32,9 @@ export class SerieService {
         return this.http.get<SerieDTO[]>(`${API_CONFIG.baseUrl}/series/name?name=${aluno}`);
     };
 
-    findOne(id): Observable <SerieDTO>
+    findOne(id): Observable <SerieListDTO>
     {
-        return this.http.get<SerieDTO>(`${API_CONFIG.baseUrl}/series/${id}`);
+        return this.http.get<SerieListDTO>(`${API_CONFIG.baseUrl}/series/${id}`);
     };
 
     findMySerie(page : number = 0, linesPerPage : number = 24): Observable <SerieDTO>

@@ -1,5 +1,5 @@
 import { SolicitacaoDTO } from './../../models/solicitacao.dto';
-import { SerieDTO } from './../../models/serie.dto';
+import { SerieListDTO } from './../../models/serieList.dto';
 import { SerieService } from './../../services/domain/serie.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -32,8 +32,8 @@ import { trigger, transition, animate, style, state, keyframes } from '@angular/
 export class SerieDetailsPage {
 
   codigo: number = this.navParams.get('id');
-  items: SerieDTO[];
-  serie: SerieDTO;
+  items: SerieListDTO[];
+  serie: SerieListDTO;
   solicitacao: SolicitacaoDTO;
   accordionDescricao = 'accordion';
   accordionObs = 'accordionObs';
