@@ -88,9 +88,25 @@ export class ProfilePage {
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
     }, (err) => {
-     // Handle error
     });
-  }
+  };
+
+  sendPicture()
+  {
+    this.usuarioService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.picture = null;
+        this.ionViewDidLoad();
+      },
+    error => {});
+  };
+
+  cancel()
+  {
+    this.picture = null;
+  };
+
+};
   
   
-}
+
