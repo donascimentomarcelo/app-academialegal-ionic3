@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-avatar>
    <!-- <img class="circle" [src]="usuario?.imageUrl || 'assets/imgs/avatar-blank.png'"> -->
    <img class="circle" [src]="profileImage"/>

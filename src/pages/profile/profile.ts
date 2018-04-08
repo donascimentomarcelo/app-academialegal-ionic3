@@ -115,13 +115,16 @@ export class ProfilePage {
 
   sendPicture()
   {
+    let loader = this.presentLoading();
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
+        loader.dismiss();
         this.picture = null;
-        this.ionViewDidLoad();
         this.getImageIfExist();
       },
-    error => {});
+    error => {
+      loader.dismiss();
+    });
   };
 
   cancel()
@@ -148,6 +151,15 @@ export class ProfilePage {
     }, (error) => {
       this.cameraOn = false; 
     });
+  };
+
+  doRefresh(refresher) {
+    this.ionViewDidLoad();
+    this.getImageIfExist();
+    this.events.publish('changedImageProfile');
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
   };
 
 };
