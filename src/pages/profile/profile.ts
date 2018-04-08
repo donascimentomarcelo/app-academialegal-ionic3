@@ -5,6 +5,7 @@ import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CameraOptions, Camera } from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @IonicPage()
@@ -19,6 +20,7 @@ export class ProfilePage {
   bucketUrl = API_CONFIG.bucketBaseUrl;
   picture: string;
   cameraOn: boolean = false;
+  profileImage;
 
   constructor(
       public navCtrl: NavController, 
@@ -26,8 +28,11 @@ export class ProfilePage {
       public storage: StorageService,
       public usuarioService: UsuarioService,
       public loadingCtrl: LoadingController,
-      public camera: Camera) {
-  }
+      public camera: Camera,
+      public sanitizer: DomSanitizer) 
+      {
+        this.profileImage = 'assets/imgs/avatar-blank.png';
+      }
 
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
@@ -58,9 +63,23 @@ export class ProfilePage {
       .subscribe(response => {
         loader.dismiss();
         this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+        this.blobToDataURL(response).then(dataurl => {
+          let str: string = dataurl as string
+          this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+        })
       },
     error => {
+      this.profileImage = 'assets/imgs/avatar-blank.png';
       loader.dismiss();
+    });
+  };
+
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+      let reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = (e) => fulfill(reader.result);
+      reader.readAsDataURL(blob);
     });
   };
 
@@ -98,6 +117,7 @@ export class ProfilePage {
       .subscribe(response => {
         this.picture = null;
         this.ionViewDidLoad();
+        this.getImageIfExist();
       },
     error => {});
   };

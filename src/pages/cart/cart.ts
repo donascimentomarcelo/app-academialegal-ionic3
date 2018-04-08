@@ -4,7 +4,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
 import { ExercicioDTO } from '../../models/exercicio.dto';
 import { StorageService } from '../../services/storage.service';
-import { Cart } from '../../models/cart';
 
 @IonicPage()
 @Component({
