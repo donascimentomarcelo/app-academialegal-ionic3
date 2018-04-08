@@ -2,12 +2,13 @@ import { LocalProfile } from './../models/local_profile';
 import { UsuarioDTO } from './../models/usuario.dto';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { API_CONFIG } from '../config/api.config';
 import { AuthService } from '../services/auth.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,9 +16,10 @@ import { AuthService } from '../services/auth.service';
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  menu: UsuarioDTO;
+  usuario: UsuarioDTO;
   perfis: any;
   rootPage: string = 'HomePage';
+  profileImage;
 
   pages: Array<{title: string, component: string}>;
 
@@ -27,16 +29,24 @@ export class MyApp {
       public splashScreen: SplashScreen,
       public storage: StorageService,
       public usuarioService: UsuarioService,
-      public authService: AuthService) {
-    this.initializeApp();
+      public authService: AuthService,  
+      public sanitizer: DomSanitizer,
+      public events: Events) 
+      {
+        this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Perfil', component: 'ProfilePage'},
-    ];
-    
-    this.loadSideMenu();
-  }
+        this.pages = [
+          { title: 'Perfil', component: 'ProfilePage'},
+        ];
+        
+        this.loadSideMenu();
+
+        events.subscribe('changedImageProfile',() =>{
+          this.getImageIfExist();
+        });
+
+        this.profileImage = 'assets/imgs/avatar-blank.png';
+      };
 
   loadSideMenu()
   {
@@ -55,9 +65,9 @@ export class MyApp {
           this.storage.setLocalPerfis(profile);
           // SET LOCALSTORAGE WITH PROFILE
 
-          this.menu = response;
+          this.usuario = response;
 
-          this.getImageIfExist(this.menu.id);
+          this.getImageIfExist();
 
           this.perfis = response.perfis;
 
@@ -95,13 +105,28 @@ export class MyApp {
     }
   };
 
-  getImageIfExist(id: string) {
-    this.usuarioService.getImageBucket(id)
+  getImageIfExist() {
+    this.usuarioService.getImageBucket(this.usuario.id)
       .subscribe(response => {
-         this.menu.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`;
+         this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+         this.blobToDataURL(response).then(dataurl => {
+          let str: string = dataurl as string
+          this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+        })
       },
-    error => {});
+    error => {
+      this.profileImage = 'assets/imgs/avatar-blank.png';
+    });
   };
+
+   blobToDataURL(blob) {
+       return new Promise((fulfill, reject) => {
+          let reader = new FileReader();
+          reader.onerror = reject;
+          reader.onload = (e) => fulfill(reader.result);
+          reader.readAsDataURL(blob);
+        });
+    };
 
   initializeApp() {
     this.platform.ready().then(() => {

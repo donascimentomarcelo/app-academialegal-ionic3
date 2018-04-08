@@ -3,7 +3,7 @@ import { API_CONFIG } from './../../config/api.config';
 import { UsuarioDTO } from './../../models/usuario.dto';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -29,7 +29,8 @@ export class ProfilePage {
       public usuarioService: UsuarioService,
       public loadingCtrl: LoadingController,
       public camera: Camera,
-      public sanitizer: DomSanitizer) 
+      public sanitizer: DomSanitizer,
+      public events: Events) 
       {
         this.profileImage = 'assets/imgs/avatar-blank.png';
       }
@@ -66,6 +67,7 @@ export class ProfilePage {
         this.blobToDataURL(response).then(dataurl => {
           let str: string = dataurl as string
           this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+          this.events.publish('changedImageProfile');
         })
       },
     error => {
