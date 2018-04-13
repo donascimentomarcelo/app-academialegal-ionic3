@@ -1,9 +1,11 @@
+import { HomePage } from './../home/home';
 import { StorageService } from './../../services/storage.service';
 import { API_CONFIG } from './../../config/api.config';
 import { GrupoDTO } from './../../models/grupo.dto';
 import { GrupoService } from './../../services/domain/grupo.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController, AlertController } from 'ionic-angular';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -21,7 +23,9 @@ showMenuRedirectToGroupPage: boolean = false;
     public navParams: NavParams,
     public grupoSercive: GrupoService,
     public storage: StorageService,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public checkRoleService: CheckRoleService) {
 
     let solId = this.storage.getSolicitacao();
 
@@ -39,6 +43,10 @@ showMenuRedirectToGroupPage: boolean = false;
         this.grupos = response;
       }, error => {
         loader.dismiss();
+        if(error.status == 403)
+        {
+          this.checkRoleService.accessAllowed();
+        }
       })
   };
 

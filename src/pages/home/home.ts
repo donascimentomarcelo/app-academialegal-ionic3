@@ -3,6 +3,7 @@ import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController, LoadingController } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
+import { UsuarioService } from '../../services/domain/usuario.service';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ creds: CredenciaisDTO = {
     public sideMenu: MenuController,
     public authService: AuthService,
     public myApp: MyApp,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public usuarioService: UsuarioService) {
 
   }
 
@@ -34,12 +36,29 @@ creds: CredenciaisDTO = {
         .subscribe(response => {
           loader.dismiss();
           this.authService.successfulLogin(response.headers.get('Authorization'));
-
-          this.navCtrl.setRoot('GrupoPage')
+          this.loadSideMenu(this.creds.email)
+          // this.navCtrl.setRoot('GrupoPage')
         }, error => {
           loader.dismiss();
         });
-  }
+  };
+
+  loadSideMenu(email: string)
+  {
+      this.usuarioService.findByEmail(email)
+        .subscribe(response => {
+          console.log(response.perfis);
+          if(response.perfis.includes("ADMIN") || response.perfis.includes("PROFESSOR"))
+          {
+            console.log('admin ou prof');
+            
+          }
+          else
+          {
+            console.log('nao e admin');
+          }
+        }, error => {});
+  };
 
   ionViewWillEnter()
   {
