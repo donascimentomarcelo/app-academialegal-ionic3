@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController, LoadingController } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { StorageService } from '../../services/storage.service';
 
 @IonicPage()
 @Component({
@@ -24,7 +25,8 @@ creds: CredenciaisDTO = {
     public authService: AuthService,
     public myApp: MyApp,
     public loadingCtrl: LoadingController,
-    public usuarioService: UsuarioService) {
+    public usuarioService: UsuarioService,
+    public storage: StorageService) {
 
   }
 
@@ -36,7 +38,7 @@ creds: CredenciaisDTO = {
         .subscribe(response => {
           loader.dismiss();
           this.authService.successfulLogin(response.headers.get('Authorization'));
-          this.loadSideMenu(this.creds.email)
+          this.loadSideMenu(this.creds.email);
           // this.navCtrl.setRoot('GrupoPage')
         }, error => {
           loader.dismiss();
@@ -50,12 +52,11 @@ creds: CredenciaisDTO = {
           console.log(response.perfis);
           if(response.perfis.includes("ADMIN") || response.perfis.includes("PROFESSOR"))
           {
-            console.log('admin ou prof');
-            
+            this.navCtrl.setRoot('DashboardAdminPage')
           }
           else
           {
-            console.log('nao e admin');
+            this.navCtrl.setRoot('DashboardAlunoPage')
           }
         }, error => {});
   };
@@ -76,8 +77,11 @@ creds: CredenciaisDTO = {
     this.authService.refreshToken()
       .subscribe(response => {
         this.authService.successfulLogin(response.headers.get('Authorization'));
-        this.myApp.setPage();
-        this.navCtrl.setRoot('GrupoPage');
+        this.myApp.setPage(); //setPage zera o menu para ser populado apenas após a verificação de perfil
+        
+        let user = this.storage.getLocalUser();
+        this.loadSideMenu(user.email);
+        // this.navCtrl.setRoot('GrupoPage');
       }, error => {});
   };
 

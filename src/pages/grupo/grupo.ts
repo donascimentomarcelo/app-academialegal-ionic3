@@ -1,4 +1,4 @@
-import { HomePage } from './../home/home';
+//import { HomePage } from './../home/home';
 import { StorageService } from './../../services/storage.service';
 import { API_CONFIG } from './../../config/api.config';
 import { GrupoDTO } from './../../models/grupo.dto';
