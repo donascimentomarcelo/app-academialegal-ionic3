@@ -1,0 +1,73 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../assets/fonts/icomoon.eot?pk2x49');
+  src:  url('../assets/fonts/icomoon.eot?pk2x49#iefix') format('embedded-opentype'),
+    url('../assets/fonts/icomoon.ttf?pk2x49') format('truetype'),
+    url('../assets/fonts/icomoon.woff?pk2x49') format('woff'),
+    url('../assets/fonts/icomoon.svg?pk2x49#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-training-other:before,
+.ion-md-icon-training-other:before {
+  content: "\e901";
+}
+.icon-training-pending:before,
+.ion-md-icon-training-pending:before, {
+  content: "\e905";
+}
+.icon-training-rejected:before,
+.ion-md-icon-training-rejected:before, {
+  content: "\e907";
+}
+.icon-definition:before,
+.ion-md-icon-definition:before, {
+  content: "\e900";
+}
+.icon-training-all:before,
+.ion-md-icon-training-all:before, {
+  content: "\e902";
+}
+.icon-pupil:before,
+.ion-md-icon-pupil:before, {
+  content: "\e903";
+  font-size: 30px;
+}
+.icon-muscle:before,
+.ion-md-icon-muscle:before, {
+  content: "\e904";
+}
+.icon-training-created:before,
+.ion-md-icon-training-created:before, {
+  content: "\e906";
+  font-size: 26px;
+}
+.icon-runner:before,
+.ion-md-icon-runner:before, {
+  content: "\e908";
+  font-size: 26px;
+}
+.icon-resistence:before,
+.ion-md-icon-resistence:before, {
+  content: "\e909";
+}
+.icon-muscle-two:before,
+.ion-md-icon-muscle-two:before, {
+  content: "\e90a";
+}
