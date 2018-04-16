@@ -23,7 +23,7 @@ export class SeriePage {
 
   ionViewDidLoad() {
     let loader = this.presentLoading();
-    this.serieService.findMySerie(this.page, 1)
+    this.serieService.findMySerie(this.page, 10)
       .subscribe(response => {
         loader.dismiss();
         this.series = this.series.concat(response['content']);

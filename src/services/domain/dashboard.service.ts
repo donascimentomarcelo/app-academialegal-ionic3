@@ -14,16 +14,26 @@ export class DashboardService {
     userDash(): Observable<UsuarioDashboardDTO[]>
     {
         return this.http.get<UsuarioDashboardDTO[]>(`${API_CONFIG.baseUrl}/usuarios/dashboard`);
-    }
+    };
 
     serieDash(): Observable<SerieDashboardDTO[]>
     {
         return this.http.get<SerieDashboardDTO[]>(`${API_CONFIG.baseUrl}/series/dashboard`);
-    }
+    };
 
     solicitacaoDash(): Observable<SolicitacaoDashboardDTO[]>
     {
         return this.http.get<SolicitacaoDashboardDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/dashboard`);
-    }
+    };
+    
+    mySerieDash(): Observable<SerieDashboardDTO[]>
+    {
+        return this.http.get<SerieDashboardDTO[]>(`${API_CONFIG.baseUrl}/series/myDashboard`);
+    };
+
+    mySolicitacaoDash(): Observable<SolicitacaoDashboardDTO[]>
+    {
+        return this.http.get<SolicitacaoDashboardDTO[]>(`${API_CONFIG.baseUrl}/solicitacoes/myDashboard`);
+    };
 
 }
