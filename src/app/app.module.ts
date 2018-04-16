@@ -22,6 +22,7 @@ import { CartService } from '../services/domain/cart.service';
 import { SerieService } from '../services/domain/serie.service';
 import { ImageUtilService } from '../services/image-util.service';
 import { CheckRoleService } from '../services/check-role.service';
+import { DashboardService } from '../services/domain/dashboard.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CheckRoleService } from '../services/check-role.service';
     CartService,
     SerieService,
     ImageUtilService,
-    CheckRoleService
+    CheckRoleService,
+    DashboardService
   ]
 })
 export class AppModule {}
