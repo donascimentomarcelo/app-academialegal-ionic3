@@ -10,27 +10,45 @@
   <ion-content padding>
       <ion-card>
           <ion-card-header>
-            Informações Gerais
+            Solicitações Gerais
           </ion-card-header>
         
           <ion-list>
+            <ion-item ion-item>
+              <ion-card-content>
+                <canvas #pieCanvasSolicitacao></canvas>
+              </ion-card-content>
+            </ion-item>
+
             <button ion-item>
               <ion-icon name="icon-training-pending" item-start></ion-icon>
-              Solicitações Pendentes
+              Pendentes
               <ion-badge item-end color="dark">{{ penDash ? (penDash | number:0): 0}}</ion-badge>
             </button>
         
             <button ion-item>
               <ion-icon name="icon-training-rejected" item-start></ion-icon>
-              Solicitações Rejeitadas
+              Rejeitadas
               <ion-badge item-end color="dark">{{ rejDash ? (rejDash | number:0): 0}}</ion-badge>
             </button>
         
             <button ion-item>
               <ion-icon name="icon-training-created" item-start></ion-icon>
-              Series Criadas
+              Concluído
               <ion-badge item-end color="dark">{{ conDash ? (conDash | number:0): 0}}</ion-badge>
             </button>
+         </ion-list>   
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+            Séries Gerais
+          </ion-card-header>
+        <ion-list>
+            <ion-item ion-item>
+              <ion-card-content>
+                <canvas #pieCanvasSerie></canvas>
+              </ion-card-content>
+            </ion-item>
 
             <button ion-item>
               <ion-icon name="icon-muscle" item-start></ion-icon>
@@ -49,13 +67,25 @@
               Séries de Resistência
               <ion-badge item-end color="dark">{{ resDash ? (resDash | number:0): 0}}</ion-badge>
             </button>
-  
+
             <button ion-item>
               <ion-icon name="icon-training-other" item-start></ion-icon>
               Outras Séries
               <ion-badge item-end color="dark">{{ outDash ? (outDash | number:0): 0}}</ion-badge>
             </button>
-        
+        </ion-list>
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+            Usuários
+          </ion-card-header>
+        <ion-list>
+            <ion-item ion-item>
+              <ion-card-content>
+                <canvas #pieCanvasUsuario></canvas>
+              </ion-card-content>
+            </ion-item>
+
             <button ion-item>
               <ion-icon name="icon-pupil" item-start></ion-icon>
               Alunos

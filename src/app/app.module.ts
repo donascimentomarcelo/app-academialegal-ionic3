@@ -23,6 +23,7 @@ import { SerieService } from '../services/domain/serie.service';
 import { ImageUtilService } from '../services/image-util.service';
 import { CheckRoleService } from '../services/check-role.service';
 import { DashboardService } from '../services/domain/dashboard.service';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DashboardService } from '../services/domain/dashboard.service';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     BrowserAnimationsModule,
+    ChartsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,7 +57,7 @@ import { DashboardService } from '../services/domain/dashboard.service';
     SerieService,
     ImageUtilService,
     CheckRoleService,
-    DashboardService
+    DashboardService,
   ]
 })
 export class AppModule {}
