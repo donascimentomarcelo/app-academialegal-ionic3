@@ -1,3 +1,4 @@
+import { CheckRoleService } from './../../services/check-role.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DashboardService } from '../../services/domain/dashboard.service';
@@ -21,7 +22,11 @@ export class DashboardAlunoPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public dash: DashboardService) { }
+    public dash: DashboardService,
+    public chechRole: CheckRoleService) 
+    {
+      this.chechRole.checkPerfilAluno();
+    }
 
   ionViewDidLoad() {
     this.loadMySerie();
@@ -86,7 +91,6 @@ export class DashboardAlunoPage {
   {
     this.dash.mySolicitacaoDash()
       .subscribe(response => {
-        console.log(response);
         
         var solicitacaoDash: any = {};
         for(var i = 0; i<response.length; i++)

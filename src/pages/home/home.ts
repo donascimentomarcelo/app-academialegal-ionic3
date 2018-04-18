@@ -49,7 +49,6 @@ creds: CredenciaisDTO = {
   {
       this.usuarioService.findByEmail(email)
         .subscribe(response => {
-          console.log(response.perfis);
           if(response.perfis.includes("ADMIN") || response.perfis.includes("PROFESSOR"))
           {
             this.navCtrl.setRoot('DashboardAdminPage')

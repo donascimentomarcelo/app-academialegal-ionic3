@@ -56,15 +56,7 @@ export class MyApp {
     {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
-
-          // SET LOCALSTORAGE WITH PROFILE
-          let profile: LocalProfile = {
-            perfis: response.perfis
-          };
-
-          this.storage.setLocalPerfis(profile);
-          // SET LOCALSTORAGE WITH PROFILE
-
+          
           this.usuario = response;
 
           this.getImageIfExist();
@@ -76,6 +68,7 @@ export class MyApp {
             if(this.perfis.includes("ADMIN"))
             {
               this.pages.push(
+                { title: 'Home', component: 'DashboardAdminPage'},
                 { title: 'Todos os Exercícios', component: 'AdminExercicioPage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Todas as Séries', component: 'AdminSeriesPage'},
@@ -86,6 +79,7 @@ export class MyApp {
             else if(this.perfis.includes("ALUNO"))
             {
               this.pages.push(
+                { title: 'Home', component: 'DashboardAlunoPage'},
                 { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
                 { title: 'Minhas séries', component: 'SeriePage'},
                 { title: 'Logout', component: '' },
@@ -94,6 +88,7 @@ export class MyApp {
             else if(this.perfis.includes("PROFESSOR"))
             {
               this.pages.push(
+                { title: 'Home', component: 'DashboardAdminPage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Todas as Séries', component: 'AdminSeriesPage'},
                 { title: 'Logout', component: '' },
@@ -157,7 +152,6 @@ export class MyApp {
     delete this.pages;
 
     this.pages = [
-      { title: 'Home', component: 'HomePage'},
       { title: 'Perfil', component: 'ProfilePage'},
     ];
   };

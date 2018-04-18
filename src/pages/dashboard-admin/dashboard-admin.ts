@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DashboardService } from '../../services/domain/dashboard.service';
 import { Chart } from 'chart.js';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,11 @@ export class DashboardAdminPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public dash: DashboardService) {}
+    public dash: DashboardService,
+    public checkRole: CheckRoleService) 
+    {
+      this.checkRole.checkPerfilAdminProf();
+    }
 
   ionViewDidLoad() 
   {
@@ -146,7 +151,6 @@ export class DashboardAdminPage {
         {
           solicitacaoDash[response[i].statusSolicitacao] = response[i].qtddSolicitacao
         };
-        console.log(response);
 
         this.penDash = solicitacaoDash.Pendente;
         this.rejDash = solicitacaoDash.Rejeitado;

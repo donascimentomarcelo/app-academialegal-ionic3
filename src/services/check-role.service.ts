@@ -31,4 +31,40 @@ export class CheckRoleService {
       });
       alert.present();
     };
+
+    checkPerfilAdminProf()
+    {
+      let ls = this.storage.getLocalPerfis();
+      
+      if(!ls)
+      {
+        this.accessAllowed();
+      };
+
+      if(ls)
+      {
+        if(!ls.perfis.includes("ADMIN") || !ls.perfis.includes("PROFESSOR"))
+        {
+          this.accessAllowed();
+        };
+      };
+    };
+
+    checkPerfilAluno()
+    {
+      let ls = this.storage.getLocalPerfis();
+      
+      if(!ls)
+      {
+        this.accessAllowed();
+      };
+
+      if(ls)
+      {
+        if(!ls.perfis.includes("ALUNO"))
+        {
+          this.accessAllowed();
+        };
+      };
+    };
 }

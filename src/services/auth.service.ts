@@ -5,6 +5,8 @@ import { API_CONFIG } from './../config/api.config';
 import { StorageService } from './storage.service';
 import { LocalUser } from '../models/local_user';
 import { JwtHelper } from 'angular2-jwt';
+import { UsuarioService } from './domain/usuario.service';
+import { LocalProfile } from '../models/local_profile';
 
 @Injectable()
 export class AuthService{
@@ -14,7 +16,8 @@ export class AuthService{
 
     constructor(
         public http: HttpClient,
-        public storage: StorageService){
+        public storage: StorageService,
+        public usuarioService: UsuarioService){
 
     }
 
@@ -38,7 +41,21 @@ export class AuthService{
             email: this.email,
         };
         this.storage.setLocalUser(user);
+        this.setPerfis(this.email);
     };
+
+    setPerfis(email: string)
+    {   
+        this.usuarioService.findByEmail(email)
+        .subscribe(response => {
+
+          let profile: LocalProfile = {
+            perfis: response.perfis
+          };
+
+          this.storage.setLocalPerfis(profile);
+        }, error => {});
+    }
 
     logout()
     {
