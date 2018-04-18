@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DashboardService } from '../../services/domain/dashboard.service';
+import { Chart } from 'chart.js';
 
 @IonicPage()
 @Component({
@@ -26,13 +27,14 @@ export class DashboardAlunoPage {
     this.loadMySerie();
     this.loadMySolicitacao();
   }
-
+  
+  @ViewChild('pieCanvasSerie') pieCanvasSerie;
+  pieChartSerie: any;
   loadMySerie()
   {
     this.dash.mySerieDash()
       .subscribe(response => {
         var serieDash: any = {};
-        console.log(response);
         for(var i= 0; i<response.length; i++)
         {
           serieDash[response[i].tipoSerie] = response[i].qtddSerie
@@ -43,9 +45,43 @@ export class DashboardAlunoPage {
         this.resDash = serieDash.Resistencia;
         this.outDash = serieDash.Outros;
 
+        
+        let qtdd = response.map(response => response.qtddSerie)
+        let tipo = response.map(response => response.tipoSerie)
+        
+        this.pieChartSerie = new Chart(this.pieCanvasSerie.nativeElement, {
+          type: 'pie',
+          data: {
+            labels: tipo,
+            datasets: [
+              {
+                label: '# quantidade',
+                data: qtdd,
+                backgroundColor: [
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 0.7)',
+                'rgba(0, 0, 0, 0.4)',
+                'rgba(71, 69, 69, 1)',
+                'rgba(71, 69, 69, 0.8)',
+                'rgba(71, 69, 69, 0.6)'
+              ],
+                hoverBackgroundColor: [
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080",
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080"
+              ]
+              }
+            ]
+          }
+        })
       }, error => { });
   };
 
+  @ViewChild('pieCanvasSolicitacao') pieCanvasSolicitacao;
+  pieChartSolicitacao: any;
   loadMySolicitacao()
   {
     this.dash.mySolicitacaoDash()
@@ -62,6 +98,37 @@ export class DashboardAlunoPage {
         this.rejDash = solicitacaoDash.Rejeitado;
         this.conDash = solicitacaoDash.Concluido;
         
+        let qtdd = response.map(response => response.qtddSolicitacao)
+        let status = response.map(response => response.statusSolicitacao)
+        
+        this.pieChartSolicitacao = new Chart(this.pieCanvasSolicitacao.nativeElement, {
+          type: 'pie',
+          data: {
+            labels: status,
+            datasets: [
+              {
+                label: '# quantidade',
+                data: qtdd,
+                backgroundColor: [
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 0.7)',
+                'rgba(0, 0, 0, 0.4)',
+                'rgba(71, 69, 69, 1)',
+                'rgba(71, 69, 69, 0.8)',
+                'rgba(71, 69, 69, 0.6)'
+              ],
+                hoverBackgroundColor: [
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080",
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080"
+              ]
+              }
+            ]
+          }
+        })
       }, error => { });
   };
 

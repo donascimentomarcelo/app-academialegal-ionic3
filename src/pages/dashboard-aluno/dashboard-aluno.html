@@ -10,28 +10,48 @@
   <ion-content padding>
       <ion-card>
           <ion-card-header>
-            Minhas Informações
+            Minhas Solicitações
           </ion-card-header>
         
           <ion-list>
+
+            <ion-item ion-item>
+              <ion-card-content>
+                <canvas #pieCanvasSolicitacao></canvas>
+              </ion-card-content>
+            </ion-item>
+
             <button ion-item>
               <ion-icon name="icon-training-pending" item-start></ion-icon>
-              Solicitações Pendentes
+              Pendentes
               <ion-badge item-end color="dark">{{ penDash ? (penDash | number:0): 0}}</ion-badge>
             </button>
         
             <button ion-item>
               <ion-icon name="icon-training-rejected" item-start></ion-icon>
-              Solicitações Rejeitadas
+              Rejeitadas
               <ion-badge item-end color="dark">{{ rejDash ? (rejDash | number:0): 0}}</ion-badge>
             </button>
-        
+          
             <button ion-item>
               <ion-icon name="icon-training-all" item-start></ion-icon>
-              Todas as Series 
+              Concluídas
               <ion-badge item-end color="dark">{{ conDash ? (conDash | number:0): 0}}</ion-badge>
             </button>
-        
+          </ion-list>
+      </ion-card>
+      <br>
+      <ion-card>
+        <ion-card-header>
+            Minhas Séries
+        </ion-card-header>
+        <ion-list>
+            <ion-item ion-item>
+              <ion-card-content>
+                <canvas #pieCanvasSerie></canvas>
+              </ion-card-content>
+            </ion-item>
+
             <button ion-item>
               <ion-icon name="icon-muscle" item-start></ion-icon>
               Séries de Hipertrofia
