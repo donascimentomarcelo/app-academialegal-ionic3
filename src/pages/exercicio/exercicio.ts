@@ -3,6 +3,7 @@ import { ExercicioDTO } from './../../models/exercicio.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ExercicioService } from '../../services/domain/exercicio.service';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -19,8 +20,11 @@ export class ExercicioPage {
     public navParams: NavParams,
     public exercicioService: ExercicioService,
     public cartService: CartService,
-    public loadingCtrl: LoadingController) {
-  }
+    public loadingCtrl: LoadingController,
+    public check: CheckRoleService) 
+    {
+      this.check.checkPerfilProfessor();
+    }
   
   ionViewDidLoad() 
   {
@@ -34,8 +38,8 @@ export class ExercicioPage {
         {
           loader.dismiss();
           this.navCtrl.setRoot('GrupoPage');
-        }
-
+        };
+        this.check.handler403(error);
       });
   };
 

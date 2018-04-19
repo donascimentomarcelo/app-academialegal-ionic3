@@ -1,4 +1,3 @@
-//import { HomePage } from './../home/home';
 import { StorageService } from './../../services/storage.service';
 import { API_CONFIG } from './../../config/api.config';
 import { GrupoDTO } from './../../models/grupo.dto';
@@ -25,15 +24,17 @@ showMenuRedirectToGroupPage: boolean = false;
     public storage: StorageService,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public checkRoleService: CheckRoleService) {
-
-    let solId = this.storage.getSolicitacao();
-
-    if(solId)
+    public checkRoleService: CheckRoleService) 
     {
-      this.showMenuRedirectToGroupPage = true;
-    }
-  }
+      this.checkRoleService.checkPerfilProfessor();
+
+      let solId = this.storage.getSolicitacao();
+
+      if(solId)
+      {
+        this.showMenuRedirectToGroupPage = true;
+      };
+    };
 
   ionViewDidLoad() {
     let loader = this.presentLoading();
@@ -43,12 +44,9 @@ showMenuRedirectToGroupPage: boolean = false;
         this.grupos = response;
       }, error => {
         loader.dismiss();
-        if(error.status == 403)
-        {
-          this.checkRoleService.accessAllowed();
-        }
-      })
-  };
+        this.checkRoleService.handler403(error);
+      });
+    };
 
   showExercicios(id: string)
   {

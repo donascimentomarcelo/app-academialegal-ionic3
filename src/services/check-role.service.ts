@@ -103,4 +103,12 @@ export class CheckRoleService {
         };
       };
     };
+
+    handler403(error)
+    {
+      if(error.status == 403)
+      {
+        this.accessAllowed();
+      };
+    }
 }

@@ -4,6 +4,7 @@ import { StorageService } from '../../services/storage.service';
 import { CartService } from '../../services/domain/cart.service';
 import { CartItem } from '../../models/cart-item';
 import { Cart } from '../../models/cart';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -19,8 +20,11 @@ export class ReorderPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public cartService: CartService,
-    public storage: StorageService) {
-  }
+    public storage: StorageService,
+    public checkRoleService: CheckRoleService) 
+    {
+      this.checkRoleService.checkPerfilProfessor();
+    };
 
   ionViewDidLoad() {
     let cart =  this.cartService.getCart();

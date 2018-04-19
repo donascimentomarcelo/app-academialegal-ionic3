@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, FabContainer } from 'ionic-angular';
 import { ExercicioDTO } from '../../models/exercicio.dto';
 import { StorageService } from '../../services/storage.service';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -17,14 +18,16 @@ export class CartPage {
   repeticao: Array<{ repeticao:string }> = [];
   observacao: Array<{ observacao:string }> = [];
   count: number;
-  // order: Array<{ observacao:string }> = [];
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public cartService: CartService,
-    public storage: StorageService) {
-  }
+    public storage: StorageService,
+    public checkRoleService: CheckRoleService) 
+    {
+      this.checkRoleService.checkPerfilProfessor();
+    }
 
   ionViewDidLoad() {
     let cart =  this.cartService.getCart();
@@ -36,7 +39,6 @@ export class CartPage {
       this.observacao[i] = cart.items[i].observacao as any; 
       this.repeticao[i] = cart.items[i].repeticoes as any; 
       this.letra[i] = cart.items[i].letra as any; 
-      // this.order[i] = i as any;
     };
   };
 

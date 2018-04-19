@@ -5,6 +5,7 @@ import { StorageService } from '../../services/storage.service';
 import { CartItem } from '../../models/cart-item';
 import { SerieDTO } from '../../models/serie.dto';
 import { SerieService } from '../../services/domain/serie.service';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -25,9 +26,11 @@ export class ConcluirSeriePage {
     public cartService: CartService,
     public serieService: SerieService,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController) {
-
-  }
+    public loadingCtrl: LoadingController,
+    public check: CheckRoleService) 
+    {
+      this.check.checkPerfilProfessor();
+    }
 
   ionViewDidLoad() 
   {
@@ -80,6 +83,7 @@ export class ConcluirSeriePage {
         this.showInsertOk();
       }, error => {
         loader.dismiss();
+        this.check.handler403(error);
       });
   };
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SolicitacaoService } from '../../services/domain/solicitacao.service';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,8 @@ export class AdminSolicitacoesSavePage {
     public solicitacaoService: SolicitacaoService,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public events: Events) {
+    public events: Events,
+    public checkRoleService: CheckRoleService) {
 
     this.formGroup = this.formBuilder.group({
       tipoSerie:['',[Validators.required]],
@@ -51,6 +53,7 @@ export class AdminSolicitacoesSavePage {
         this.events.publish('created');
       }, error => {
         loader.dismiss();
+        this.checkRoleService.handler403(error);
       });
   };
 

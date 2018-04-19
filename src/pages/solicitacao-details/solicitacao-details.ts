@@ -5,6 +5,7 @@ import { SolicitacaoService } from '../../services/domain/solicitacao.service';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { trigger, transition, animate, style, state, keyframes } from '@angular/animations'
 import { Solicitacao_identificator } from '../../models/solicitacao_identificator';
+import { CheckRoleService } from '../../services/check-role.service';
 
 
 @IonicPage()
@@ -46,7 +47,8 @@ export class SolicitacaoDetailsPage {
       public solicitacaoService: SolicitacaoService,  
       public storage: StorageService,
       public alertCtrl: AlertController,
-      public loadingCtrl: LoadingController) 
+      public loadingCtrl: LoadingController,
+      public checkRoleService: CheckRoleService) 
       {
         this.perfis = this.storage.getLocalPerfis().perfis;
 
@@ -65,7 +67,9 @@ export class SolicitacaoDetailsPage {
     this.solicitacaoService.findOne(this.codigo)
       .subscribe(response => {
         this.solicitacao = response;
-      }, error => {});
+      }, error => {
+        this.checkRoleService.handler403(error);
+      });
   };
 
   shownGroup = null;
@@ -118,6 +122,7 @@ export class SolicitacaoDetailsPage {
         this.navCtrl.pop();
       }, error => {
         loader.dismiss();
+        this.checkRoleService.handler403(error);
       });
   };
 
