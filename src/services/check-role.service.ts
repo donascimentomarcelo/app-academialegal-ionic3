@@ -39,12 +39,12 @@ export class CheckRoleService {
       if(!ls)
       {
         this.accessAllowed();
-      };
-
+      };  
+      
       if(ls)
       {
-        if(!ls.perfis.includes("ADMIN") || !ls.perfis.includes("PROFESSOR"))
-        {
+        if(!ls.perfis.includes("ADMIN") && !ls.perfis.includes("PROFESSOR"))
+        { 
           this.accessAllowed();
         };
       };
@@ -62,6 +62,42 @@ export class CheckRoleService {
       if(ls)
       {
         if(!ls.perfis.includes("ALUNO"))
+        {
+          this.accessAllowed();
+        };
+      };
+    };
+
+    checkPerfilAdmin()
+    {
+      let ls = this.storage.getLocalPerfis();
+      
+      if(!ls)
+      {
+        this.accessAllowed();
+      };
+
+      if(ls)
+      {
+        if(!ls.perfis.includes("ADMIN"))
+        {
+          this.accessAllowed();
+        };
+      };
+    };
+
+    checkPerfilProfessor()
+    {
+      let ls = this.storage.getLocalPerfis();
+      
+      if(!ls)
+      {
+        this.accessAllowed();
+      };
+
+      if(ls)
+      {
+        if(!ls.perfis.includes("PROFESSOR"))
         {
           this.accessAllowed();
         };

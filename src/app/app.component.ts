@@ -56,7 +56,7 @@ export class MyApp {
     {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
-          
+
           this.usuario = response;
 
           this.getImageIfExist();
@@ -76,7 +76,7 @@ export class MyApp {
                 { title: 'Logout', component: '' },
               )
             }
-            else if(this.perfis.includes("ALUNO"))
+            else if(this.perfis.includes("ALUNO") && !this.perfis.includes("PROFESSOR"))
             {
               this.pages.push(
                 { title: 'Home', component: 'DashboardAlunoPage'},
@@ -85,10 +85,21 @@ export class MyApp {
                 { title: 'Logout', component: '' },
               )
             }
-            else if(this.perfis.includes("PROFESSOR"))
+            else if(this.perfis.includes("PROFESSOR") && !this.perfis.includes("ALUNO"))
             {
               this.pages.push(
                 { title: 'Home', component: 'DashboardAdminPage'},
+                { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
+                { title: 'Todas as Séries', component: 'AdminSeriesPage'},
+                { title: 'Logout', component: '' },
+              )
+            }
+            else if(this.perfis.includes("PROFESSOR") && this.perfis.includes("ALUNO"))
+            {
+              this.pages.push(
+                { title: 'Home', component: 'DashboardAlunoPage'},
+                { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
+                { title: 'Minhas séries', component: 'SeriePage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Todas as Séries', component: 'AdminSeriesPage'},
                 { title: 'Logout', component: '' },

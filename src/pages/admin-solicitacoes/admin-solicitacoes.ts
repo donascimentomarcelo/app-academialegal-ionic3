@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, FabContainer, LoadingController } from 'ionic-angular';
 import { SolicitacaoDTO } from '../../models/solicitacao.dto';
 import { StorageService } from '../../services/storage.service';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -23,7 +24,10 @@ export class AdminSolicitacoesPage {
     public navParams: NavParams,
     public solicitacaoService: SolicitacaoService,
     public storage: StorageService,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public check: CheckRoleService) {
+
+    this.check.checkPerfilAdminProf();
     
     let solId = this.storage.getSolicitacao();
 
@@ -42,6 +46,10 @@ export class AdminSolicitacoesPage {
         this.solicitacoes = this.solicitacoes.concat(response['content']);
       }, error => {
         loader.dismiss();
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
       });
   };
 
@@ -59,7 +67,12 @@ export class AdminSolicitacoesPage {
         {
           this.onClear();
         }
-      }, error => {});
+      }, error => {
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
+      });
   };
 
   onClear()
@@ -126,6 +139,10 @@ export class AdminSolicitacoesPage {
         this.solicitacoes = this.solicitacoes.concat(response['content']);
       }, error => {
         loader.dismiss();
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
       });
   };
 

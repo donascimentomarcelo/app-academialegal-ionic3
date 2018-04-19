@@ -3,6 +3,7 @@ import { UsuarioDTO } from './../../models/usuario.dto';
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, LoadingController } from 'ionic-angular';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,11 @@ export class UsuarioPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public usuarioService: UsuarioService,
-    public loadingCtrl: LoadingController) { }
+    public loadingCtrl: LoadingController,
+    public check: CheckRoleService) 
+    {
+      this.check.checkPerfilAdmin();
+    }
 
   ionViewDidLoad() 
   {
@@ -31,6 +36,10 @@ export class UsuarioPage {
           this.usuarios = this.usuarios.concat(response['content']);
         }, error => {
           loader.dismiss();
+          if(error.status == 403)
+          {
+            this.check.accessAllowed();
+          };
         });
   };
 
@@ -48,7 +57,12 @@ export class UsuarioPage {
         {
           this.onClear();
         }
-      }, error => {});
+      }, error => {
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
+      });
   };
 
   onClear()

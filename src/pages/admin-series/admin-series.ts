@@ -3,6 +3,7 @@ import { SerieDTO } from './../../models/serie.dto';
 import { SerieService } from './../../services/domain/serie.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, FabContainer, Content, LoadingController } from 'ionic-angular';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,10 @@ export class AdminSeriesPage {
       public navParams: NavParams,
       public serieService: SerieService,
       public loadingCtrl: LoadingController,
-      public storage: StorageService) {
+      public storage: StorageService,
+      public check: CheckRoleService) {
+
+        this.check.checkPerfilAdminProf();
 
         let solId = this.storage.getSolicitacao();
 

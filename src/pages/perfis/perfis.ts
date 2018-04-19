@@ -4,6 +4,7 @@ import { UsuarioService } from './../../services/domain/usuario.service';
 import { UsuarioDTO } from './../../models/usuario.dto';
 import { API_CONFIG } from '../../config/api.config';
 import { PerfilService } from '../../services/domain/perfil.service';
+import { CheckRoleService } from '../../services/check-role.service';
 
 @IonicPage()
 @Component({
@@ -23,8 +24,11 @@ export class PerfisPage {
     public navParams: NavParams,
     public usuarioService: UsuarioService,
     public perfilService: PerfilService,
-    public loadingCtrl: LoadingController) {
-  }
+    public loadingCtrl: LoadingController,
+    public check: CheckRoleService) 
+    {
+      this.check.checkPerfilAdmin();
+    }
 
   ionViewDidLoad() {
     let id = this.codigo;
@@ -34,8 +38,12 @@ export class PerfisPage {
         loader.dismiss();
         this.usuario = response;
         this.getImageIfExist(response.id)
-      }, erros => {
+      }, error => {
         loader.dismiss();
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
       });
   };
 
@@ -57,6 +65,10 @@ export class PerfisPage {
         this.usuario.perfis.length = this.usuario.perfis.length - 1;
       }, error => {
         loader.dismiss();
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
       });
   };
 
@@ -84,6 +96,10 @@ export class PerfisPage {
         this.loadPerfil(id);
       }, error => {
         loader.dismiss();
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
       });
   };
 
@@ -95,7 +111,12 @@ export class PerfisPage {
         this.usuario.perfis = response.perfis;
         this.usuario.perfis.length + 1;
         delete this.perfil;
-      }, erros => {});
+      }, error => {
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
+      });
   };
 
   presentLoading()

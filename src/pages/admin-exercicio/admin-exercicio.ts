@@ -1,3 +1,4 @@
+import { CheckRoleService } from './../../services/check-role.service';
 import { ExercicioDTO } from './../../models/exercicio.dto';
 import { ExercicioService } from './../../services/domain/exercicio.service';
 import { Component, ViewChild } from '@angular/core';
@@ -14,8 +15,11 @@ export class AdminExercicioPage {
       public navCtrl: NavController, 
       public navParams: NavParams,
       public exercicioService: ExercicioService,
-      public loadingCtrl: LoadingController) {
-  };
+      public loadingCtrl: LoadingController,
+      public check: CheckRoleService) 
+      {
+        this.check.checkPerfilAdminProf();
+      };
 
   exercicios: ExercicioDTO[] = [];
   search: string;
@@ -41,6 +45,10 @@ export class AdminExercicioPage {
       this.exercicios = this.exercicios.concat(response['content']);         
     }, error => {
       loader.dismiss();
+      if(error.status == 403)
+      {
+        this.check.accessAllowed();
+      };
      });
   };  
 
@@ -62,7 +70,12 @@ export class AdminExercicioPage {
         {
           this.onClear();
         }
-      }, error => {});
+      }, error => {
+        if(error.status == 403)
+        {
+          this.check.accessAllowed();
+        };
+      });
   };
 
 
