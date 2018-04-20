@@ -18,6 +18,8 @@ export class DashboardAlunoPage {
   penDash: number;
   rejDash: number;
   conDash: number;
+  serie: number;
+  solicitacao: number;
 
   constructor(
     public navCtrl: NavController, 
@@ -40,6 +42,7 @@ export class DashboardAlunoPage {
     this.dash.mySerieDash()
       .subscribe(response => {
         var serieDash: any = {};
+        this.serie = response.length;
         for(var i= 0; i<response.length; i++)
         {
           serieDash[response[i].tipoSerie] = response[i].qtddSerie
@@ -91,7 +94,7 @@ export class DashboardAlunoPage {
   {
     this.dash.mySolicitacaoDash()
       .subscribe(response => {
-        
+        this.solicitacao = response.length;
         var solicitacaoDash: any = {};
         for(var i = 0; i<response.length; i++)
         {

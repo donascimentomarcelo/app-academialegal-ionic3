@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DashboardService } from '../../services/domain/dashboard.service';
@@ -21,15 +22,36 @@ export class DashboardAdminPage {
   penDash: number;
   rejDash: number;
   conDash: number;
-  chartSolicitacoes = [];
+  serie: number;
+  solicitacao: number;
+  usuario: number;
+  mySerie: number;
+  mySolicitacao: number;
+  penMyDash: number;
+  rejMyDash: number;
+  conMyDash: number;
+  hipMyDash: number;
+  defMyDash: number;
+  resMyDash: number;
+  outMyDash: number;
+  isAluno: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public dash: DashboardService,
-    public checkRole: CheckRoleService) 
+    public checkRole: CheckRoleService,
+    public storage: StorageService) 
     {
       this.checkRole.checkPerfilAdminProf();
+
+      let ls = this.storage.getLocalPerfis();
+      if(ls.perfis.includes("ALUNO"))
+      {
+        this.isAluno = true;
+      };
+      console.log(this.isAluno);
+      
     }
 
   ionViewDidLoad() 
@@ -37,6 +59,8 @@ export class DashboardAdminPage {
     this.loadUser();
     this.loadSerie();
     this.loadSolicitacao();
+    this.loadMySolicitacao();
+    this.loadMySerie();
   };
 
   @ViewChild('pieCanvasUsuario') pieCanvasUsuario;
@@ -46,6 +70,7 @@ export class DashboardAdminPage {
     this.dash.userDash()
     .subscribe(response => {
       var userDash: any = {};
+      this.usuario = response.length;
       for(var i = 0; i < response.length; i++)
       {
         userDash[response[i].perfil] = response[i].qtddUsuario
@@ -96,6 +121,7 @@ export class DashboardAdminPage {
     this.dash.serieDash()
       .subscribe(response => {
         var serieDash: any = {};
+        this.serie = response.length;
         for(var i= 0; i<response.length; i++)
         {
           serieDash[response[i].tipoSerie] = response[i].qtddSerie
@@ -147,6 +173,7 @@ export class DashboardAdminPage {
     this.dash.solicitacaoDash()
       .subscribe(response => {
         var solicitacaoDash: any = {};
+        this.solicitacao = response.length;
         for(var i = 0; i<response.length; i++)
         {
           solicitacaoDash[response[i].statusSolicitacao] = response[i].qtddSolicitacao
@@ -189,5 +216,108 @@ export class DashboardAdminPage {
         })
       }, error => { });
   };
+  
+  @ViewChild('pieMyCanvasSolicitacao') pieMyCanvasSolicitacao;
+  pieMyChartSolicitacao: any;
+  loadMySolicitacao()
+  {
+    this.dash.mySolicitacaoDash()
+      .subscribe(response => {
+        var solicitacaoDash: any = {};
+        this.mySolicitacao = response.length;
+        for(var i = 0; i<response.length; i++)
+        {
+          solicitacaoDash[response[i].statusSolicitacao] = response[i].qtddSolicitacao
+        };
+        
+        this.penMyDash = solicitacaoDash.Pendente;
+        this.rejMyDash = solicitacaoDash.Rejeitado;
+        this.conMyDash = solicitacaoDash.Concluido;
 
+        let qtdd = response.map(response => response.qtddSolicitacao)
+        let status = response.map(response => response.statusSolicitacao)
+        
+        this.pieMyChartSolicitacao = new Chart(this.pieMyCanvasSolicitacao.nativeElement, {
+          type: 'pie',
+          data: {
+            labels: status,
+            datasets: [
+              {
+                label: '# quantidade',
+                data: qtdd,
+                backgroundColor: [
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 0.7)',
+                'rgba(0, 0, 0, 0.4)',
+                'rgba(71, 69, 69, 1)',
+                'rgba(71, 69, 69, 0.8)',
+                'rgba(71, 69, 69, 0.6)'
+              ],
+                hoverBackgroundColor: [
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080",
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080"
+              ]
+              }
+            ]
+          }
+        })
+      }, error => { });
+  };
+
+  @ViewChild('pieMyCanvasSerie') pieMyCanvasSerie;
+  pieMyChartSerie: any;
+  loadMySerie()
+  {
+    this.dash.mySerieDash()
+      .subscribe(response => {
+        var serieDash: any = {};
+        this.mySerie = response.length;
+        for(var i= 0; i<response.length; i++)
+        {
+          serieDash[response[i].tipoSerie] = response[i].qtddSerie
+        };
+
+        this.hipMyDash = serieDash.Hipertrofia;
+        this.defMyDash = serieDash.Definicao;
+        this.resMyDash = serieDash.Resistencia;
+        this.outMyDash = serieDash.Outros;
+
+        
+        let qtdd = response.map(response => response.qtddSerie)
+        let tipo = response.map(response => response.tipoSerie)
+        
+        this.pieMyChartSerie = new Chart(this.pieMyCanvasSerie.nativeElement, {
+          type: 'pie',
+          data: {
+            labels: tipo,
+            datasets: [
+              {
+                label: '# quantidade',
+                data: qtdd,
+                backgroundColor: [
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 0.7)',
+                'rgba(0, 0, 0, 0.4)',
+                'rgba(71, 69, 69, 1)',
+                'rgba(71, 69, 69, 0.8)',
+                'rgba(71, 69, 69, 0.6)'
+              ],
+                hoverBackgroundColor: [
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080",
+                  "#000000",
+                  "#C0C0C0",
+                  "#808080"
+              ]
+              }
+            ]
+          }
+        })
+      }, error => { });
+  };
 }

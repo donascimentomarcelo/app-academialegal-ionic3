@@ -14,8 +14,7 @@
           </ion-card-header>
         
           <ion-list>
-
-            <ion-item ion-item>
+            <ion-item ion-item [hidden]="solicitacao == 0">
               <ion-card-content>
                 <canvas #pieCanvasSolicitacao></canvas>
               </ion-card-content>
@@ -46,7 +45,7 @@
             Minhas Séries
         </ion-card-header>
         <ion-list>
-            <ion-item ion-item>
+            <ion-item ion-item [hidden]="serie == 0">
               <ion-card-content>
                 <canvas #pieCanvasSerie></canvas>
               </ion-card-content>

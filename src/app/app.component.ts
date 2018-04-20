@@ -1,4 +1,3 @@
-import { LocalProfile } from './../models/local_profile';
 import { UsuarioDTO } from './../models/usuario.dto';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
@@ -35,9 +34,7 @@ export class MyApp {
       {
         this.initializeApp();
 
-        this.pages = [
-          { title: 'Perfil', component: 'ProfilePage'},
-        ];
+        this.pages = [];
         
         this.loadSideMenu();
 
@@ -69,6 +66,7 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Home', component: 'DashboardAdminPage'},
+                { title: 'Perfil', component: 'ProfilePage'},
                 { title: 'Todos os Exercícios', component: 'AdminExercicioPage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Todas as Séries', component: 'AdminSeriesPage'},
@@ -80,6 +78,7 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Home', component: 'DashboardAlunoPage'},
+                { title: 'Perfil', component: 'ProfilePage'},
                 { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
                 { title: 'Minhas séries', component: 'SeriePage'},
                 { title: 'Logout', component: '' },
@@ -89,6 +88,7 @@ export class MyApp {
             {
               this.pages.push(
                 { title: 'Home', component: 'DashboardAdminPage'},
+                { title: 'Perfil', component: 'ProfilePage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
                 { title: 'Todas as Séries', component: 'AdminSeriesPage'},
                 { title: 'Logout', component: '' },
@@ -97,7 +97,8 @@ export class MyApp {
             else if(this.perfis.includes("PROFESSOR") && this.perfis.includes("ALUNO"))
             {
               this.pages.push(
-                { title: 'Home', component: 'DashboardAlunoPage'},
+                { title: 'Home', component: 'DashboardAdminPage'},
+                { title: 'Perfil', component: 'ProfilePage'},
                 { title: 'Minhas solicitações', component: 'SolicitacoesPage'},
                 { title: 'Minhas séries', component: 'SeriePage'},
                 { title: 'Todas as Solicitações', component: 'AdminSolicitacoesPage'},
@@ -161,10 +162,7 @@ export class MyApp {
   setPage()
   {
     delete this.pages;
-
-    this.pages = [
-      { title: 'Perfil', component: 'ProfilePage'},
-    ];
+    this.pages = [];
   };
 
 }

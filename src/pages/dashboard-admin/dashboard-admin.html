@@ -14,7 +14,7 @@
           </ion-card-header>
         
           <ion-list>
-            <ion-item ion-item>
+            <ion-item ion-item [hidden]="solicitacao == 0">
               <ion-card-content>
                 <canvas #pieCanvasSolicitacao></canvas>
               </ion-card-content>
@@ -45,7 +45,7 @@
             Séries Gerais
           </ion-card-header>
         <ion-list>
-            <ion-item ion-item>
+            <ion-item ion-item [hidden]="serie == 0">
               <ion-card-content>
                 <canvas #pieCanvasSerie></canvas>
               </ion-card-content>
@@ -82,7 +82,7 @@
             Usuários
           </ion-card-header>
         <ion-list>
-            <ion-item ion-item>
+            <ion-item ion-item [hidden]="usuario == 0">
               <ion-card-content>
                 <canvas #pieCanvasUsuario></canvas>
               </ion-card-content>
@@ -108,5 +108,75 @@
         
           </ion-list>
         </ion-card>
+        <br>
+        <ion-card [hidden]="isAluno == false">
+            <ion-card-header>
+              Minhas Solicitações
+            </ion-card-header>
+          
+            <ion-list>
+              <ion-item ion-item [hidden]="mySolicitacao == 0">
+                <ion-card-content>
+                  <canvas #pieMyCanvasSolicitacao></canvas>
+                </ion-card-content>
+              </ion-item>
+  
+              <button ion-item>
+                <ion-icon name="icon-training-pending" item-start></ion-icon>
+                Pendentes
+                <ion-badge item-end color="dark">{{ penMyDash ? (penMyDash | number:0): 0}}</ion-badge>
+              </button>
+          
+              <button ion-item>
+                <ion-icon name="icon-training-rejected" item-start></ion-icon>
+                Rejeitadas
+                <ion-badge item-end color="dark">{{ rejMyDash ? (rejMyDash | number:0): 0}}</ion-badge>
+              </button>
+            
+              <button ion-item>
+                <ion-icon name="icon-training-all" item-start></ion-icon>
+                Concluídas
+                <ion-badge item-end color="dark">{{ conMyDash ? (conMyDash | number:0): 0}}</ion-badge>
+              </button>
+            </ion-list>
+        </ion-card>
+        <br>
+        <ion-card [hidden]="isAluno == false">
+          <ion-card-header>
+              Minhas Séries
+          </ion-card-header>
+          <ion-list>
+              <ion-item ion-item [hidden]="mySerie == 0">
+                <ion-card-content>
+                  <canvas #pieMyCanvasSerie></canvas>
+                </ion-card-content>
+              </ion-item>
+  
+              <button ion-item>
+                <ion-icon name="icon-muscle" item-start></ion-icon>
+                Séries de Hipertrofia
+                <ion-badge item-end color="dark">{{ hipMyDash ? (hipMyDash | number:0): 0}}</ion-badge>
+              </button>
+          
+              <button ion-item>
+                <ion-icon name="icon-definition" item-start></ion-icon>
+                Séries de Definição
+                <ion-badge item-end color="dark">{{ defMyDash ? (defMyDash | number:0): 0}}</ion-badge>
+              </button>
+          
+              <button ion-item>
+                <ion-icon name="icon-runner" item-start></ion-icon>
+                Séries de Resistência
+                <ion-badge item-end color="dark">{{ resMyDash ? (resMyDash | number:0): 0}}</ion-badge>
+              </button>
+  
+              <button ion-item>
+                <ion-icon name="icon-training-other" item-start></ion-icon>
+                Outras Séries
+                <ion-badge item-end color="dark">{{ outMyDash ? (outMyDash | number:0): 0}}</ion-badge>
+              </button>
+          
+            </ion-list>
+          </ion-card>
   </ion-content>
   
