@@ -24,6 +24,7 @@ import { ImageUtilService } from '../services/image-util.service';
 import { CheckRoleService } from '../services/check-role.service';
 import { DashboardService } from '../services/domain/dashboard.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ImageUtilService,
     CheckRoleService,
     DashboardService,
+    Network,
   ]
 })
 export class AppModule {}

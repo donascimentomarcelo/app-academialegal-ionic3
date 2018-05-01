@@ -1,13 +1,14 @@
 import { UsuarioDTO } from './../models/usuario.dto';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Events } from 'ionic-angular';
+import { Nav, Platform, Events, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { API_CONFIG } from '../config/api.config';
 import { AuthService } from '../services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Network } from '@ionic-native/network';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,7 +31,9 @@ export class MyApp {
       public usuarioService: UsuarioService,
       public authService: AuthService,  
       public sanitizer: DomSanitizer,
-      public events: Events) 
+      public events: Events,
+      private network: Network,
+      public toast: ToastController) 
       {
         this.initializeApp();
 
@@ -137,10 +140,23 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.network.onDisconnect().subscribe(() => {
+        this.toast.create({
+          message:'Sem conexão à internet',
+          duration: 5000
+        }).present();
+      });    
+      
+      this.network.onConnect().subscribe(() => {
+        this.toast.create({
+          message:'Conectado à internet',
+          duration: 3000
+        }).present();
+      });
+
     });
   }
 
