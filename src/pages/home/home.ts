@@ -81,7 +81,9 @@ creds: CredenciaisDTO = {
         let user = this.storage.getLocalUser();
         this.loadSideMenu(user.email);
         // this.navCtrl.setRoot('GrupoPage');
-      }, error => {});
+      }, error => {
+        this.myApp.setPage();
+      });
   };
 
   signup()
