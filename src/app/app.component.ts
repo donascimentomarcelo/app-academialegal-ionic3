@@ -9,6 +9,7 @@ import { API_CONFIG } from '../config/api.config';
 import { AuthService } from '../services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Network } from '@ionic-native/network';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,7 +34,8 @@ export class MyApp {
       public sanitizer: DomSanitizer,
       public events: Events,
       private network: Network,
-      public toast: ToastController) 
+      public toast: ToastController, 
+      public oneSignal: OneSignal) 
       {
         this.initializeApp();
 
@@ -142,6 +144,17 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      let ls = this.storage.getLocalUser();
+      if(ls && ls.email)
+      {
+        console.log(ls.email);
+        
+        this.oneSignal.startInit("APP_ID", "ID_FIRE_BASE");
+        this.oneSignal.sendTag('email', ls.email);
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+        this.oneSignal.endInit();
+      }
 
       this.network.onDisconnect().subscribe(() => {
         this.toast.create({

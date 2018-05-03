@@ -50,8 +50,6 @@ export class DashboardAdminPage {
       {
         this.isAluno = true;
       };
-      console.log(this.isAluno);
-      
     }
 
   ionViewDidLoad() 

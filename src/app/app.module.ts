@@ -25,6 +25,7 @@ import { CheckRoleService } from '../services/check-role.service';
 import { DashboardService } from '../services/domain/dashboard.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Network } from '@ionic-native/network';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { Network } from '@ionic-native/network';
     CheckRoleService,
     DashboardService,
     Network,
+    OneSignal,
   ]
 })
 export class AppModule {}
