@@ -73,7 +73,7 @@
   </ion-item>
     <hr>
   </ion-card>
-  <button ion-button block outline color="dark" (click)="redirectToGroupPage(); closeFab($event, fab)" *ngIf="count < 5">Continuar montando</button>
+  <button ion-button block outline color="dark" (click)="redirectToGroupPage(); closeFab($event, fab)" *ngIf="count != 0">Continuar montando</button>
   <button ion-button block color="dark" (click)="reorder(); closeFab($event, fab)" *ngIf="count != 0">Ordenar</button>
   <button ion-button block color="tertiary" (click)="deleteStorageCart(); closeFab($event, fab)" *ngIf="count != 0">Refazer</button>
 </ion-content>
