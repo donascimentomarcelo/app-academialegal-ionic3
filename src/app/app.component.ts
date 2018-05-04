@@ -159,7 +159,7 @@ export class MyApp {
       this.network.onDisconnect().subscribe(() => {
         this.toast.create({
           message:'Sem conexão à internet',
-          duration: 5000
+          duration: 8000
         }).present();
       });    
       

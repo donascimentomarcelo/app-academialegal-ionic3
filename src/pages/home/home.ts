@@ -47,15 +47,18 @@ creds: CredenciaisDTO = {
 
   loadSideMenu(email: string)
   {
+      let loader = this.presentLoading();
       this.usuarioService.findByEmail(email)
         .subscribe(response => {
           if(response.perfis.includes("ADMIN") || response.perfis.includes("PROFESSOR"))
           {
-            this.navCtrl.setRoot('DashboardAdminPage')
+            this.navCtrl.setRoot('DashboardAdminPage');
+            loader.dismiss();
           }
           else
           {
-            this.navCtrl.setRoot('DashboardAlunoPage')
+            this.navCtrl.setRoot('DashboardAlunoPage');
+            loader.dismiss();
           }
         }, error => {});
   };
